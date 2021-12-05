@@ -1,0 +1,3 @@
+-I
+/opt/homebrew/opt/readline/include/
+-std=c99
