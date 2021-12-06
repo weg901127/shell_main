@@ -6,27 +6,27 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/04 23:29:44 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 16:03:18 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "micro_shell.h"
-#include "libft/libft.h"
 
-bool	is_builtin(char *name)
+void	init_builtin(t_bag *bag)
 {
-	char	builtin[7][6];
-	int		i;
-
-	i = 7;
-	builtin = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
-	ft_memcpy(builtin[0], "echo", sizeof(char) * 4);
-	while(i--)
-	{
-		if (ft_strncmp(const char *s1, const char *s2, size_t n))
-	}
-
+	
 }
+
+void	run_builtin(t_bag *bag)
+{
+	//어떤 대단한 로직
+	a = 어떤 무언가를 찾는 함수;
+	if (a == ECHO_)
+		//my echo 실행
+	else if (a == CD_)
+		//
+}
+
 void	handler(int signum)
 {
 	if (signum != SIGINT)

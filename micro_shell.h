@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/04 21:36:22 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 15:57:59 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,26 @@
 # include <unistd.h>
 # include <stdio.h>
 # include "libft/libft.h"
+# include "gnl/get_next_line.h"
+# include "srcs/array_list/arraylist.h"
+
+typedef	enum e_builtins
+{
+	ECHO_,
+	CD_,
+	PWD_,
+	EXPORT_,
+	UNSET_,
+	ENV_,
+	EXIT_
+}	t_builtins;
+typedef struct s_bag
+{
+	t_ArrayList	*builtin;
+}	t_bag;
 
 /* ./srcs/init */
 void	init_rl_catch_signals();
+
+/*  */
 #endif
