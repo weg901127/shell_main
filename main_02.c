@@ -6,17 +6,40 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 16:03:18 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 21:39:29 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "micro_shell.h"
 
-void	init_builtin(t_bag *bag)
+t_bag	*create_bag()
 {
-	
+	return ((t_bag *)ft_calloc(1, sizeof(t_bag)));
 }
 
+void	init_bag(t_bag *bag)
+{
+	bag->builtin = createArrayList(7);
+}
+
+void	init_builtin(t_bag *bag)
+{
+	int				fd;
+	char			*buf;
+	t_ArrayListNode	element;
+
+	fd = open("./.builtin", O_RDONLY);
+	while (1)
+	{
+		get_next_line(fd, &buf);
+		element.data = buf;
+		if(*buf == 0)
+			break;
+		addALElement(bag->builtin, 0, element);
+	}
+}
+
+/*
 void	run_builtin(t_bag *bag)
 {
 	//어떤 대단한 로직
@@ -26,6 +49,7 @@ void	run_builtin(t_bag *bag)
 	else if (a == CD_)
 		//
 }
+*/
 
 void	handler(int signum)
 {
@@ -40,9 +64,16 @@ void	handler(int signum)
 
 int		main(void)
 {
-	int				ret;
-	char			*line;
+	//int				ret;
+	//char			*line;
+	t_bag			*bag;
 
+	bag = create_bag();
+	init_bag(bag);
+	init_builtin(bag);
+	printf("%s\n", getALElement(bag->builtin, 0)->data);
+	
+	/*
 	init_rl_catch_signals();
 	signal(SIGINT, handler);
 	while (true)
@@ -62,5 +93,6 @@ int		main(void)
 		else
 			return (1);
 	}
+	*/
 	return (0);
 }

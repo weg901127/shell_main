@@ -6,11 +6,11 @@
 #    By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 01:21:24 by gilee             #+#    #+#              #
-#    Updated: 2021/11/24 01:21:56 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/06 18:17:16 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC      = gcc
+CC      = cc -g
 LIB		= ar rcs
 CFLAGS  = -Wall -Wextra -Werror
 RM      = rm -f

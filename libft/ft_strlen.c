@@ -6,7 +6,7 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 04:53:53 by gilee             #+#    #+#             */
-/*   Updated: 2021/06/30 20:25:21 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 21:34:44 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ size_t	ft_strlen(const char *src)
 	size_t	count;
 
 	count = 0;
-	while (*src++ != '\0')
+	if (src)
 	{
-		count++;
+		while (*src++ != '\0')
+			count++;
 	}
 	return (count);
 }

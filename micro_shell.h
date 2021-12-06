@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 15:57:59 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:49:52 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "libft/libft.h"
+#include <fcntl.h>
 # include "gnl/get_next_line.h"
 # include "srcs/array_list/arraylist.h"
 

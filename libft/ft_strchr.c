@@ -6,7 +6,7 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 04:44:06 by gilee             #+#    #+#             */
-/*   Updated: 2021/01/21 03:32:48 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 21:06:50 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ char	*ft_strchr(const char *s, int c)
 {
 	size_t	len;
 
-	len = ft_strlen(s) + 1;
-	while (len--)
+	if (s)
 	{
-		if (*s++ == (char)c)
-			return ((char *)--s);
+		len = ft_strlen(s) + 1;
+		while (len--)
+		{
+			if (*s++ == (char)c)
+				return ((char *)--s);
+		}
 	}
 	return (NULL);
 }

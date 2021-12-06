@@ -6,11 +6,11 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 19:02:12 by gilee             #+#    #+#             */
-/*   Updated: 2021/02/26 19:02:15 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:48:07 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/get_next_line.h"
+#include "get_next_line.h"
 
 char	*ft_strdup2(const char *s1)
 {
