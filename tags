@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+ARRAYLIST_H	srcs/array_list/arraylist.h	/^# define ARRAYLIST_H$/;"	d
 BUFFER_SIZE	gnl/get_next_line.h	/^#  define BUFFER_SIZE /;"	d
 CC	Makefile	/^CC 					= cc -g$/;"	m
 CC	libft/Makefile	/^CC      = cc -g$/;"	m
@@ -14,6 +15,7 @@ ECHO_	micro_shell.h	/^	ECHO_,$/;"	e	enum:e_builtins
 ENV_	micro_shell.h	/^	ENV_,$/;"	e	enum:e_builtins
 EXIT_	micro_shell.h	/^	EXIT_$/;"	e	enum:e_builtins
 EXPORT_	micro_shell.h	/^	EXPORT_,$/;"	e	enum:e_builtins
+FALSE	srcs/array_list/arraylist.h	/^#  define FALSE	/;"	d
 FD	libft/Makefile	/^FD		= ft_putnbr_fd.c ft_putstr_fd.c \\$/;"	m
 GET_NEXT_LINE_H	gnl/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
 INC	libft/Makefile	/^INC     = .\/libft.h$/;"	m
@@ -42,11 +44,19 @@ PWD_	micro_shell.h	/^	PWD_,$/;"	e	enum:e_builtins
 RM	libft/Makefile	/^RM      = rm -f$/;"	m
 SRCS	Makefile	/^SRCS				= .\/main_02.c					.\/srcs\/init\/init_rl_catch_signals.c \\$/;"	m
 STR	libft/Makefile	/^STR		= ft_strchr.c ft_strdup.c \\$/;"	m
+TRUE	srcs/array_list/arraylist.h	/^#  define TRUE	/;"	d
 UNSET_	micro_shell.h	/^	UNSET_,$/;"	e	enum:e_builtins
+_COMMON_LIST_DEF_	srcs/array_list/arraylist.h	/^#  define _COMMON_LIST_DEF_$/;"	d
+addALElement	srcs/array_list/arraylist.c	/^int	addALElement(t_ArrayList *pList, int position, t_ArrayListNode element)$/;"	f
 allfree	libft/ft_split.c	/^static void	allfree(char **res, int i)$/;"	f	file:
 builtin	micro_shell.h	/^	t_ArrayList	*builtin;$/;"	m	struct:s_bag
+clearArrayList	srcs/array_list/array_utils.c	/^void	clearArrayList(t_ArrayList *pList)$/;"	f
 content	libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
+createArrayList	srcs/array_list/arraylist.c	/^t_ArrayList	*createArrayList(int maxElementCount)$/;"	f
 create_bag	main_02.c	/^t_bag	*create_bag()$/;"	f
+currentElementCount	srcs/array_list/arraylist.h	/^	int				currentElementCount;$/;"	m	struct:s_ArrayListType
+data	srcs/array_list/arraylist.h	/^	char	*data;$/;"	m	struct:s_ArrayListNodeType
+deleteArrayList	srcs/array_list/arraylist.c	/^void	deleteArrayList(t_ArrayList *pList)$/;"	f
 e_builtins	micro_shell.h	/^typedef	enum e_builtins$/;"	g
 find_return	gnl/get_next_line.c	/^int	find_return(int fd, char **backup, char **cur)$/;"	f
 ft_abs	libft/ft_itoa.c	/^static int	ft_abs(int num)$/;"	f	file:
@@ -105,17 +115,28 @@ ft_strtrim	libft/ft_strtrim.c	/^char	*ft_strtrim(char const *s1, char const *set
 ft_substr	libft/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
 ft_tolower	libft/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
+getALElement	srcs/array_list/arraylist.c	/^t_ArrayListNode	*getALElement(t_ArrayList *pList, int position)$/;"	f
+getArrayListLength	srcs/array_list/array_utils.c	/^int	getArrayListLength(t_ArrayList *pList)$/;"	f
 get_next_line	gnl/get_next_line.c	/^int	get_next_line(int fd, char **line)$/;"	f
 handler	main_02.c	/^void	handler(int signum)$/;"	f
 init_bag	main_02.c	/^void	init_bag(t_bag *bag)$/;"	f
 init_builtin	main_02.c	/^void	init_builtin(t_bag *bag)$/;"	f
+init_rl_catch_signals	srcs/init/init_rl_catch_signals.c	/^void	init_rl_catch_signals()$/;"	f
+isArrayListFull	srcs/array_list/array_utils.c	/^int	isArrayListFull(t_ArrayList *pList)$/;"	f
 main	a.cpp	/^int main ()$/;"	f
 main	main_02.c	/^int		main(void)$/;"	f
+maxElementCount	srcs/array_list/arraylist.h	/^	int				maxElementCount;$/;"	m	struct:s_ArrayListType
 next	libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
+pElement	srcs/array_list/arraylist.h	/^	t_ArrayListNode	*pElement;$/;"	m	struct:s_ArrayListType
+removeALElement	srcs/array_list/arraylist.c	/^int	removeALElement(t_ArrayList *pList, int position)$/;"	f
+s_ArrayListNodeType	srcs/array_list/arraylist.h	/^typedef struct s_ArrayListNodeType$/;"	s
+s_ArrayListType	srcs/array_list/arraylist.h	/^typedef struct s_ArrayListType$/;"	s
 s_bag	micro_shell.h	/^typedef struct s_bag$/;"	s
 s_list	libft/libft.h	/^typedef struct s_list$/;"	s
 set_after_nl	gnl/get_next_line.c	/^char	*set_after_nl(char **backup, int *flagcheck, char **cur)$/;"	f
 set_prev_nl	gnl/get_next_line.c	/^char	*set_prev_nl(char **backup, char **cur)$/;"	f
+t_ArrayList	srcs/array_list/arraylist.h	/^}	t_ArrayList;$/;"	t	typeref:struct:s_ArrayListType
+t_ArrayListNode	srcs/array_list/arraylist.h	/^}	t_ArrayListNode;$/;"	t	typeref:struct:s_ArrayListNodeType
 t_bag	micro_shell.h	/^}	t_bag;$/;"	t	typeref:struct:s_bag
 t_builtins	micro_shell.h	/^}	t_builtins;$/;"	t	typeref:enum:e_builtins
 t_list	libft/libft.h	/^}				t_list;$/;"	t	typeref:struct:s_list

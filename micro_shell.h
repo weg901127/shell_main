@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 17:49:52 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:08:53 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,8 @@ typedef struct s_bag
 void	init_rl_catch_signals();
 
 /*  */
+t_bag	*create_bag();
+void	init_bag(t_bag *bag);
+void	init_builtin(t_bag *bag);
+bool	is_builtin(t_bag *bag, const char *cmd);
 #endif

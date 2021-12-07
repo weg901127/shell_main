@@ -6,38 +6,11 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 21:39:29 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:53:17 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "micro_shell.h"
-
-t_bag	*create_bag()
-{
-	return ((t_bag *)ft_calloc(1, sizeof(t_bag)));
-}
-
-void	init_bag(t_bag *bag)
-{
-	bag->builtin = createArrayList(7);
-}
-
-void	init_builtin(t_bag *bag)
-{
-	int				fd;
-	char			*buf;
-	t_ArrayListNode	element;
-
-	fd = open("./.builtin", O_RDONLY);
-	while (1)
-	{
-		get_next_line(fd, &buf);
-		element.data = buf;
-		if(*buf == 0)
-			break;
-		addALElement(bag->builtin, 0, element);
-	}
-}
 
 /*
 void	run_builtin(t_bag *bag)
@@ -71,8 +44,7 @@ int		main(void)
 	bag = create_bag();
 	init_bag(bag);
 	init_builtin(bag);
-	printf("%s\n", getALElement(bag->builtin, 0)->data);
-	
+	deleteArrayList(bag->builtin);	
 	/*
 	init_rl_catch_signals();
 	signal(SIGINT, handler);
