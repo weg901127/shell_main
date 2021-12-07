@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   micro_shell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/07 12:08:53 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/07 13:38:21 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef	enum e_builtins
 	ENV_,
 	EXIT_
 }	t_builtins;
+
 typedef struct s_bag
 {
 	t_ArrayList	*builtin;
