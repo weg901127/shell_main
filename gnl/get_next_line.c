@@ -6,11 +6,11 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 19:01:29 by gilee             #+#    #+#             */
-/*   Updated: 2021/02/26 19:01:34 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:47:58 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/get_next_line.h"
+#include "get_next_line.h"
 
 int	find_return(int fd, char **backup, char **cur)
 {

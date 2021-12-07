@@ -6,23 +6,31 @@
 #    By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/04 21:28:17 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/07 12:56:05 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME  				= minishell
-
+NAME_TEST			= test
 CC 					= cc -g
 CFLAGS 				= -Wall -Wextra -Werror
 
 LIBFT_DIR 			= ./libft/
 LIBFT_NAME			= libft.a
 LIB					= $(LIBFT_DIR)$(LIBFT_NAME)
-IREADLINE			= -I /opt/homebrew/opt/readline/include/
-LREADLINE			= -L /opt/homebrew/opt/readline/lib/
-SRCS				= ./main_02.c ./srcs/init/init_rl_catch_signals.c
-
+#IREADLINE			= -I /opt/homebrew/opt/readline/include/
+#LREADLINE			= -L /opt/homebrew/opt/readline/lib/
+IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
+LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
+SRCS				= ./main.c					\
+					  ./gnl/get_next_line.c			./gnl/get_next_line_utils.c \
+					  ./srcs/array_list/arraylist.c ./srcs/array_list/array_utils.c \
+					  ./srcs/init/create_bag.c		./srcs/init/init_bag.c \
+					  ./srcs/init/init_builtin.c	./srcs/init/init_rl_catch_signals.c \
+					  ./srcs/parse/is_builtin.c
 OBJ					=	$(SRCS:.c=.o)
+TEST				=	$(SRCS:main.c=test.c)
+TEST_OBJ			=	$(TEST:.c=.o)
 
 all : MAKE_LIB $(NAME)
 
@@ -31,6 +39,14 @@ all : MAKE_LIB $(NAME)
 
 $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME)
+
+test : MAKE_LIB $(NAME_TEST)
+
+.c.o:
+	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
+
+$(NAME_TEST) : $(TEST_OBJ)
+	$(CC) $(TEST_OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME_TEST)
 
 clean :
 	rm -f $(OBJ)
@@ -46,4 +62,4 @@ re : clean
 MAKE_LIB :
 	make -C $(LIBFT_DIR) all
 
-.PHONY : all clean fclean re
+.PHONY : all test clean fclean re

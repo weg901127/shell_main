@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   init_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/26 04:44:06 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 21:06:50 by gilee            ###   ########.fr       */
+/*   Created: 2021/12/07 12:34:34 by gilee             #+#    #+#             */
+/*   Updated: 2021/12/07 12:35:43 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../micro_shell.h"
 
-char	*ft_strchr(const char *s, int c)
+void	init_builtin(t_bag *bag)
 {
-	size_t	len;
+	int				fd;
+	char			*buf;
+	t_ArrayListNode	element;
 
-	if (s)
+	fd = open("./.builtin", O_RDONLY);
+	while (1)
 	{
-		len = ft_strlen(s) + 1;
-		while (len--)
-		{
-			if (*s++ == (char)c)
-				return ((char *)--s);
-		}
+		get_next_line(fd, &buf);
+		element.data = buf;
+		if(*buf == 0)
+			break;
+		addALElement(bag->builtin, 0, element);
 	}
-	return (NULL);
 }

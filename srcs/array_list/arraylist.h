@@ -6,18 +6,18 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:38:40 by gilee             #+#    #+#             */
-/*   Updated: 2021/11/30 04:56:25 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:23:09 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARRAYLIST_H
 # define ARRAYLIST_H
 
-# include <stdlib.h>
-# include <string.h>
+# include "../../libft/libft.h"
+
 typedef struct s_ArrayListNodeType
 {
-	int	data;
+	char	*data;
 }	t_ArrayListNode;
 
 typedef struct s_ArrayListType

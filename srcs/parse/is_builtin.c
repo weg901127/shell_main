@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/26 04:44:06 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 21:06:50 by gilee            ###   ########.fr       */
+/*   Created: 2021/12/07 12:36:40 by gilee             #+#    #+#             */
+/*   Updated: 2021/12/07 12:37:04 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../micro_shell.h"
 
-char	*ft_strchr(const char *s, int c)
+bool	is_builtin(t_bag *bag, const char *cmd)
 {
-	size_t	len;
+	bool	res;
+	int		i;
+	char	*tmp;
 
-	if (s)
+	res = false;
+	i = bag->builtin->currentElementCount;
+	while (i--)
 	{
-		len = ft_strlen(s) + 1;
-		while (len--)
-		{
-			if (*s++ == (char)c)
-				return ((char *)--s);
-		}
+		tmp = getALElement(bag->builtin, i)->data;
+		if (!ft_strncmp(cmd, tmp, ft_strlen(tmp)))
+			res = true;
 	}
-	return (NULL);
+	return (res);
 }

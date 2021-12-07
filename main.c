@@ -6,17 +6,13 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 16:03:18 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:53:17 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "micro_shell.h"
 
-void	init_builtin(t_bag *bag)
-{
-	
-}
-
+/*
 void	run_builtin(t_bag *bag)
 {
 	//어떤 대단한 로직
@@ -26,6 +22,7 @@ void	run_builtin(t_bag *bag)
 	else if (a == CD_)
 		//
 }
+*/
 
 void	handler(int signum)
 {
@@ -40,9 +37,15 @@ void	handler(int signum)
 
 int		main(void)
 {
-	int				ret;
-	char			*line;
+	//int				ret;
+	//char			*line;
+	t_bag			*bag;
 
+	bag = create_bag();
+	init_bag(bag);
+	init_builtin(bag);
+	deleteArrayList(bag->builtin);	
+	/*
 	init_rl_catch_signals();
 	signal(SIGINT, handler);
 	while (true)
@@ -62,5 +65,6 @@ int		main(void)
 		else
 			return (1);
 	}
+	*/
 	return (0);
 }

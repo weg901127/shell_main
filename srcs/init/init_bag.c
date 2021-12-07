@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   create_bag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/26 04:44:06 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 21:06:50 by gilee            ###   ########.fr       */
+/*   Created: 2021/12/07 12:33:30 by gilee             #+#    #+#             */
+/*   Updated: 2021/12/07 12:34:05 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../micro_shell.h"
 
-char	*ft_strchr(const char *s, int c)
+void	init_bag(t_bag *bag)
 {
-	size_t	len;
-
-	if (s)
-	{
-		len = ft_strlen(s) + 1;
-		while (len--)
-		{
-			if (*s++ == (char)c)
-				return ((char *)--s);
-		}
-	}
-	return (NULL);
+	bag->builtin = createArrayList(7);
 }
