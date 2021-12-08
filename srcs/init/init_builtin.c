@@ -6,13 +6,13 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:34:34 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/07 12:35:43 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/08 14:39:47 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-void	init_builtin(t_bag *bag)
+void	init_builtin(t_storage *bag)
 {
 	int				fd;
 	char			*buf;

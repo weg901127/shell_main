@@ -6,7 +6,7 @@
 #    By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/07 12:56:05 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/08 14:19:49 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,16 @@ LIB					= $(LIBFT_DIR)$(LIBFT_NAME)
 IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
 LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
 SRCS				= ./main.c					\
-					  ./gnl/get_next_line.c			./gnl/get_next_line_utils.c \
-					  ./srcs/array_list/arraylist.c ./srcs/array_list/array_utils.c \
-					  ./srcs/init/create_bag.c		./srcs/init/init_bag.c \
-					  ./srcs/init/init_builtin.c	./srcs/init/init_rl_catch_signals.c \
-					  ./srcs/parse/is_builtin.c
+					  ./gnl/get_next_line.c				./gnl/get_next_line_utils.c \
+					  ./srcs/array_list/arraylist.c 	./srcs/array_list/array_utils.c \
+					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
+					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
+					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
+					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
+					  ./srcs/pipex/wait_and_exit.c		./srcs/pipex/parse_arguments.c \
+					  ./srcs/pipex/execve_with_path.c	./srcs/pipex/split_cmd.c \
+					  ./srcs/pipex/exit_macros.c		./srcs/pipex/parse_arguments2.c \
+					  ./srcs/pipex/fork_grandchildren.c	./srcs/pipex/heredoc_to_tmpfile.c
 OBJ					=	$(SRCS:.c=.o)
 TEST				=	$(SRCS:main.c=test.c)
 TEST_OBJ			=	$(TEST:.c=.o)

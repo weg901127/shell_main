@@ -3,7 +3,7 @@
 
 int main()
 {
-	t_bag *bag;
+	t_storage *bag;
 
 	bag = create_bag();
 	init_bag(bag);

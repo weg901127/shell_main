@@ -6,7 +6,7 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 23:25:48 by gilee             #+#    #+#             */
-/*   Updated: 2021/07/01 23:26:36 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/08 13:55:18 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,8 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, \
 		void *(*f)(void *), void (*del)(void *));
+void			ft_malloc_fail_int(int **arr, int max);
+void			ft_malloc_fail_str(char **str, int max);
+void			ft_ptr_free(char *ptr);
+void			ft_strcopy_with_delimiter(char *dest, char *src, char c);
 #endif

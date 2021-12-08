@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/07 13:38:21 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/08 14:40:53 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,47 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
 # include <stdio.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include "gnl/get_next_line.h"
 # include "srcs/array_list/arraylist.h"
+# include <errno.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+
+# define EXIT_SUCCESS	0
+# define EXIT_FAILURE	1
+# define PIPE_RD_FD		0
+# define PIPE_WR_FD		1
+# define STDIN_FD		0
+# define STDOUT_FD		1
+# define ECMD_NOT_FND	127
+# define EPERMS_DND		126
+
+
+typedef struct s_storage
+{
+	char		*infile_name;
+	char		*outfile_name;
+	char		***cmd_args;
+	int			num_of_cmds;
+	int			**pipe_fds;
+	pid_t		*grandchild_pids;
+	char		*limiter;
+	int			heredoc_flag;
+	t_ArrayList	*builtin;
+}	t_storage;
+
+typedef struct s_chunk_info
+{
+	int		chunk_count;
+	int		str_count;
+	int		quote_flag;
+	char	delimiter;
+}	t_chunk_info;
 
 typedef	enum e_builtins
 {
@@ -36,17 +69,61 @@ typedef	enum e_builtins
 	EXIT_
 }	t_builtins;
 
-typedef struct s_bag
-{
-	t_ArrayList	*builtin;
-}	t_bag;
+/* pipex */
+void	pipex(int argc, char **argv, char **envp);
+/* parse_arguments, parse_arguments2, split_cmd */
+void	parse_arguments_for_heredoc(int argc, char **argv, t_storage *info);
+void	parse_arguments_for_multi_pipes(t_storage *info, int argc, char **argv);
+void	parse_arguments(int argc, char **argv, t_storage *info);
+void	malloc_grandchild_pids(t_storage *info);
+void	malloc_pipe_fds(t_storage *info);
+void	malloc_cmd_args(t_storage *info, char **argv);
+char	**split_cmd(char *str);
+
+/* heredoc_to_tmpfile */
+void	heredoc_to_tmpfile(t_storage *info);
+
+/* print_errors */
+void	print_error(char *error_str, char *error_str2);
+void	print_error_and_exit(char *error_str, char *error_str2, \
+		int return_value);
+void	print_execve_error_and_exit(char *error_str, char *error_str2, \
+		int exit_status);
+
+/* redirect_fds */
+void	redirect_fds_in_1st_grandchild(t_storage *info);
+void	redirect_fds_in_nth_grandchild(t_storage *info, int cmd_idx);
+void	redirect_fds_in_last_grandchild(t_storage *info);
+
+/* fork_grandchildren */
+void	fork_1st_grandchild(t_storage *info, char **envp);
+void	fork_nth_grandchild(t_storage *info, int cmd_idx, char **envp);
+void	fork_last_grandchild(t_storage *info, char **envp);
+
+/* execve_with_path */
+void	execve_with_path(char **array_of_path, char **cmd_arg, char **envp);
+char	**split_path_env(char **envp);
+void	execve_with_error_handling(char **array_of_path, char **cmd_arg, \
+	char **envp, char *final_path);
+
+/* exit_macros */
+int		wstatus(int status);
+int		wifexited(int status);
+int		wexitstatus(int status);
+int		wifsignaled(int status);
+int		wtermsig(int status);
+
+/* wait_and_exit */
+void	exit_for_child(int status);
+void	wait_and_exit_for_grandchildren(t_storage info);
+
 
 /* ./srcs/init */
 void	init_rl_catch_signals();
 
 /*  */
-t_bag	*create_bag();
-void	init_bag(t_bag *bag);
-void	init_builtin(t_bag *bag);
-bool	is_builtin(t_bag *bag, const char *cmd);
+t_storage	*create_bag();
+void		init_bag(t_storage *bag);
+void		init_builtin(t_storage *bag);
+bool		is_builtin(t_storage *bag, const char *cmd);
 #endif
