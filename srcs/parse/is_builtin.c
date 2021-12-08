@@ -6,13 +6,13 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:36:40 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/07 12:37:04 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/08 14:38:57 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-bool	is_builtin(t_bag *bag, const char *cmd)
+bool	is_builtin(t_storage *bag, const char *cmd)
 {
 	bool	res;
 	int		i;
