@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/09 13:53:30 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/09 15:16:28 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS				= ./main.c					\
 					  ./srcs/array_list/arraylist.c 	./srcs/array_list/array_utils.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
-					  ./srcs/init/init_environ.c \
+					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c\
 					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
 					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
 					  ./srcs/pipex/wait_and_exit.c		./srcs/pipex/parse_arguments.c \
