@@ -6,28 +6,22 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:18:54 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/09 15:03:38 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/09 18:48:02 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-void	ft_strcpy(char *dest, char *src)
+static void	str_malloc_and_insert(char **cmd, char *str, int len, int index)
 {
-	while (*src != '\0')
-		*dest++ = *src++;
-	*dest = '\0';
-}
-
-void	str_malloc_and_insert(char **cmd, char *str, int len, int index)
-{
-	cmd[index] = (char *)malloc(sizeof(char) * (len + 1));
+	cmd[index] = (char *)ft_calloc(len + 1 , sizeof(char));
 	// if (!cmd[index])
 	// {
 	// 	// malloc free 해주기
 	// 	print_erro_and_exit("malloc() has failed.\n", NULL, -1);
 	// }
-	ft_strcpy(cmd[index], str);
+	//ft_strcpy(cmd[index], str);
+	ft_memcpy(cmd[index], str, len);
 }
 
 char **getenviron(t_storage *bag)

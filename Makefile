@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/09 15:33:26 by sehhong          ###   ########.fr        #
+#    Updated: 2021/12/09 19:13:08 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ CFLAGS 				= -Wall -Wextra -Werror
 LIBFT_DIR 			= ./libft/
 LIBFT_NAME			= libft.a
 LIB					= $(LIBFT_DIR)$(LIBFT_NAME)
-IREADLINE			= -I /goinfre/sehhong/homebrew/opt/readline/include
-LREADLINE			= -L /goinfre/sehhong/homebrew/opt/readline/lib	
+#IREADLINE			= -I /goinfre/sehhong/homebrew/opt/readline/include
+#LREADLINE			= -L /goinfre/sehhong/homebrew/opt/readline/lib	
 #IREADLINE			= -I /opt/homebrew/opt/readline/include/
 #LREADLINE			= -L /opt/homebrew/opt/readline/lib/
-#IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
-#LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
+IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
+LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
 SRCS				= ./main.c					\
 					  ./gnl/get_next_line.c				./gnl/get_next_line_utils.c \
 					  ./srcs/array_list/arraylist.c 	./srcs/array_list/array_utils.c \
@@ -41,33 +41,23 @@ TEST				=	$(SRCS:main.c=test.c)
 TEST_OBJ			=	$(TEST:.c=.o)
 
 all : MAKE_LIB $(NAME)
-
 .c.o:
 	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
-
 $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME)
-
 test : MAKE_LIB $(NAME_TEST)
-
 .c.o:
 	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
-
 $(NAME_TEST) : $(TEST_OBJ)
 	$(CC) $(TEST_OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME_TEST)
-
 clean :
 	rm -f $(OBJ)
-
 fclean : clean
 	rm -f $(NAME)
 	make -C $(LIBFT_DIR) fclean
-
 re : clean
 	rm -f $(NAME)
 	make -C . all
-
 MAKE_LIB :
 	make -C $(LIBFT_DIR) all
-
 .PHONY : all test clean fclean re

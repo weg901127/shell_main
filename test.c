@@ -56,7 +56,7 @@ int	main(void)
 	init_environ(bag);
 	cmd_arg = getenviron(bag);
 	i = 0;
-	while (!cmd_arg[i])
+	while (cmd_arg[i])
 	{
 		printf("%s\n", cmd_arg[i]);
 		i++;
