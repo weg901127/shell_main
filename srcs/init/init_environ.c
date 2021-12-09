@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bag.c                                         :+:      :+:    :+:   */
+/*   init_environ.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 12:33:30 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/09 13:44:52 by gilee            ###   ########.fr       */
+/*   Created: 2021/12/09 13:45:14 by gilee             #+#    #+#             */
+/*   Updated: 2021/12/09 14:18:03 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-void	init_bag(t_storage *bag)
+void	init_environ(t_storage *bag)
 {
-	bag->builtin = createArrayList(7);
-	bag->environ = createArrayList(30);
+	extern char		**environ;
+	t_ArrayListNode	element;
+	int				i;
+
+	i = 0;
+	while (environ[i])
+	{
+		element.data = environ[i];
+		addALElement(bag->environ, 0, element);
+		i++;
+	}
 }
