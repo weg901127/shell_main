@@ -6,7 +6,7 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/08 14:41:10 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/08 15:02:36 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(void)
 	bag = create_bag();
 	init_bag(bag);
 	init_builtin(bag);
-	deleteArrayList(bag->builtin);	
+	deleteArrayList(bag->builtin);
 	/*
 	init_rl_catch_signals();
 	signal(SIGINT, handler);

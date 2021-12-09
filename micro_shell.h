@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/08 14:40:53 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/09 13:50:03 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_storage
 	pid_t		*grandchild_pids;
 	char		*limiter;
 	int			heredoc_flag;
+	t_ArrayList	*environ;
 	t_ArrayList	*builtin;
 }	t_storage;
 
@@ -126,4 +127,5 @@ t_storage	*create_bag();
 void		init_bag(t_storage *bag);
 void		init_builtin(t_storage *bag);
 bool		is_builtin(t_storage *bag, const char *cmd);
+void		init_environ(t_storage *bag);
 #endif
