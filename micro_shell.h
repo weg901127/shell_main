@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/09 15:04:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/09 18:48:28 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,6 @@ bool		is_builtin(t_storage *bag, const char *cmd);
 void		init_environ(t_storage *bag);
 
 /* getenviron */
-void	ft_strcpy(char *dest, char *src);
-void	str_malloc_and_insert(char **cmd, char *str, int len, int index);
-char **getenviron(t_storage *bag);
+char		**getenviron(t_storage *bag);
 
 #endif

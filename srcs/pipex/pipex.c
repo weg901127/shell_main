@@ -6,14 +6,15 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 08:50:23 by sehee             #+#    #+#             */
-/*   Updated: 2021/12/08 19:47:35 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/09 19:18:49 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 // argc, argv 는 readline 인자로 바꾸자!
 // envp는 허용함수 쓰자!
-void	pipex(int argc, char **argv, char **envp)
+//void	pipex(int argc, char **argv, char **envp)
+void	pipex(t_storage *bag)
 {
 	t_storage	info;
 	pid_t		pid;
