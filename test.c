@@ -48,18 +48,10 @@ extern char **environ;
 int	main(void)
 {
 	t_storage	*bag;
-	char		**cmd_arg;
-	int			i;
 
 	bag = create_bag();
 	init_bag(bag);
 	init_environ(bag);
-	cmd_arg = getenviron(bag);
-	i = 0;
-	while (cmd_arg[i])
-	{
-		printf("%s\n", cmd_arg[i]);
-		i++;
-	}
+	printf("%s", my_which(bag, "ls"));
 	printf("\033[32;1mDONE\n\033[m");
 }

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/09 18:48:28 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/14 03:53:37 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,11 @@ int		wtermsig(int status);
 void	exit_for_child(int status);
 void	wait_and_exit_for_grandchildren(t_storage info);
 
+/* ./srcs/pipex/getpath */
+bool	getpath(t_storage *bag, char ***path_res);
+
+/* ./srcs/pipex/my_which */
+char	*my_which(t_storage *bag, char *cmd);
 
 /* ./srcs/init */
 void	init_rl_catch_signals();
