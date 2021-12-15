@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 01:21:24 by gilee             #+#    #+#              #
-#    Updated: 2021/12/08 13:59:30 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/15 12:26:12 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ STR		= ft_strchr.c			ft_strdup.c \
 		  ft_itoa.c				ft_atoi.c \
 		  ft_tolower.c			ft_toupper.c \
 		  ft_substr.c			ft_strcopy_with_delimiter.c
+		  ft_print_error.c
 
 IS		= ft_isalnum.c 			ft_isalpha.c \
 		  ft_isascii.c 			ft_isdigit.c \
