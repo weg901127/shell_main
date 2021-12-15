@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/15 16:41:52 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/15 16:48:46 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_storage
 	pid_t		*grandchild_pids;
 	char		*limiter;
 	int			heredoc_flag;
+	char		*input;
+	char		**parse_buf;
 	t_ArrayList	*runtime_env;
 	t_ArrayList	*environ;
 	t_ArrayList	*builtin;
