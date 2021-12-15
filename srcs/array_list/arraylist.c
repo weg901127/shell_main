@@ -6,27 +6,27 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:19:30 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/06 17:49:09 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/15 17:02:38 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arraylist.h"
 
-t_ArrayList	*createArrayList(int maxElementCount)
+t_ArrayList	*createArrayList(int max_element_count)
 {
 	t_ArrayList	*tmp;
 
 	tmp = (t_ArrayList *)ft_calloc(1, sizeof(t_ArrayList));
-	tmp->maxElementCount = maxElementCount;
-	tmp->currentElementCount = 0;
-	tmp->pElement = (t_ArrayListNode *)ft_calloc
-		(maxElementCount, sizeof(t_ArrayListNode));
+	tmp->max_element_count = max_element_count;
+	tmp->current_element_count = 0;
+	tmp->p_element = (t_ArrayListNode *)ft_calloc
+		(max_element_count, sizeof(t_ArrayListNode));
 	return (tmp);
 }
 
 void	deleteArrayList(t_ArrayList *pList)
 {
-	free(pList->pElement);
+	free(pList->p_element);
 	free(pList);
 	pList = NULL;
 }
@@ -37,37 +37,37 @@ int	addALElement(t_ArrayList *pList, int position, t_ArrayListNode element)
 
 	if (isArrayListFull(pList))
 	{
-		pList->maxElementCount *= 3;
-		tmp = (t_ArrayListNode *)calloc(pList->maxElementCount,
+		pList->max_element_count *= 3;
+		tmp = (t_ArrayListNode *)calloc(pList->max_element_count,
 				sizeof(t_ArrayListNode));
-		ft_memcpy(tmp, pList->pElement,
-			pList->currentElementCount * sizeof(t_ArrayListNode));
-		free(pList->pElement);
-		pList->pElement = tmp;
+		ft_memcpy(tmp, pList->p_element,
+			pList->current_element_count * sizeof(t_ArrayListNode));
+		free(pList->p_element);
+		pList->p_element = tmp;
 	}
-	if ((pList->currentElementCount && position > pList->currentElementCount))
+	if ((pList->current_element_count && position > pList->current_element_count))
 		return (FALSE);
-	ft_memmove(pList->pElement + position + 1, pList->pElement + position,
-		sizeof(t_ArrayListNode) * (pList->currentElementCount - position));
-	*(pList->pElement + position) = element;
-	(pList->currentElementCount)++;
+	ft_memmove(pList->p_element + position + 1, pList->p_element + position,
+		sizeof(t_ArrayListNode) * (pList->current_element_count - position));
+	*(pList->p_element + position) = element;
+	(pList->current_element_count)++;
 	return (TRUE);
 }
 
 int	removeALElement(t_ArrayList *pList, int position)
 {
-	if (position >= pList->currentElementCount
-		|| pList->currentElementCount == 0)
+	if (position >= pList->current_element_count
+		|| pList->current_element_count == 0)
 		return (FALSE);
-	ft_memmove(pList->pElement + position, pList->pElement + position + 1,
-		sizeof(t_ArrayListNode) * (pList->currentElementCount - position));
-	(pList->currentElementCount)--;
+	ft_memmove(pList->p_element + position, pList->p_element + position + 1,
+		sizeof(t_ArrayListNode) * (pList->current_element_count - position));
+	(pList->current_element_count)--;
 	return (TRUE);
 }
 
 t_ArrayListNode	*getALElement(t_ArrayList *pList, int position)
 {
-	if (position < pList->maxElementCount)
-		return (pList->pElement + position);
+	if (position < pList->max_element_count)
+		return (pList->p_element + position);
 	return (NULL);
 }
