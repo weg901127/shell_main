@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/14 03:53:37 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/15 12:00:34 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ bool	getpath(t_storage *bag, char ***path_res);
 char	*my_which(t_storage *bag, char *cmd);
 
 /* ./srcs/init */
-void	init_rl_catch_signals();
+void	init_rl_catch_signals(void);
 
 /*  */
 t_storage	*create_bag();
@@ -136,6 +136,12 @@ bool		is_builtin(t_storage *bag, const char *cmd);
 void		init_environ(t_storage *bag);
 
 /* getenviron */
-char		**getenviron(t_storage *bag);
+char	**getenviron(t_storage *bag);
+
+/*builtin*/
+int		builtin_cd(char *path);
+void	builtin_echo(char *str, int n_option);
+void	builtin_exit(int is_lastcmd);
+int		builtin_pwd(void);
 
 #endif

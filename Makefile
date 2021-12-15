@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/14 03:53:57 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/15 11:58:03 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ LREADLINE			= -L /opt/homebrew/opt/readline/lib/
 SRCS				= ./main.c					\
 					  ./gnl/get_next_line.c				./gnl/get_next_line_utils.c \
 					  ./srcs/array_list/arraylist.c 	./srcs/array_list/array_utils.c \
+					  ./srcs/builtins/builtin_cd.c		./srcs/builtins/builtin_pwd.c \
+					  ./srcs/builtins/builtin_echo.c 	./srcs/builtins/builtin_exit.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
 					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c\
