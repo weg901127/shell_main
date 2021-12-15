@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/15 14:09:23 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/15 16:10:41 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void	handler(int signum)
 
 int	main(void)
 {
-	//int				ret;
-	//char			*line;
-	t_storage	*bag;
+	int				ret;
+	char			*line;
+	t_storage			*bag;
 
 	bag = create_bag();
 	init_bag(bag);
 	init_builtin(bag);
-	deleteArrayList(bag->builtin);
-	/*
+	init_environ(bag);
+	
 	init_rl_catch_signals();
 	signal(SIGINT, handler);
 	while (true)
@@ -65,6 +65,6 @@ int	main(void)
 		else
 			return (1);
 	}
-	*/
+	
 	return (0);
 }

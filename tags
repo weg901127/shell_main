@@ -61,6 +61,10 @@ _COMMON_LIST_DEF_	srcs/array_list/arraylist.h	/^#  define _COMMON_LIST_DEF_$/;"	
 addALElement	srcs/array_list/arraylist.c	/^int	addALElement(t_ArrayList *pList, int position, t_ArrayListNode element)$/;"	f
 allfree	libft/ft_split.c	/^static void	allfree(char **res, int i)$/;"	f	file:
 builtin	micro_shell.h	/^	t_ArrayList	*builtin;$/;"	m	struct:s_storage
+builtin_cd	srcs/builtins/builtin_cd.c	/^int	builtin_cd(char *path)$/;"	f
+builtin_echo	srcs/builtins/builtin_echo.c	/^void	builtin_echo(char *str, int n_option)$/;"	f
+builtin_exit	srcs/builtins/builtin_exit.c	/^void    builtin_exit(int is_lastcmd)$/;"	f
+builtin_pwd	srcs/builtins/builtin_pwd.c	/^int	builtin_pwd(void)$/;"	f
 chunk_count	micro_shell.h	/^	int		chunk_count;$/;"	m	struct:s_chunk_info
 chunk_count	srcs/pipex/split_cmd.c	/^static int	chunk_count(char *str, t_chunk_info *chunk_info)$/;"	f	file:
 clearArrayList	srcs/array_list/array_utils.c	/^void	clearArrayList(t_ArrayList *pList)$/;"	f
@@ -75,6 +79,7 @@ deleteArrayList	srcs/array_list/arraylist.c	/^void	deleteArrayList(t_ArrayList *
 delimiter	micro_shell.h	/^	char	delimiter;$/;"	m	struct:s_chunk_info
 delimiter_based_str_input	srcs/pipex/split_cmd.c	/^static void	delimiter_based_str_input(char **cmd_arg, char *str, t_chunk_info \\$/;"	f	file:
 e_builtins	micro_shell.h	/^typedef	enum e_builtins$/;"	g
+environ	micro_shell.h	/^	t_ArrayList	*environ;$/;"	m	struct:s_storage
 execve_with_error_handling	srcs/pipex/execve_with_path.c	/^void	execve_with_error_handling(char **array_of_path, char **cmd_arg, \\$/;"	f
 execve_with_path	srcs/pipex/execve_with_path.c	/^void	execve_with_path(char **array_of_path, char **cmd_arg, char **envp)$/;"	f
 exit_for_child	srcs/pipex/wait_and_exit.c	/^void	exit_for_child(int status)$/;"	f
@@ -118,6 +123,7 @@ ft_memmove	libft/ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, siz
 ft_memset	libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
 ft_ndec	libft/ft_itoa.c	/^static int	ft_ndec(int len)$/;"	f	file:
 ft_ndec	libft/ft_putnbr_fd.c	/^static int	ft_ndec(int len)$/;"	f	file:
+ft_print_error	libft/ft_print_error.c	/^void	ft_print_error(char *cmd, char *str, char *error_str)$/;"	f
 ft_ptr_free	libft/ft_ptr_free.c	/^void	ft_ptr_free(char *ptr)$/;"	f
 ft_putchar_fd	libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f
 ft_putendl_fd	libft/ft_putendl_fd.c	/^void	ft_putendl_fd(char *s, int fd)$/;"	f
@@ -145,6 +151,8 @@ ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
 getALElement	srcs/array_list/arraylist.c	/^t_ArrayListNode	*getALElement(t_ArrayList *pList, int position)$/;"	f
 getArrayListLength	srcs/array_list/array_utils.c	/^int	getArrayListLength(t_ArrayList *pList)$/;"	f
 get_next_line	gnl/get_next_line.c	/^int	get_next_line(int fd, char **line)$/;"	f
+getenviron	srcs/parse/getenviron.c	/^char **getenviron(t_storage *bag)$/;"	f
+getpath	srcs/pipex/getpath.c	/^bool	getpath(t_storage *bag, char ***path_res)$/;"	f
 grandchild_pids	micro_shell.h	/^	pid_t		*grandchild_pids;$/;"	m	struct:s_storage
 handler	main.c	/^void	handler(int signum)$/;"	f
 heredoc_flag	micro_shell.h	/^	int			heredoc_flag;$/;"	m	struct:s_storage
@@ -152,16 +160,18 @@ heredoc_to_tmpfile	srcs/pipex/heredoc_to_tmpfile.c	/^void	heredoc_to_tmpfile(t_s
 infile_name	micro_shell.h	/^	char		*infile_name;$/;"	m	struct:s_storage
 init_bag	srcs/init/init_bag.c	/^void	init_bag(t_storage *bag)$/;"	f
 init_builtin	srcs/init/init_builtin.c	/^void	init_builtin(t_storage *bag)$/;"	f
+init_environ	srcs/init/init_environ.c	/^void	init_environ(t_storage *bag)$/;"	f
 init_rl_catch_signals	srcs/init/init_rl_catch_signals.c	/^void	init_rl_catch_signals()$/;"	f
 isArrayListFull	srcs/array_list/array_utils.c	/^int	isArrayListFull(t_ArrayList *pList)$/;"	f
 is_builtin	srcs/parse/is_builtin.c	/^bool	is_builtin(t_storage *bag, const char *cmd)$/;"	f
 limiter	micro_shell.h	/^	char		*limiter;$/;"	m	struct:s_storage
 main	main.c	/^int		main(void)$/;"	f
-main	test.c	/^int main()$/;"	f
+main	test.c	/^int	main(void)$/;"	f
 malloc_cmd_args	srcs/pipex/parse_arguments2.c	/^void	malloc_cmd_args(t_storage *info, char **argv)$/;"	f
 malloc_grandchild_pids	srcs/pipex/parse_arguments2.c	/^void	malloc_grandchild_pids(t_storage *info)$/;"	f
 malloc_pipe_fds	srcs/pipex/parse_arguments2.c	/^void	malloc_pipe_fds(t_storage *info)$/;"	f
 maxElementCount	srcs/array_list/arraylist.h	/^	int				maxElementCount;$/;"	m	struct:s_ArrayListType
+my_which	srcs/pipex/my_which.c	/^char	*my_which(t_storage *bag, char *cmd)$/;"	f
 next	libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
 num_of_cmds	micro_shell.h	/^	int			num_of_cmds;$/;"	m	struct:s_storage
 outfile_name	micro_shell.h	/^	char		*outfile_name;$/;"	m	struct:s_storage
@@ -190,6 +200,7 @@ split_cmd	srcs/pipex/split_cmd.c	/^char	**split_cmd(char *str)$/;"	f
 split_path_env	srcs/pipex/execve_with_path.c	/^char	**split_path_env(char **envp)$/;"	f
 str_count	micro_shell.h	/^	int		str_count;$/;"	m	struct:s_chunk_info
 str_input	srcs/pipex/split_cmd.c	/^static char	*str_input(t_chunk_info *info, char *str, int str_len, \\$/;"	f	file:
+str_malloc_and_insert	srcs/parse/getenviron.c	/^static void	str_malloc_and_insert(char **cmd, char *str, int len, int index)$/;"	f	file:
 t_ArrayList	srcs/array_list/arraylist.h	/^}	t_ArrayList;$/;"	t	typeref:struct:s_ArrayListType
 t_ArrayListNode	srcs/array_list/arraylist.h	/^}	t_ArrayListNode;$/;"	t	typeref:struct:s_ArrayListNodeType
 t_builtins	micro_shell.h	/^}	t_builtins;$/;"	t	typeref:enum:e_builtins
