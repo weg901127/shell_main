@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/09 18:19:36 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/15 14:09:23 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	handler(int signum)
 	rl_redisplay();
 }
 
-int		main(void)
+int	main(void)
 {
 	//int				ret;
 	//char			*line;
-	t_storage			*bag;
+	t_storage	*bag;
 
 	bag = create_bag();
 	init_bag(bag);

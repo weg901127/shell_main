@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 00:56:10 by hongsehui         #+#    #+#             */
-/*   Updated: 2021/12/15 15:52:19 by sehhong          ###   ########.fr       */
+/*   Created: 2021/12/15 14:35:25 by sehhong           #+#    #+#             */
+/*   Updated: 2021/12/15 14:37:22 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
-//TODO err code 확인하기!
-int	builtin_cd(t_storage *bag, char *path)
+
+//environ의 요소중 $0, $?를 정해진 위치에 두면 좋을 듯.
+void	set_exit_status(t_storage *bag, int exit_status)
 {
-	if (chdir(path) == -1)
-	{	
-		ft_print_error("cd", path, strerror(errno));
-		set_exit_status(bag, EXIT_FAILURE);
-		return (-1);
-	}
-	set_exit_status(bag, EXIT_SUCCESS);
-	return (0);
+	getALElement(bag->environ->pElement, 1)->data = ft_itoa(exit_status);
 }
-
-// int	main(void)
-// {
-// 	t_storage	*bag;
-
-// 	bag = create_bag();
-// 	init_bag(bag);
-
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:34:34 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/09 14:12:04 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/15 14:14:19 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_builtin(t_storage *bag)
 	{
 		get_next_line(fd, &buf);
 		element.data = buf;
-		if(*buf == 0)
-			break;
+		if (*buf == 0)
+			break ;
 		addALElement(bag->builtin, 0, element);
 	}
 	close(fd);
