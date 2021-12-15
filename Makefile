@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/15 12:24:50 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/15 16:12:39 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ clean :
 	rm -f $(OBJ)
 fclean : clean
 	rm -f $(NAME)
+	rm -f $(NAME_TEST)
+	rm -f $(TEST_OBJ)
+	rm -f $(OBJ)
 	make -C $(LIBFT_DIR) fclean
 re : clean
 	rm -f $(NAME)
