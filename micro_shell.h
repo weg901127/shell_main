@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/15 12:00:34 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/15 15:52:06 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define ECMD_NOT_FND	127
 # define EPERMS_DND		126
 
-
 typedef struct s_storage
 {
 	char		*infile_name;
@@ -48,6 +47,7 @@ typedef struct s_storage
 	pid_t		*grandchild_pids;
 	char		*limiter;
 	int			heredoc_flag;
+	t_ArrayList	*runtime_env;
 	t_ArrayList	*environ;
 	t_ArrayList	*builtin;
 }	t_storage;
@@ -60,7 +60,7 @@ typedef struct s_chunk_info
 	char	delimiter;
 }	t_chunk_info;
 
-typedef	enum e_builtins
+typedef enum e_builtins
 {
 	ECHO_,
 	CD_,
@@ -129,19 +129,20 @@ char	*my_which(t_storage *bag, char *cmd);
 void	init_rl_catch_signals(void);
 
 /*  */
-t_storage	*create_bag();
-void		init_bag(t_storage *bag);
-void		init_builtin(t_storage *bag);
-bool		is_builtin(t_storage *bag, const char *cmd);
-void		init_environ(t_storage *bag);
+t_storage	*create_bag(void);
+void	init_bag(t_storage *bag);
+void	init_builtin(t_storage *bag);
+bool	is_builtin(t_storage *bag, const char *cmd);
+void	init_environ(t_storage *bag);
 
 /* getenviron */
 char	**getenviron(t_storage *bag);
 
 /*builtin*/
-int		builtin_cd(char *path);
+int		builtin_cd(t_storage *bag, char *path);
 void	builtin_echo(char *str, int n_option);
 void	builtin_exit(int is_lastcmd);
 int		builtin_pwd(void);
+void	set_exit_status(t_storage *bag, int exit_status);
 
 #endif
