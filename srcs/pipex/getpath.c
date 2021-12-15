@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:17:19 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/14 04:12:23 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/15 17:06:10 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	getpath(t_storage *bag, char ***path_res)
 
 	res = false;
 	tmp = getenviron(bag);
-	env_list_len = bag->environ->currentElementCount;
+	env_list_len = bag->environ->current_element_count;
 	while (--env_list_len >= 0)
 	{
 		after_split = ft_split(tmp[env_list_len], '=');

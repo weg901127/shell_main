@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:18:54 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/14 03:14:20 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/15 17:05:34 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char **getenviron(t_storage *bag)
 	int		i;
 	char	*tmp_data;
 
-	ret = (char **)malloc((bag->environ->currentElementCount + 1) * sizeof(char *));
+	ret = (char **)malloc((bag->environ->current_element_count + 1) * sizeof(char *));
 	i = 0;
-	while (i < bag->environ->currentElementCount)
+	while (i < bag->environ->current_element_count)
 	{
 		tmp_data = getALElement(bag->environ, i)->data;
 		str_malloc_and_insert(ret, tmp_data, ft_strlen(tmp_data), i);
