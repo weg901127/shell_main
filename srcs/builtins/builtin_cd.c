@@ -6,15 +6,12 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 00:56:10 by hongsehui         #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2021/12/15 15:52:19 by sehhong          ###   ########.fr       */
-=======
-/*   Updated: 2021/12/15 12:37:04 by gilee            ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2021/12/15 16:16:02 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
+
 //TODO err code 확인하기!
 int	builtin_cd(t_storage *bag, char *path)
 {
