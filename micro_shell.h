@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/17 14:47:30 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/17 15:14:47 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ typedef struct s_chunk_info
 	int		quote_flag;
 	char	delimiter;
 }	t_chunk_info;
+
+typedef enum e_startend
+{
+	START,
+	END
+}	t_startend;
 
 typedef enum e_builtins
 {
