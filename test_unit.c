@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "libft/libft.h"
+#include "micro_shell.h"
 #include "srcs/array_list/arraylist.h"
 
 
@@ -31,16 +32,33 @@ char	*fndnchange(char *string, char target)
 //2안
 char	*cutnjoin(char *string, char target)
 {
-	// ' 에서 다음 '까지 자른다 버퍼에 쪼인한다. 간단...
-	// '가 있는지 없는지 확인
-	// if (!ft_charcnt('\''))
-	// 		없다면 종료
-	// 있다면 로직 실행
-	// 	1. '를 만나기 전까지 자른다. 하지만 이전 문자열이 \라면 '까지 자른다 (시작일때 끝일때 다르다_)
-	// 	2. 복사 & 쪼인한다.
-	// 	3. '를 만났다 --> 다음 '까지 자른다
-	// 	4. 복사 & 쪼인한다.
-	// 	5. 기존 string의 끝까지 이동했다면 종료
+	char	*flag[2];
+	char	buf[10000];
+
+	flag[START] = string;
+	flag[END] = string;
+	ft_memset(buf, 0, 10000);
+	// "'asdf\\\'\\\'"
+	int	tmp = 0;
+	while (1)
+	{
+		tmp = ft_strlen(buf);
+		ft_memccpy(buf + tmp, flag[START], target, ft_strlen(flag[START]));
+		if (ft_strchr(flag[START], target))
+			flag[START] = flag[START] + (ft_strchr(flag[START], target) - flag[START] + 1);
+		else
+			break;
+		if (buf[ft_strlen(buf) - 1] == target)
+		{
+			if (ft_strdup(buf) && buf[ft_strlen(buf) - 2] == '\\')
+				buf[ft_strlen(buf) - 2] = target;
+			buf[ft_strlen(buf) - 1] = '\0';
+		}
+		//if (!flag[START])
+		//	break;
+	}
+	printf("output : %s",buf);
+	return NULL;
 }
 int	ft_splitcnt(char **src)
 {
@@ -70,21 +88,10 @@ int	ft_charcnt(char *src, char target)
 	return (cnt);
 }
 
-int main()
+int main(int argc, char **argv)
 {
-	char	*str = "\'asdf\\\'\\\'";
-	char	*buf;
-	char	*buf2;
-	char	**split;
-
-	buf = ft_strdup(str);
-	printf("%s\n", buf);
-	buf2 = fndnchange(buf, '\'');
-	printf("%s\n", buf2);
-	split = ft_split(buf, '\'');
-	while(*split)
-	{
-		printf("%s\n", *split++);
-	}
+	(void)argc;
+	printf("input : %s\n", argv[1]);
+	cutnjoin(argv[1], '\'');
 	return 0;
 }
