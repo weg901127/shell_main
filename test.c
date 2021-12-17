@@ -52,6 +52,6 @@ int	main(void)
 	bag = create_bag();
 	init_bag(bag);
 	init_environ(bag);
-	printf("%s", my_which(bag, "ls"));
+	printf("%s\n", get_value(bag->environ, "OLDPWD"));
 	printf("\033[32;1mDONE\n\033[m");
 }

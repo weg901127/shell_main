@@ -5,33 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 00:56:10 by hongsehui         #+#    #+#             */
-/*   Updated: 2021/12/15 16:40:39 by sehhong          ###   ########.fr       */
+/*   Created: 2021/12/16 07:37:03 by sehhong           #+#    #+#             */
+/*   Updated: 2021/12/16 16:06:03 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
 //TODO err code 확인하기!
+//cmd 리스트를 확인했을 때, cd 뒤에 경로가 있을경우만, chdir(path)
+//->리스트 형태 정해지면 추가할것.
+
 bool	builtin_cd(t_storage *bag, char *path)
 {
+	// if (!path)
+	// 	path = "home"
 	if (chdir(path) == -1)
 	{	
 		ft_print_error("cd", path, strerror(errno));
-		set_exit_status(bag, EXIT_FAILURE);
+		set_env_var(bag, EXIT_FAILURE);
 		return (FALSE);
 	}
-	set_exit_status(bag, EXIT_SUCCESS);
+	set_env_var(bag, EXIT_SUCCESS);
 	return (TRUE);
 }
 
-// int	main(void)
-// {
-// 	t_storage	*bag;
-
-// 	bag = create_bag();
-// 	init_bag(bag);
-// 	init_environ(bag);
-// 	printf("%s", my_which(bag, "ls"));
-// 	printf("\033[32;1mDONE\n\033[m");
-// }
