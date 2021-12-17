@@ -44,6 +44,18 @@
 // 	printf("\033[32;1mDONE\n\033[m");
 // }
 
+void	print_all_env(t_storage *bag)
+{
+	int	i;
+
+	i = 0;
+	while (i < bag->environ->current_element_count)
+	{
+		printf("%s\n", getALElement(bag->environ, i)->data);
+		i++;
+	}
+}
+
 extern char **environ;
 int	main(void)
 {
@@ -52,6 +64,9 @@ int	main(void)
 	bag = create_bag();
 	init_bag(bag);
 	init_environ(bag);
-	printf("%s\n", get_value(bag->environ, "OLDPWD"));
+	print_all_env(bag);
+	printf("-----------------------------------");
+	update_env(bag->environ, "_", "whatever");
+	print_all_env(bag);
 	printf("\033[32;1mDONE\n\033[m");
 }

@@ -6,13 +6,13 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 09:53:14 by sehhong           #+#    #+#             */
-/*   Updated: 2021/12/16 16:19:18 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/17 12:51:13 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-static void    find_n_rm_element(t_storage *bag, char *str)
+static void     find_n_rm_element(t_storage *bag, char *str)
 {
     int     i;
     int     str_len;
