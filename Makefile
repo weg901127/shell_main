@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/15 16:12:39 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/16 17:05:00 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,17 @@ LIBFT_NAME			= libft.a
 LIB					= $(LIBFT_DIR)$(LIBFT_NAME)
 #IREADLINE			= -I /goinfre/sehhong/homebrew/opt/readline/include
 #LREADLINE			= -L /goinfre/sehhong/homebrew/opt/readline/lib	
-#IREADLINE			= -I /opt/homebrew/opt/readline/include/
-#LREADLINE			= -L /opt/homebrew/opt/readline/lib/
-IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
-LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
+IREADLINE			= -I /opt/homebrew/opt/readline/include/
+LREADLINE			= -L /opt/homebrew/opt/readline/lib/
+#IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
+#LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
 SRCS				= ./main.c					\
 					  ./gnl/get_next_line.c				./gnl/get_next_line_utils.c \
 					  ./srcs/array_list/arraylist.c 	./srcs/array_list/array_utils.c \
 					  ./srcs/builtins/builtin_cd.c		./srcs/builtins/builtin_pwd.c \
 					  ./srcs/builtins/builtin_echo.c 	./srcs/builtins/builtin_exit.c \
+					  ./srcs/builtins/builtin_env.c		./srcs/builtins/get_value.c \
+					  ./srcs/builtins/builtin_unset.c	./srcs/builtins/set_env_var.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
 					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c\

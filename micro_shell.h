@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/15 16:43:30 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/16 17:04:42 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,13 @@ void	init_environ(t_storage *bag);
 char	**getenviron(t_storage *bag);
 
 /*builtin*/
-int		builtin_cd(t_storage *bag, char *path);
-void	builtin_echo(char *str, int n_option);
+bool	builtin_cd(t_storage *bag, char *path);
+void	builtin_echo(t_storage *bag, char *str, int n_option);
+void    builtin_env(t_storage *bag);
 void	builtin_exit(int is_lastcmd);
-int		builtin_pwd(void);
-void	set_exit_status(t_storage *bag, int exit_status);
+void	builtin_pwd(t_storage *bag);
+void    builtin_unset(t_storage *bag, char **arg);
+void	set_env_var(t_storage *bag, int exit_status);
+char    *get_value(t_ArrayList *env, char *str);
 
 #endif

@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_exit_status.c                                  :+:      :+:    :+:   */
+/*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 14:35:25 by sehhong           #+#    #+#             */
-/*   Updated: 2021/12/15 16:07:56 by sehhong          ###   ########.fr       */
+/*   Created: 2021/12/16 16:44:15 by sehhong           #+#    #+#             */
+/*   Updated: 2021/12/16 17:08:41 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-//runtime_env의 요소중 $0, $?를 정해진 위치에 두면 좋을 듯.
-void	set_exit_status(t_storage *bag, int exit_status)
+char    *get_value(t_ArrayList *env, char *str)
 {
-	getALElement(bag->runtime_env->pElement, 1)->data = ft_itoa(exit_status);
+    int     i;
+    int     len_str;
+    char    *data;
+
+    i = 0;
+    len_str = ft_strlen(str);
+    while (i < env->current_element_count)
+    {
+        data = getALElement(env, i)->data;
+        if (!ft_strncmp(data, str, len_str) && data[len_str] == '=')
+            return (data + len_str + 1); 
+        i++;
+    }
+    return (NULL);
 }
+
