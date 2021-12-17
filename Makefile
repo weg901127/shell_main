@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/17 14:47:57 by sehhong          ###   ########.fr        #
+#    Updated: 2021/12/17 15:33:57 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ CFLAGS 				= -Wall -Wextra -Werror
 LIBFT_DIR 			= ./libft/
 LIBFT_NAME			= libft.a
 LIB					= $(LIBFT_DIR)$(LIBFT_NAME)
-IREADLINE			= -I /goinfre/sehhong/homebrew/opt/readline/include
-LREADLINE			= -L /goinfre/sehhong/homebrew/opt/readline/lib	
-#IREADLINE			= -I /opt/homebrew/opt/readline/include/
-#LREADLINE			= -L /opt/homebrew/opt/readline/lib/
+#IREADLINE			= -I /goinfre/sehhong/homebrew/opt/readline/include
+#LREADLINE			= -L /goinfre/sehhong/homebrew/opt/readline/lib	
+IREADLINE			= -I /opt/homebrew/opt/readline/include/
+LREADLINE			= -L /opt/homebrew/opt/readline/lib/
 #IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
 #LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
 SRCS				= ./main.c					\
@@ -35,7 +35,8 @@ SRCS				= ./main.c					\
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
 					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c\
-					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
+					  ./srcs/parse/is_builtin.c			./srcs/parse/prase_master.c \
+					  ./srcs/pipex/pipex.c \
 					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
 					  ./srcs/pipex/wait_and_exit.c		./srcs/pipex/parse_arguments.c \
 					  ./srcs/pipex/execve_with_path.c	./srcs/pipex/split_cmd.c \

@@ -6,10 +6,11 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:36:56 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/15 16:10:41 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/17 15:32:22 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "micro_shell.h"
 
 /*
@@ -37,7 +38,6 @@ void	handler(int signum)
 
 int	main(void)
 {
-	int				ret;
 	char			*line;
 	t_storage			*bag;
 
@@ -53,14 +53,12 @@ int	main(void)
 		line = readline("micro_shell> ");
 		if (line)
 		{
-			ret = strcmp(line, "bye");
-			if (ret)
-				printf("output> %s\n", line);
+			bag->input = line;
+			//line을 parsing에 태움
+			parse_master(bag);
 			add_history(line);
 			free(line);
 			line = NULL;
-			if (!ret)
-				break ;
 		}
 		else
 			return (1);

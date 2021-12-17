@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/17 15:14:47 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/17 15:32:56 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,7 @@ void    builtin_unset(t_storage *bag, char **arg);
 void	set_env_var(t_storage *bag, int exit_status);
 char    *get_value(t_ArrayList *env, char *str);
 void    update_env(t_ArrayList *env, char *key, char *new_val);
+/* parse_master */
+bool parse_master(t_storage *bag);
 
 #endif
