@@ -1,18 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_runtime_env.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/17 13:12:37 by sehhong           #+#    #+#             */
-/*   Updated: 2021/12/17 13:13:07 by sehhong          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../../micro_shell.h"
 
-#include "../../microshell.h"
-
-void	init_runtime_env(t_storgae *bag)
+//쉘변수: $0=bash, $?=마지막 커맨드 exit status, $$=현재 bash쉘의 pid
+void	init_runtime_env(t_storage *bag)
 {
-	
+	t_ArrayListNode element;
+    
+    element.data = "0=microshell";
+    addALElement(bag->runtime_env, bag->runtime_env->current_element_count, element);
+    element.data = "?=0";
+    addALElement(bag->runtime_env, bag->runtime_env->current_element_count, element);
 }
+

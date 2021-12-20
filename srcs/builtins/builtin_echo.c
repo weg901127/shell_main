@@ -1,24 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 01:26:59 by sehhong           #+#    #+#             */
-/*   Updated: 2021/12/17 12:40:47 by sehhong          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../micro_shell.h"
 
-//TODO error가 일어날 경우가 언제가 있지? 있을 경우, exit code는?
-//아무리 생각해도 실패할 경우가 거의 없는듯....?
-//리스트의 형태에 따라 바꿔야 함.
-void	builtin_echo(t_storage *bag, char *str, int n_option)
+//The return status is 0 unless a write error occurs. 
+void	builtin_echo(t_storage *bag, char *arg, int n_option)
 {
-	ft_putstr_fd(str, 1);
+	// char	**arg_arr;
+	// int		len_arr;
+
+	// arg_arr = split_cmd(arg);
+	// len_arr = count_str_array(arg_arr);
+	ft_putstr_fd(arg, 1);
 	if (!n_option)
 		write(1, "\n", 1);
-	set_env_var(bag, EXIT_SUCCESS);
+	// if (!len_arr)
+	// 	update_env(bag->environ, "_", "echo");
+	// else
+	// 	update_env(bag->environ, "_", arg_arr[len_arr- 1]);
+	set_environ(bag, EXIT_SUCCESS);
 }

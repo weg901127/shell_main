@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:53:59 by gilee             #+#    #+#              #
-#    Updated: 2021/12/17 15:33:57 by gilee            ###   ########.fr        #
+#    Updated: 2021/12/20 15:28:58 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,14 @@ SRCS				= ./main.c					\
 					  ./srcs/builtins/builtin_cd.c		./srcs/builtins/builtin_pwd.c \
 					  ./srcs/builtins/builtin_echo.c 	./srcs/builtins/builtin_exit.c \
 					  ./srcs/builtins/builtin_env.c		./srcs/builtins/get_value.c \
-					  ./srcs/builtins/builtin_unset.c	./srcs/builtins/set_env_var.c \
-					  ./srcs/builtins/update_env.c \
+					  ./srcs/builtins/builtin_unset.c	./srcs/builtins/set_environ.c \
+					  ./srcs/builtins/update_env.c 		./srcs/builtins/strncmp_exact.c \
+					  ./srcs/builtins/count_str_array.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
 					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c\
-					  ./srcs/parse/is_builtin.c			./srcs/parse/prase_master.c \
-					  ./srcs/pipex/pipex.c \
+					  ./srcs/init/init_runtime_env.c \
+					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
 					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
 					  ./srcs/pipex/wait_and_exit.c		./srcs/pipex/parse_arguments.c \
 					  ./srcs/pipex/execve_with_path.c	./srcs/pipex/split_cmd.c \

@@ -178,7 +178,9 @@ int	main(void)
 	init_bag(bag);
 	init_builtin(bag);
 	init_environ(bag);
-	printf("%s",get_value(bag->environ, "PATH"));
+	init_runtime_env(bag);
+	print_all_env(bag);
+	printf("-----------------------------------");
 	printf("\033[32;1mDONE\n\033[m");
 }
 */
