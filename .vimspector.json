@@ -15,7 +15,8 @@
       "debugOptions": [],
       "MIMode": "lldb",
       "cwd": "${cwd}",
-      "program": "${fileDirname}/a.out"
+      "program": "${fileDirname}/test",
+	  "args":["\\'$PATH\\'"]
     }
   }
   }
