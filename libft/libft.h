@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 23:25:48 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/15 12:20:43 by sehhong          ###   ########.fr       */
+/*   Updated: 2021/12/20 16:37:16 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void			ft_malloc_fail_str(char **str, int max);
 void			ft_ptr_free(char *ptr);
 void			ft_strcopy_with_delimiter(char *dest, char *src, char c);
 void			ft_print_error(char *cmd, char *str, char *error_str);
+int				ft_splitcnt(char **src);
+int				ft_charcnt(char *src, char target);
 
 #endif

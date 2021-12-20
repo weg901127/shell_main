@@ -23,8 +23,8 @@ SRCS				= ./main.c					\
 					  ./srcs/builtins/count_str_array.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
-					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c\
-					  ./srcs/init/init_runtime_env.c \
+					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c \
+					  ./srcs/init/init_runtime_env.c 	./srcs/parse/prase_master.c \
 					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
 					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
 					  ./srcs/pipex/wait_and_exit.c		./srcs/pipex/parse_arguments.c \
