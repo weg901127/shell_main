@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 01:21:24 by gilee             #+#    #+#              #
-#    Updated: 2021/12/15 12:28:40 by sehhong          ###   ########.fr        #
+#    Updated: 2021/12/20 16:38:00 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ STR		= ft_strchr.c			ft_strdup.c \
 		  ft_itoa.c				ft_atoi.c \
 		  ft_tolower.c			ft_toupper.c \
 		  ft_substr.c			ft_strcopy_with_delimiter.c \
-		  ft_print_error.c
+		  ft_print_error.c		ft_charcnt.c \
+		  ft_splitcnt.c
 
 IS		= ft_isalnum.c 			ft_isalpha.c \
 		  ft_isascii.c 			ft_isdigit.c \

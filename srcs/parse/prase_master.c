@@ -31,34 +31,89 @@ char	*cutnjoin(char *string, char target)
 	return NULL;
 }
 
-int	ft_splitcnt(char **src)
+
+
+int	*get_zone(char	*string)
 {
-	int	cnt;
+	int	*buf;
+	int	start;
+	int	i;
 
-	cnt = 0;
-	if (src == NULL || *src == NULL)
-		return (0);
-	while(src[cnt][0])
-		cnt++;
-	return (cnt);
-}
-
-int	ft_charcnt(char *src, char target)
-{
-	int	cnt;
-
-	cnt = 0;
-	if (src == NULL || *src == 0)
-		return (0);
-	while (*src)
+	i = 0;
+	start = 0;
+	buf = (int *)ft_calloc(ft_strlen(string), sizeof(int));
+	while (*string)
 	{
-		if (*src == target)
-			cnt++;
-		src++;
+		if (*string == '\'')
+		{
+			buf[i] = 2;
+			if (ft_strchr(string + 1, '\''))
+				start = !start;
+			else if (!ft_strchr(string + 1, '\''))
+				start = 0;
+		}
+		else if (start)
+			buf[i] = 0;
+		else
+			buf[i] = 1;
+		string++;
+		i++;
 	}
-	return (cnt);
+	return (buf);
 }
 
+int	get_env_len(char *tmp)
+{
+	//변수 이름에대해서 예외상황이 많다.. 다 처리해줘야함
+	//숫자먼저 오는경우 (한자리까지 받는다)
+	//알파벳이 먼저오면 숫자 아무리많이와도 상관없다.
+	//특수문자도 마찬가지
+	//--> 1글자 먼저 해석하는경우
+	//숫자하나올때
+	//특수문자하나올때
+	//뒤에 뭐가오든 기존에 예약된게있다면 그 결과에 추가로 뒤에오는애들을 붙인다.
+	int	res;
+
+	res = 0;
+	while (*tmp)
+	{
+		if (ft_isspace(*tmp) || *tmp == '\'' || *tmp =='\"')
+			break;
+		res++;
+		tmp++;
+	}
+	return (res);
+}
+
+char	*parse_env(t_storage *bag, char *string)
+{
+	char	buf[10000];
+	char	var_buf[1000];
+	char	*tmp;
+	int		*zone;
+
+	tmp = string;
+	ft_memset(buf, 0, 10000);
+	ft_memset(var_buf, 0, 1000);
+	zone = get_zone(string);
+	while (1)
+	{
+		ft_memccpy(buf, tmp, '$', ft_strlen(tmp));
+		tmp = ft_strchr(tmp, '$') + 1;
+		if (buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(buf) - 1] == 1)
+		{
+			buf[ft_strlen(buf) - 1] = '\0';
+			ft_memcpy(var_buf, tmp, get_env_len(tmp));
+			tmp = tmp + get_env_len(tmp);
+			ft_strlcat(buf, get_value(bag->environ, var_buf), 10000);
+		}
+		if (!*tmp)
+			break;
+	}
+	free(zone);
+	printf("%s", buf);
+	return NULL;
+}
 bool parse_master(t_storage *bag)
 {
 	bool	res;
