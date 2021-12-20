@@ -19,15 +19,12 @@ char	*cutnjoin(char *string, char target)
 			break;
 		if (buf[ft_strlen(buf) - 1] == target)
 		{
-			if (ft_strdup(buf) && buf[ft_strlen(buf) - 2] == '\\')
+			if (ft_strlen(buf) && buf[ft_strlen(buf) - 2] == '\\')
 				buf[ft_strlen(buf) - 2] = target;
 			buf[ft_strlen(buf) - 1] = '\0';
 		}
-		//if (!flag[START])
-		//	break;
 	}
-	printf("output : %s",buf);
-	return NULL;
+	return ft_strdup(buf);
 }
 
 
@@ -76,7 +73,7 @@ int	get_env_len(char *tmp)
 	res = 0;
 	while (*tmp)
 	{
-		if (ft_isspace(*tmp) || *tmp == '\'' || *tmp =='\"')
+		if (ft_isspace(*tmp) || *tmp == '\'' || *tmp =='\"' || *tmp == '$')
 			break;
 		res++;
 		tmp++;
@@ -93,7 +90,7 @@ char	*parse_env(t_storage *bag, char *string)
 	int		*zone;
 
 	if (!ft_strchr(string, '$'))
-		return (string);
+		return (ft_strdup(string));
 	tmp = string;
 	ft_memset(buf, 0, 10000);
 	ft_memset(var_buf, 0, 1000);
@@ -105,28 +102,38 @@ char	*parse_env(t_storage *bag, char *string)
 		tmp = ft_strchr(tmp, '$');
 		if (tmp)
 			tmp += 1;
-		if (buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(buf) - 1] == 1)
+		if (buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(string) - ft_strlen(tmp) - 1] == 1)
 		{
 			buf[ft_strlen(buf) - 1] = '\0';
 			ft_memcpy(var_buf, tmp, get_env_len(tmp));
 			tmp = tmp + get_env_len(tmp);
-			ft_strlcat(buf, get_value(bag->environ, var_buf), 10000);
+			//TODO get_value NULL처리
+			if (get_value(bag->environ, var_buf))
+				ft_strlcat(buf, get_value(bag->environ, var_buf), 10000);
 		}
 		if (!tmp)
 			break;
 	}
 	free(zone);
-	printf("%s", buf);
-	return NULL;
+	return ft_strdup(buf);
 }
 
 bool parse_master(t_storage *bag)
 {
 	bool	res;
+	char	*buf;
+	char	*buf2;
+	char	*buf3;
 
 	res = false;
-	//single거의 완료
-	parse_env(bag, bag->input);
+	buf = parse_env(bag, bag->input);
+	buf2 = cutnjoin(buf, '\'');
+	buf3 = cutnjoin(buf2, '\"');
+	printf("%s\n",buf3);
+	free(buf);
+	free(buf2);
+	free(buf3);
+	//free(bag->input);
 	//cutnjoin(bag->input, '\'');
 	//double 처리
 	//cutnjoin(bag->input, '\"');
