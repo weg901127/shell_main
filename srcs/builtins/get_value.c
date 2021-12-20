@@ -12,7 +12,7 @@ char    *get_value(t_ArrayList *env, char *str)
     {
         data = getALElement(env, i)->data;
         if (strncmp_exact(data, str, '='))
-            return (data + len_str + 1); 
+            return (data + len_str + 1);
         i++;
     }
     return (NULL);
