@@ -64,9 +64,8 @@ int	main(void)
 	bag = create_bag();
 	init_bag(bag);
 	init_environ(bag);
+	init_runtime_env(bag);
 	print_all_env(bag);
 	printf("-----------------------------------");
-	update_env(bag->environ, "_", "whatever");
-	print_all_env(bag);
 	printf("\033[32;1mDONE\n\033[m");
 }

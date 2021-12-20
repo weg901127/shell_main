@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   update_env.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 17:15:01 by sehhong           #+#    #+#             */
-/*   Updated: 2021/12/17 14:48:43 by sehhong          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../micro_shell.h"
 
 void    update_env(t_ArrayList *env, char *key, char *new_val)
@@ -24,13 +12,16 @@ void    update_env(t_ArrayList *env, char *key, char *new_val)
 	while (i < env->current_element_count)
 	{
 		data = getALElement(env, i)->data;
-		if (!ft_strncmp(data, key, len_key) && data[len_key] == '=')
+		if (strncmp_exact(data, key, '='))
 		{
-			data = NULL;
             free(data);
+			data = NULL;
             tmp = ft_strjoin(key, "=");
             data = ft_strjoin(tmp, new_val);
-            return ;
+			free(tmp);
+			tmp = NULL;
+			getALElement(env, i)->data = data;
+			return ;
 		}
         i++;
 	}
