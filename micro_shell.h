@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:46:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/17 15:32:56 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/20 15:28:10 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,18 +142,22 @@ void	init_bag(t_storage *bag);
 void	init_builtin(t_storage *bag);
 bool	is_builtin(t_storage *bag, const char *cmd);
 void	init_environ(t_storage *bag);
+void	init_runtime_env(t_storage *bag);
+void	init_runtime_env(t_storage *bag);
 
 /* getenviron */
 char	**getenviron(t_storage *bag);
 
 /*builtin*/
-bool	builtin_cd(t_storage *bag, char *path);
+void	builtin_cd(t_storage *bag, char *arg);
 void	builtin_echo(t_storage *bag, char *str, int n_option);
 void    builtin_env(t_storage *bag);
-void	builtin_exit(int is_lastcmd);
+void	builtin_exit(t_storage *bag, char *arg);
 void	builtin_pwd(t_storage *bag);
-void    builtin_unset(t_storage *bag, char **arg);
-void	set_env_var(t_storage *bag, int exit_status);
+void    builtin_unset(t_storage *bag, char *arg);
+int		count_str_array(char **arg_arr);
+void	set_environ(t_storage *bag, int exit_status);
+bool	strncmp_exact(char *str1, char *str2, char c);
 char    *get_value(t_ArrayList *env, char *str);
 void    update_env(t_ArrayList *env, char *key, char *new_val);
 /* parse_master */

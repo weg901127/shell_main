@@ -1,33 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 07:37:03 by sehhong           #+#    #+#             */
-/*   Updated: 2021/12/17 16:03:58 by gilee            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../micro_shell.h"
 
 //TODO err code 확인하기!
-//cmd 리스트를 확인했을 때, cd 뒤에 경로가 있을경우만, chdir(path)
-//->리스트 형태 정해지면 추가할것.
-//cd ~ b c d
-//{"cd"},{"~ b c d"}
-bool	builtin_cd(t_storage *bag, char *path)
+static void	change_pwds_environ(t_storage *bag, char *curr_pwd, char *new_path)
 {
-	// if (!path)
-	// path = "home"
-	if (chdir(path) == -1)
+	t_ArrayListNode	element;
+
+	if (!get_value(bag->environ, "OLDPWD"))
 	{	
-		ft_print_error("cd", path, strerror(errno));
-		set_env_var(bag, EXIT_FAILURE);
-		return (FALSE);
+		element.data = ft_strjoin("OLDPWD=", curr_pwd);
+		addALElement(bag->environ, bag->environ->current_element_count - 1, element);
 	}
-	set_env_var(bag, EXIT_SUCCESS);
-	return (TRUE);
+	else
+		update_env(bag->environ, "OLDPWD", curr_pwd);
+	update_env(bag->environ, "PWD", new_path);
 }
 
+void	builtin_cd(t_storage *bag, char *arg)
+{
+	char	**arg_arr;
+	char	*path;
+
+	arg_arr = split_cmd(arg);
+	if (arg_arr[0] == NULL)
+		path = get_value(bag->environ, "HOME");
+	else
+		path = arg_arr[0];
+	if (chdir(path) == -1)
+	{
+		ft_print_error("cd", path, strerror(errno));
+		set_environ(bag, EXIT_FAILURE);
+	}
+	else
+	{
+		set_environ(bag, EXIT_SUCCESS);
+		change_pwds_environ(bag, get_value(bag->environ, "PWD"), path);
+	}
+}
