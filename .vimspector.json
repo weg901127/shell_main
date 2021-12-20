@@ -15,8 +15,7 @@
       "debugOptions": [],
       "MIMode": "lldb",
       "cwd": "${cwd}",
-      "program": "${fileDirname}/test",
-	  "args":["\\'$PATH\\'"]
+      "program": "${fileDirname}/minishell"
     }
   }
   }
