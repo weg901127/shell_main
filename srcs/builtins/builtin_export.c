@@ -3,8 +3,6 @@
 static  int    where_is_equal(char *str)
 {
     int i;
-    int ret;
-
     
     i = 0;
     while (str[i])
@@ -14,7 +12,7 @@ static  int    where_is_equal(char *str)
         i++;
     }
     //'='가 없다.
-    if (str[i] == '\0') 
+    if (str[i] == '\0')
         return(-1);
 }
 
