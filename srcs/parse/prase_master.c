@@ -8,7 +8,6 @@ char	*cutnjoin(char *string, char target)
 	flag[START] = string;
 	flag[END] = string;
 	ft_memset(buf, 0, 10000);
-	// "'asdf\\\'\\\'"
 	int	tmp = 0;
 	while (1)
 	{
@@ -90,16 +89,22 @@ char	*parse_env(t_storage *bag, char *string)
 	char	buf[10000];
 	char	var_buf[1000];
 	char	*tmp;
+	int		buflen;
 	int		*zone;
 
+	if (!ft_strchr(string, '$'))
+		return (string);
 	tmp = string;
 	ft_memset(buf, 0, 10000);
 	ft_memset(var_buf, 0, 1000);
 	zone = get_zone(string);
 	while (1)
 	{
-		ft_memccpy(buf, tmp, '$', ft_strlen(tmp));
-		tmp = ft_strchr(tmp, '$') + 1;
+		buflen = ft_strlen(buf);
+		ft_memccpy(buf + buflen, tmp, '$', ft_strlen(tmp));
+		tmp = ft_strchr(tmp, '$');
+		if (tmp)
+			tmp += 1;
 		if (buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(buf) - 1] == 1)
 		{
 			buf[ft_strlen(buf) - 1] = '\0';
@@ -107,20 +112,22 @@ char	*parse_env(t_storage *bag, char *string)
 			tmp = tmp + get_env_len(tmp);
 			ft_strlcat(buf, get_value(bag->environ, var_buf), 10000);
 		}
-		if (!*tmp)
+		if (!tmp)
 			break;
 	}
 	free(zone);
 	printf("%s", buf);
 	return NULL;
 }
+
 bool parse_master(t_storage *bag)
 {
 	bool	res;
 
 	res = false;
 	//single거의 완료
-	cutnjoin(bag->input, '\'');
+	parse_env(bag, bag->input);
+	//cutnjoin(bag->input, '\'');
 	//double 처리
 	//cutnjoin(bag->input, '\"');
 	//$처리
