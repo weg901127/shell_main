@@ -41,15 +41,16 @@ int	main(void)
 		line = readline("micro_shell> ");
 		if (line)
 		{
-			bag->input = line;
+			bag->input = ft_strdup(line);
 			//line을 parsing에 태움
 			parse_master(bag);
 			add_history(line);
 			free(line);
+			free(bag->input);
 			line = NULL;
 		}
-		else
-			return (1);
+		//else
+		//	return (1);
 	}
 	
 	return (0);
