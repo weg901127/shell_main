@@ -3,11 +3,11 @@
 char	*cutnjoin(char *string, char target)
 {
 	char	*flag[2];
-	char	buf[10000];
+	char	buf[MAXLEN];
 
 	flag[START] = string;
 	flag[END] = string;
-	ft_memset(buf, 0, 10000);
+	ft_memset(buf, 0, MAXLEN);
 	int	tmp = 0;
 	while (1)
 	{
@@ -60,14 +60,6 @@ int	*get_zone(char	*string)
 
 int	get_env_len(char *tmp)
 {
-	//변수 이름에대해서 예외상황이 많다.. 다 처리해줘야함
-	//숫자먼저 오는경우 (한자리까지 받는다)
-	//알파벳이 먼저오면 숫자 아무리많이와도 상관없다.
-	//특수문자도 마찬가지
-	//--> 1글자 먼저 해석하는경우
-	//숫자하나올때
-	//특수문자하나올때
-	//뒤에 뭐가오든 기존에 예약된게있다면 그 결과에 추가로 뒤에오는애들을 붙인다.
 	int	res;
 
 	res = 0;
@@ -83,8 +75,8 @@ int	get_env_len(char *tmp)
 
 char	*parse_env(t_storage *bag, char *string)
 {
-	char	buf[10000];
-	char	var_buf[1000];
+	char	buf[MAXLEN];
+	char	var_buf[MAX_ENVLEN];
 	char	*tmp;
 	int		buflen;
 	int		*zone;
@@ -92,8 +84,8 @@ char	*parse_env(t_storage *bag, char *string)
 	if (!ft_strchr(string, '$'))
 		return (ft_strdup(string));
 	tmp = string;
-	ft_memset(buf, 0, 10000);
-	ft_memset(var_buf, 0, 1000);
+	ft_memset(buf, 0, MAXLEN);
+	ft_memset(var_buf, 0, MAX_ENVLEN);
 	zone = get_zone(string);
 	while (1)
 	{
@@ -109,7 +101,7 @@ char	*parse_env(t_storage *bag, char *string)
 			tmp = tmp + get_env_len(tmp);
 			//TODO get_value NULL처리
 			if (get_value(bag->environ, var_buf))
-				ft_strlcat(buf, get_value(bag->environ, var_buf), 10000);
+				ft_strlcat(buf, get_value(bag->environ, var_buf), MAXLEN);
 		}
 		if (!tmp)
 			break;
@@ -119,11 +111,11 @@ char	*parse_env(t_storage *bag, char *string)
 }
 void	execve_builtin(t_storage *bag, char *arg)
 {
-	char	buf1[10000];
-	char	buf2[10000];
+	char	buf1[MAXLEN];
+	char	buf2[MAXLEN];
 
-	ft_memset(buf1, 0, 10000);
-	ft_memset(buf2, 0, 10000);
+	ft_memset(buf1, 0, MAXLEN);
+	ft_memset(buf2, 0, MAXLEN);
 	ft_memccpy(buf1, arg, ' ', ft_strlen(arg));
 	if (buf1[ft_strlen(buf1) - 1] == ' ')
 		buf1[ft_strlen(buf1) - 1] = '\0';
@@ -146,9 +138,10 @@ void	execve_builtin(t_storage *bag, char *arg)
 }
 void	execve_cmd(t_storage *bag, char	*arg)
 {
-	char	buf[10000];
+	//builtin도 fork태우고 pipe, dup 해준다~
+	char	buf[MAXLEN];
 
-	ft_memset(buf, 0, 10000);
+	ft_memset(buf, 0, MAXLEN);
 	ft_memccpy(buf, arg, ' ', ft_strlen(arg));
 	if (buf[ft_strlen(buf) - 1] == ' ')
 		buf[ft_strlen(buf) - 1] = '\0';
@@ -157,18 +150,22 @@ void	execve_cmd(t_storage *bag, char	*arg)
 }
 bool parse_master(t_storage *bag)
 {
-	bool	res;
-	char	*buf;
-	char	*buf2;
-	char	*buf3;
+	char	*buf[3];
+	char	**args;
+	int		i;
 
-	res = false;
-	buf = parse_env(bag, bag->input);
-	buf2 = cutnjoin(buf, '\'');
-	buf3 = cutnjoin(buf2, '\"');
-	free(buf);
-	free(buf2);
-	//free(buf3);
-	execve_cmd(bag, buf3);
-	return (res);
+	i = 0;
+	buf[0] = parse_env(bag, bag->input);
+	buf[1] = cutnjoin(buf[0], '\'');
+	buf[2] = cutnjoin(buf[1], '\"');
+	free(buf[0]);
+	free(buf[1]);
+	args = ft_split(buf[2], '|');
+	free(buf[2]);
+	while (args[i])
+		execve_cmd(bag, args[i++]);
+	while (i--)
+		free(args[i]);
+	free(args);
+	return (false);
 }

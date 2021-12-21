@@ -24,6 +24,8 @@
 # define STDOUT_FD		1
 # define ECMD_NOT_FND	127
 # define EPERMS_DND		126
+# define MAXLEN			10000
+# define MAX_ENVLEN		1000
 
 typedef struct s_storage
 {
