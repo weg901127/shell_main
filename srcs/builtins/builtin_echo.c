@@ -1,5 +1,6 @@
 #include "../../micro_shell.h"
-
+//TODO 옵션 처리 알아서 하기
+//TODO
 //The return status is 0 unless a write error occurs. 
 void	builtin_echo(t_storage *bag, char *arg, int n_option)
 {
