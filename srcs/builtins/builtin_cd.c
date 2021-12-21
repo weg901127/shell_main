@@ -35,4 +35,5 @@ void	builtin_cd(t_storage *bag, char *arg)
 		set_environ(bag, EXIT_SUCCESS);
 		change_pwds_environ(bag, get_value(bag->environ, "PWD"), path);
 	}
+	ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
 }

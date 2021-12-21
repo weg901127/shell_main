@@ -1,5 +1,17 @@
 #include "../../micro_shell.h"
 
+static	void	add_env(t_ArrayList *env, char *key, char *new_val)
+{
+	t_ArrayListNode	element;
+	char			*tmp;
+
+	tmp = ft_strjoin(key, "=");
+	element.data = ft_strjoin(tmp, new_val);
+	free(tmp);
+	tmp = NULL;
+	addALElement(env, env->current_element_count, element);
+}
+
 void    update_env(t_ArrayList *env, char *key, char *new_val)
 {
     int		i;
@@ -25,4 +37,6 @@ void    update_env(t_ArrayList *env, char *key, char *new_val)
 		}
         i++;
 	}
+	if (i == env->current_element_count)
+		add_env(env, key, new_val);
 }

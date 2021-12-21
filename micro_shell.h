@@ -141,6 +141,7 @@ void	builtin_cd(t_storage *bag, char *arg);
 void	builtin_echo(t_storage *bag, char *str, int n_option);
 void    builtin_env(t_storage *bag);
 void	builtin_exit(t_storage *bag, char *arg);
+void    builtin_export(t_storage *bag, char *arg);
 void	builtin_pwd(t_storage *bag);
 void    builtin_unset(t_storage *bag, char *arg);
 int		count_str_array(char **arg_arr);

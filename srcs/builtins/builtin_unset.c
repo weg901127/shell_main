@@ -11,12 +11,16 @@ static void     find_n_rm_element(t_storage *bag, char *key)
     while (i < bag->environ->current_element_count)
     {
         data = getALElement(bag->environ, i)->data;
-        if (!strncmp_exact(data, key, '='))
+        if (strncmp_exact(data, key, '='))
             break ;
         i++;
     }
     if (i < bag->environ->current_element_count)
+    {   
+        free(data);
+        data = NULL;
         removeALElement(bag->environ, i);
+    }
 }
 
 void    builtin_unset(t_storage *bag, char *arg)
@@ -32,4 +36,5 @@ void    builtin_unset(t_storage *bag, char *arg)
         i++;
     }
     set_environ(bag, EXIT_SUCCESS);
+    ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
 }
