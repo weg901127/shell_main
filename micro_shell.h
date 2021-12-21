@@ -138,7 +138,7 @@ char	**getenviron(t_storage *bag);
 
 /*builtin*/
 void	builtin_cd(t_storage *bag, char *arg);
-void	builtin_echo(t_storage *bag, char *str, int n_option);
+void	builtin_echo(t_storage *bag, char *str);
 void    builtin_env(t_storage *bag);
 void	builtin_exit(t_storage *bag, char *arg);
 void    builtin_export(t_storage *bag, char *arg);

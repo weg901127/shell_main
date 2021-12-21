@@ -41,4 +41,3 @@ int	main(void)
 // 	printf("%d\n", ft_strncmp(str, cmp_str, ft_strlen(cmp_str)));
 // 	return(0);
 // }
-
