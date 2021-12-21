@@ -1,5 +1,5 @@
 #include "../../micro_shell.h"
-
+//TODO tab 말고 다른애들도 split할때 처리하기
 char	*cutnjoin(char *string, char target)
 {
 	char	*flag[2];
@@ -119,26 +119,30 @@ char	*parse_env(t_storage *bag, char *string)
 }
 void	execve_builtin(t_storage *bag, char *arg)
 {
-	char buf[10000];
+	char	buf1[10000];
+	char	buf2[10000];
 
-	ft_memset(buf, 0, 10000);
-	ft_memccpy(buf, arg, ' ', ft_strlen(arg));
-	if (buf[ft_strlen(buf) - 1] == ' ')
-		buf[ft_strlen(buf) - 1] = '\0';
-	if (!ft_strncmp(buf, "cd", 2))
-		builtin_cd(bag, arg);
-	else if (!ft_strncmp(buf, "echo", 4))
-		builtin_echo(bag, arg, 1);
-	else if (!ft_strncmp(buf, "pwd", 3))
+	ft_memset(buf1, 0, 10000);
+	ft_memset(buf2, 0, 10000);
+	ft_memccpy(buf1, arg, ' ', ft_strlen(arg));
+	if (buf1[ft_strlen(buf1) - 1] == ' ')
+		buf1[ft_strlen(buf1) - 1] = '\0';
+	if (ft_strlen(buf1))
+		ft_memcpy(buf2, ft_strchr(arg, ' ') + 1, ft_strlen(ft_strchr(arg, ' ')));
+	if (!ft_strncmp(buf1, "cd", 2))
+		builtin_cd(bag, buf2);
+	else if (!ft_strncmp(buf1, "echo", 4))
+		builtin_echo(bag, buf2, 0);
+	else if (!ft_strncmp(buf1, "pwd", 3))
 		builtin_pwd(bag);
-	else if (!ft_strncmp(buf, "exit", 4))
-		builtin_exit(bag, arg);
-	else if (!ft_strncmp(buf, "export", 6))
-		builtin_export(bag, arg);
-	else if (!ft_strncmp(buf, "env", 3))
+	else if (!ft_strncmp(buf1, "exit", 4))
+		builtin_exit(bag, buf2);
+	else if (!ft_strncmp(buf1, "export", 6))
+		builtin_export(bag, buf2);
+	else if (!ft_strncmp(buf1, "env", 3))
 		builtin_env(bag);
-	else if (!ft_strncmp(buf, "unset", 5))
-		builtin_unset(bag, arg);
+	else if (!ft_strncmp(buf1, "unset", 5))
+		builtin_unset(bag, buf2);
 }
 void	execve_cmd(t_storage *bag, char	*arg)
 {
@@ -162,7 +166,6 @@ bool parse_master(t_storage *bag)
 	buf = parse_env(bag, bag->input);
 	buf2 = cutnjoin(buf, '\'');
 	buf3 = cutnjoin(buf2, '\"');
-	printf("%s\n",buf3);
 	free(buf);
 	free(buf2);
 	//free(buf3);

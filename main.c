@@ -33,6 +33,7 @@ int	main(void)
 	init_bag(bag);
 	init_builtin(bag);
 	init_environ(bag);
+	init_runtime_env(bag);
 	
 	init_rl_catch_signals();
 	signal(SIGINT, handler);
