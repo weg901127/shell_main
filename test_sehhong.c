@@ -43,9 +43,9 @@ int	main(void)
 
 
 //echo
-	builtin_echo(bag, "alsdk.fjla//ks'jdlfk'jp irweporiwpe qwperpowier /flkasjdf. ", 0);	
+	builtin_echo(bag, "-n alsdk.fjla//ks'jdlfk'jp                rweporiwpe qwperpowier /flkasjdf. ");	
     printf("$?=%s\n", get_value(bag->runtime_env, "?"));
-	builtin_echo(bag, "alsdk.fjla//ks'jdlfk'jp irweporiwpe qwperpowier /flkasjdf. ", 1);
+	builtin_echo(bag, "-nalsdk.fjla//ks'jdlfk'j      sfjdlkjfslkjfalksd       irweporiwpe qwperpowier /flkasjdf. ");
     printf("$?=%s\n", get_value(bag->runtime_env, "?"));
 
 
