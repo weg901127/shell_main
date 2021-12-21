@@ -5,6 +5,8 @@ static  int    where_is_equal(char *str)
     int i;
     
     i = 0;
+    if (!str)
+        return (-2);
     while (str[i])
     {
         if (str[i] == '=')
@@ -12,8 +14,7 @@ static  int    where_is_equal(char *str)
         i++;
     }
     //'='가 없다.
-    if (str[i] == '\0') 
-        return(-1);
+    return(-1);
 }
 
 static void    export_no_option(t_storage *bag)
@@ -28,7 +29,7 @@ static void    export_no_option(t_storage *bag)
         i++;
     }   
 }
-
+//asdf=hihi environ에 원래 있음 -> export asdf=yum_yum
 static void    add_name_on_env(t_storage *bag, char *key_value, int equal_here)
 {
     char            key[10000];
@@ -37,11 +38,11 @@ static void    add_name_on_env(t_storage *bag, char *key_value, int equal_here)
     ft_memccpy(key, key_value, '=', equal_here);
     key[equal_here] = '\0';
     if (get_value(bag->environ, key))
-        update_env(bag->environ, key, key + equal_here + 1);
+        update_env(bag->environ, key, key_value + equal_here + 1);
     else
     {
-        element.data = key_value;
-        addALElement(bag->environ, bag->environ->current_element_count -1, element);
+        element.data = ft_strdup(key_value);
+        addALElement(bag->environ, bag->environ->current_element_count, element);
     }
 }
 
@@ -69,10 +70,14 @@ void    builtin_export(t_storage *bag, char *arg)
                 ft_print_error("export", arg_arr[i], "not a valid identifier");
             }
             else if (equal_here == -1)   //export water
-                update_env(bag->environ, arg_arr[i], get_value(bag->runtime_env, arg_arr[i]));
+            {   
+                if (get_value(bag->runtime_env, arg_arr[i]))
+                    update_env(bag->environ, arg_arr[i], get_value(bag->runtime_env, arg_arr[i]));
+            }
             else    //export water=hihi
                 add_name_on_env(bag, arg_arr[i], equal_here);
             i++;
         }
     }
+    ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
 }

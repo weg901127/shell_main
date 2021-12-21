@@ -38,5 +38,5 @@ void    builtin_exit(t_storage *bag, char *arg)
         exit(ft_atoi(arg_arr[0]) % 256);
     ft_print_error("exit", NULL, "too many arguments");
     set_environ(bag, EXIT_FAILURE);
-
+    ft_malloc_fail_str(arg_arr, len_arr);
 }
