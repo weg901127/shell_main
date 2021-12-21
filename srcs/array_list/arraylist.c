@@ -26,7 +26,7 @@ int	addALElement(t_ArrayList *pList, int position, t_ArrayListNode element)
 	if (isArrayListFull(pList))
 	{
 		pList->max_element_count *= 3;
-		tmp = (t_ArrayListNode *)calloc(pList->max_element_count,
+		tmp = (t_ArrayListNode *)ft_calloc(pList->max_element_count,
 				sizeof(t_ArrayListNode));
 		ft_memcpy(tmp, pList->p_element,
 			pList->current_element_count * sizeof(t_ArrayListNode));
