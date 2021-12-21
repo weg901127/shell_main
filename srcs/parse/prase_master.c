@@ -117,7 +117,40 @@ char	*parse_env(t_storage *bag, char *string)
 	free(zone);
 	return ft_strdup(buf);
 }
+void	execve_builtin(t_storage *bag, char *arg)
+{
+	char buf[10000];
 
+	ft_memset(buf, 0, 10000);
+	ft_memccpy(buf, arg, ' ', ft_strlen(arg));
+	if (buf[ft_strlen(buf) - 1] == ' ')
+		buf[ft_strlen(buf) - 1] = '\0';
+	if (!ft_strncmp(buf, "cd", 2))
+		builtin_cd(bag, arg);
+	else if (!ft_strncmp(buf, "echo", 4))
+		builtin_echo(bag, arg, 1);
+	else if (!ft_strncmp(buf, "pwd", 3))
+		builtin_pwd(bag);
+	else if (!ft_strncmp(buf, "exit", 4))
+		builtin_exit(bag, arg);
+	else if (!ft_strncmp(buf, "export", 6))
+		builtin_export(bag, arg);
+	else if (!ft_strncmp(buf, "env", 3))
+		builtin_env(bag);
+	else if (!ft_strncmp(buf, "unset", 5))
+		builtin_unset(bag, arg);
+}
+void	execve_cmd(t_storage *bag, char	*arg)
+{
+	char	buf[10000];
+
+	ft_memset(buf, 0, 10000);
+	ft_memccpy(buf, arg, ' ', ft_strlen(arg));
+	if (buf[ft_strlen(buf) - 1] == ' ')
+		buf[ft_strlen(buf) - 1] = '\0';
+	if(is_builtin(bag, buf))
+		execve_builtin(bag, arg);
+}
 bool parse_master(t_storage *bag)
 {
 	bool	res;
@@ -132,12 +165,7 @@ bool parse_master(t_storage *bag)
 	printf("%s\n",buf3);
 	free(buf);
 	free(buf2);
-	free(buf3);
-	//free(bag->input);
-	//cutnjoin(bag->input, '\'');
-	//double 처리
-	//cutnjoin(bag->input, '\"');
-	//$처리
-	//명령어 단위로 쪼개서 넘겨줌
+	//free(buf3);
+	execve_cmd(bag, buf3);
 	return (res);
 }
