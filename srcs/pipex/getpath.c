@@ -8,7 +8,7 @@ bool	getpath(t_storage *bag, char ***path_res)
 	bool	res;
 
 	res = false;
-	tmp = getenviron(bag);
+	tmp = get_environ(bag);
 	env_list_len = bag->environ->current_element_count;
 	while (--env_list_len >= 0)
 	{

@@ -23,14 +23,14 @@ SRCS				= ./main.c					\
 					  ./srcs/builtins/count_str_array.c ./srcs/builtins/builtin_export.c\
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
-					  ./srcs/init/init_environ.c 		./srcs/parse/getenviron.c \
+					  ./srcs/init/init_environ.c 		./srcs/parse/get_environ.c \
 					  ./srcs/init/init_runtime_env.c 	./srcs/parse/prase_master.c \
 					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
 					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
-					  ./srcs/pipex/wait_and_exit.c		./srcs/pipex/parse_arguments.c \
+					  ./srcs/pipex/wait_and_exit.c 		./srcs/pipex/allocate_before_fork.c\
 					  ./srcs/pipex/execve_with_path.c	./srcs/pipex/split_cmd.c \
-					  ./srcs/pipex/exit_macros.c		./srcs/pipex/parse_arguments2.c \
-					  ./srcs/pipex/fork_grandchildren.c	./srcs/pipex/heredoc_to_tmpfile.c \
+					  ./srcs/pipex/exit_macros.c 		./srcs/pipex/execve_cmd.c\
+					  ./srcs/pipex/fork_grandchild.c	./srcs/pipex/heredoc_to_tmpfile.c \
 					  ./srcs/pipex/getpath.c			./srcs/pipex/my_which.c
 OBJ					=	$(SRCS:.c=.o)
 TEST				=	$(SRCS:main.c=test.c)

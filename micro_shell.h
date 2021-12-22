@@ -29,14 +29,14 @@
 
 typedef struct s_storage
 {
-	char		*infile_name;
-	char		*outfile_name;
-	char		***cmd_args;
+	// char		*infile_name;
+	// char		*outfile_name;
+	// char		***cmd_args;
 	int			num_of_cmds;
 	int			**pipe_fds;
 	pid_t		*grandchild_pids;
-	char		*limiter;
-	int			heredoc_flag;
+	//char		*limiter;
+	//int			heredoc_flag;
 	char		*input;
 	char		**parse_buf;
 	t_ArrayList	*runtime_env;
@@ -70,18 +70,15 @@ typedef enum e_builtins
 }	t_builtins;
 
 /* pipex */
-void	pipex(int argc, char **argv, char **envp);
-/* parse_arguments, parse_arguments2, split_cmd */
-void	parse_arguments_for_heredoc(int argc, char **argv, t_storage *info);
-void	parse_arguments_for_multi_pipes(t_storage *info, int argc, char **argv);
-void	parse_arguments(int argc, char **argv, t_storage *info);
-void	malloc_grandchild_pids(t_storage *info);
-void	malloc_pipe_fds(t_storage *info);
-void	malloc_cmd_args(t_storage *info, char **argv);
+void	pipex(t_storage *bag, char **args);
+void	allocate_before_fork(t_storage *bag, char **args);
 char	**split_cmd(char *str);
-
-/* heredoc_to_tmpfile */
-void	heredoc_to_tmpfile(t_storage *info);
+void	redirect_fds(t_storage *bag, int idx);
+void	fork_grandchild(t_storage *bag, char *arg, int idx);
+void	execve_with_path(t_storage *bag, char *cmd, char *arg);
+void	execve_cmd(t_storage *bag, char *arg);
+void	execve_builtin(t_storage *bag, char *arg);
+//void	heredoc_to_tmpfile(t_storage *info);
 
 /* print_errors */
 void	print_error(char *error_str, char *error_str2);
@@ -89,22 +86,6 @@ void	print_error_and_exit(char *error_str, char *error_str2, \
 		int return_value);
 void	print_execve_error_and_exit(char *error_str, char *error_str2, \
 		int exit_status);
-
-/* redirect_fds */
-void	redirect_fds_in_1st_grandchild(t_storage *info);
-void	redirect_fds_in_nth_grandchild(t_storage *info, int cmd_idx);
-void	redirect_fds_in_last_grandchild(t_storage *info);
-
-/* fork_grandchildren */
-void	fork_1st_grandchild(t_storage *info, char **envp);
-void	fork_nth_grandchild(t_storage *info, int cmd_idx, char **envp);
-void	fork_last_grandchild(t_storage *info, char **envp);
-
-/* execve_with_path */
-void	execve_with_path(char **array_of_path, char **cmd_arg, char **envp);
-char	**split_path_env(char **envp);
-void	execve_with_error_handling(char **array_of_path, char **cmd_arg, \
-	char **envp, char *final_path);
 
 /* exit_macros */
 int		wstatus(int status);
@@ -136,7 +117,7 @@ void	init_runtime_env(t_storage *bag);
 void	init_runtime_env(t_storage *bag);
 
 /* getenviron */
-char	**getenviron(t_storage *bag);
+char	**get_environ(t_storage *bag);
 
 /*builtin*/
 void	builtin_cd(t_storage *bag, char *arg);

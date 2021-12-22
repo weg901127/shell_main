@@ -12,7 +12,7 @@ static void	str_malloc_and_insert(char **cmd, char *str, int len, int index)
 	ft_memcpy(cmd[index], str, len);
 }
 
-char **getenviron(t_storage *bag)
+char **get_environ(t_storage *bag)
 {
 	char	**ret;
 	int		i;
