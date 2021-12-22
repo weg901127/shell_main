@@ -29,6 +29,7 @@ SRCS				= ./main.c					\
 					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
 					  ./srcs/pipex/wait_and_exit.c 		./srcs/pipex/allocate_before_fork.c\
 					  ./srcs/pipex/execve_with_path.c	./srcs/pipex/split_cmd.c \
+					  ./srcs/pipex/execve_builtin.c \
 					  ./srcs/pipex/exit_macros.c 		./srcs/pipex/execve_cmd.c\
 					  ./srcs/pipex/fork_grandchild.c	./srcs/pipex/heredoc_to_tmpfile.c \
 					  ./srcs/pipex/getpath.c			./srcs/pipex/my_which.c

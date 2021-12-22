@@ -133,6 +133,7 @@ bool	strncmp_exact(char *str1, char *str2, char c);
 char    *get_value(t_ArrayList *env, char *str);
 void    update_env(t_ArrayList *env, char *key, char *new_val);
 /* parse_master */
+char	*cutnjoin(char *string, char target);
 bool parse_master(t_storage *bag);
 
 #endif
