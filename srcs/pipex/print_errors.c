@@ -2,7 +2,7 @@
 
 void	print_error(char *error_str, char *error_str2)
 {
-	ft_putstr_fd("zsh: ", 2);
+	ft_putstr_fd("micro_shell: ", 2);
 	ft_putstr_fd(error_str, 2);
 	if (error_str2 != NULL)
 	{
