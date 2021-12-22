@@ -5,6 +5,8 @@ char	*cutnjoin(char *string, char target)
 	char	*flag[2];
 	char	buf[MAXLEN];
 
+	if (ft_charcnt(string, target) & 1)
+		exit(1);
 	flag[START] = string;
 	flag[END] = string;
 	ft_memset(buf, 0, MAXLEN);
@@ -166,10 +168,6 @@ bool parse_master(t_storage *bag)
 
 	i = 0;
 	buf = parse_env(bag, bag->input);
-	//buf[1] = cutnjoin(buf[0], '\'');
-	//buf[2] = cutnjoin(buf[1], '\"');
-	//free(buf[0]);
-	//free(buf[1]);
 	args = ft_split(buf, '|');
 	free(buf);
 	while (args[i])
