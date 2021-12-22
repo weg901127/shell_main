@@ -148,6 +148,7 @@ void	execve_cmd(t_storage *bag, char	*arg)
 	if(is_builtin(bag, buf))
 		execve_builtin(bag, arg);
 }
+
 bool parse_master(t_storage *bag)
 {
 	char	*buf[3];
