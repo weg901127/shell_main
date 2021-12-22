@@ -96,7 +96,7 @@ int		wtermsig(int status);
 
 /* wait_and_exit */
 void	exit_for_child(int status);
-void	wait_and_exit_for_grandchildren(t_storage info);
+void	wait_and_exit_for_grandchildren(t_storage *bag);
 
 /* ./srcs/pipex/getpath */
 bool	getpath(t_storage *bag, char ***path_res);

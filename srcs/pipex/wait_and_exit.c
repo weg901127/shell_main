@@ -10,7 +10,7 @@ void	exit_for_child(int status)
 		exit(EXIT_FAILURE);
 }
 
-void	wait_and_exit_for_grandchildren(t_storage bag)
+void	wait_and_exit_for_grandchildren(t_storage *bag)
 {
 	int		status;
 	int		cmdn_status;
@@ -20,7 +20,7 @@ void	wait_and_exit_for_grandchildren(t_storage bag)
 	while (reaped_pid != -1)
 	{
 		reaped_pid = waitpid(-1, &status, 0);
-		if (reaped_pid == bag.grandchild_pids[bag.num_of_cmds - 1])
+		if (reaped_pid == bag->grandchild_pids[bag->num_of_cmds - 1])
 			cmdn_status = status;
 	}
 	exit_for_child(cmdn_status);
