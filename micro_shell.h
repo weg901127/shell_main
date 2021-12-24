@@ -33,7 +33,7 @@ typedef struct s_storage
 	// char		*outfile_name;
 	// char		***cmd_args;
 	int			num_of_cmds;
-	int			**pipe_fds;
+	int			*pipe_fds;
 	pid_t		*grandchild_pids;
 	//char		*limiter;
 	//int			heredoc_flag;

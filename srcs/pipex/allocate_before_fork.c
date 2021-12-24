@@ -9,6 +9,8 @@ static void	malloc_grandchild_pids(t_storage *bag)
 
 static void	malloc_pipe_fds(t_storage *bag)
 {
+	(void)bag;
+	/*
 	int	i;
 
 	bag->pipe_fds = (int **)ft_calloc((bag->num_of_cmds - 1), sizeof(int *));
@@ -25,6 +27,7 @@ static void	malloc_pipe_fds(t_storage *bag)
 		}
 		i++;
 	}
+	*/
 }
 
 void	allocate_before_fork(t_storage *bag, char **args)
