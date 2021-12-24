@@ -38,7 +38,7 @@ char	*parse_space(char *string)
 int main(int argc, char **argv)
 {
 	char	*str;
-	char	*str2 = "  ";
+	char	*str2 = "echo            -n        asdf";
 	(void)argc;
 	(void)argv;
 	str = parse_space(str2);
