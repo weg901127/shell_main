@@ -2,6 +2,8 @@
 
 void	redirect_fds(t_storage *bag, int idx)
 {
+	(void)bag;
+	(void)idx;
 	// char	*input_name;
 	// char	*output_name;
 	// int		input_fd;
@@ -12,6 +14,7 @@ void	redirect_fds(t_storage *bag, int idx)
 	// -> arg에는 "cmd + arguments"만 남아있음.
 
 	//(default) connecting both pipes & closing unneccessary pipe_rd/wr
+	/*
 	if (idx != 0)
 	{	
 		print_error_and_exit("dup2() has failed", NULL, \
@@ -24,6 +27,7 @@ void	redirect_fds(t_storage *bag, int idx)
 			dup2(bag->pipe_fds[idx][PIPE_WR_FD], STDOUT_FD));
 		close(bag->pipe_fds[idx][PIPE_WR_FD]);
 	}
+	*/
 	//depending on the mode (0 ~ 3), redirction to input_fd & output_fd
 	// input_fd = open(input_name, O_RDONLY);
 	// print_error_and_exit(strerror(errno), input_name, input_fd);

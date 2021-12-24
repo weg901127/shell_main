@@ -2,6 +2,10 @@
 
 void	fork_grandchild(t_storage *bag, char *arg, int idx)
 {
+	(void)bag;
+	(void)arg;
+	(void)idx;
+	/*
 	print_error_and_exit("pipe() has failed", NULL, pipe(bag->pipe_fds[idx]));
 	bag->grandchild_pids[idx] = fork();
 	print_error_and_exit("fork() has failed", NULL, bag->grandchild_pids[idx]);
@@ -21,4 +25,5 @@ void	fork_grandchild(t_storage *bag, char *arg, int idx)
 		close(bag->pipe_fds[idx - 1][PIPE_WR_FD]);
 	}
 	//remove heredoc_tmp_file 
+	*/
 }
