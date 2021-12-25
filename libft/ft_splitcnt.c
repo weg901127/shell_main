@@ -6,7 +6,7 @@
 /*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:34:02 by gilee             #+#    #+#             */
-/*   Updated: 2021/12/24 19:09:24 by gilee            ###   ########.fr       */
+/*   Updated: 2021/12/24 21:11:36 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int	ft_splitcnt(char **src)
 		return (0);
 	while(src[cnt])
 		cnt++;
-	return (cnt - 1);
+	return (cnt);
 }

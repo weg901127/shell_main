@@ -17,10 +17,10 @@ void	do_fork(pid_t *pid, char *str, int *pip, int cmd)
 			close(pip[i]);
 		if (cmd == 1)
 		{
-			char	*argv[] = {str,"a", NULL};
+			char	*argv[] = {str, NULL};
 			execve(str, argv, environ);
 		}
-		char	*argv2[] = {str,NULL};
+		char	*argv2[] = {str,"-al",NULL};
 		execve(str, argv2, environ);
 	}
 }
@@ -32,11 +32,11 @@ int main(int argc, char **argv)
 	int		i;
 
 	memset(arg, 0, sizeof(char *) * 10);
-	arg[0] = "/bin/ls";
-	arg[1] = "/usr/bin/grep";
+	arg[0] = "/bin/ps";
+	arg[1] = "/usr/bin/sort";
 	(void)argc;
 	(void)argv;
-	pip = (int *)malloc(sizeof(int) * 4);
+	pip = (int *)malloc(sizeof(int) * 2);
 	for (int i = 0; i < 2; i++)
 		pipe(pip + 2*i);
 	i = 0;

@@ -15,7 +15,7 @@ void	run_builtin(t_bag *bag)
 
 void	handler(int signum)
 {
-	if (signum != SIGINT)
+	if (signum != SIGINT && g_child == 1)
 		return ;
 	write(STDOUT_FILENO, "\n", 1);
 	if (rl_on_new_line() == -1)
@@ -28,7 +28,9 @@ int	main(void)
 {
 	char			*line;
 	t_storage			*bag;
+	int				out_backup;
 
+	out_backup = dup(1);
 	bag = create_bag();
 	init_bag(bag);
 	init_builtin(bag);
@@ -50,6 +52,8 @@ int	main(void)
 			free(bag->input);
 			line = NULL;
 		}
+		usleep(10000);
+		dup2(out_backup, 1);
 		//else
 		//	return (1);
 	}

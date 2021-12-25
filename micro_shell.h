@@ -27,6 +27,8 @@
 # define MAXLEN			10000
 # define MAX_ENVLEN		1000
 
+int	g_child;
+
 typedef struct s_storage
 {
 	// char		*infile_name;
