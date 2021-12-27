@@ -147,5 +147,6 @@ bool parse_master(t_storage *bag);
 int		has_redirect(t_storage *bag, char *str);
 void	handler_int(int signum);
 void	handler_int_child(int signum);
+void	handler_int_heredoc(int signum);
 
 #endif

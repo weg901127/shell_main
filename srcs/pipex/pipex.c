@@ -105,10 +105,46 @@ void	rd_input(char *str)
 	close(fd);
 }
 
+void	heredoc_rdline(char *buf, int fd)
+{
+	char	*line;
+	int		pid;
+
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == 0)
+	{
+		signal(SIGINT, handler_int_heredoc);
+		while (true)
+		{
+			line = readline("> ");
+			
+			if (!ft_strncmp(buf, line, ft_strlen(line)))
+			{
+				close(fd);
+				break;
+			}
+			if (line)
+			{
+				write(fd, line, ft_strlen(line));
+				write(fd,"\n", 1);
+				add_history(line);
+				free(line);
+				line = NULL;
+			}
+			usleep(10000);
+		}
+		exit(0);
+	}
+	else
+	{
+		wait(NULL);
+		signal(SIGINT, handler_int_child);
+	}
+}
 void	rd_heredoc(char *str)
 {
 	char	*buf;
-	char	*line;
 	int		fd;	
 
 	buf = ft_strdup(get_last_redirect(str) + 1);
@@ -116,25 +152,7 @@ void	rd_heredoc(char *str)
 	if (!ft_strlen(buf))
 		exit(SYNTAX_ERR);
 	fd = open(".hd________", O_RDWR|O_CREAT, S_IRUSR | S_IWUSR);
-	while (true)
-	{
-		line = readline("> ");
-		
-		if (!ft_strncmp(buf, line, ft_strlen(line)))
-		{
-			close(fd);
-			break;
-		}
-		if (line)
-		{
-			write(fd, line, ft_strlen(line));
-			write(fd,"\n", 1);
-			add_history(line);
-			free(line);
-			line = NULL;
-		}
-		usleep(10000);
-	}
+	heredoc_rdline(buf, fd);
 	fd = open(".hd________",O_RDONLY);
 	if (fd == -1)
 		exit(1);
