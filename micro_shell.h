@@ -27,7 +27,8 @@
 # define MAXLEN			10000
 # define MAX_ENVLEN		1000
 
-int	g_child;
+# define SYNTAX_ERR		99
+int	g_out_backup;
 
 typedef struct s_storage
 {
@@ -36,9 +37,13 @@ typedef struct s_storage
 	// char		***cmd_args;
 	int			num_of_cmds;
 	int			*pipe_fds;
+	int			pipe_old;
 	pid_t		*grandchild_pids;
 	//char		*limiter;
-	//int			heredoc_flag;
+	int			redirect_input;
+	int			redirect_output;
+	int			heredoc;
+	int			append;
 	char		*input;
 	char		**parse_buf;
 	t_ArrayList	*runtime_env;
@@ -137,5 +142,10 @@ void    update_env(t_ArrayList *env, char *key, char *new_val);
 /* parse_master */
 char	*cutnjoin(char *string, char target);
 bool parse_master(t_storage *bag);
+
+
+int		has_redirect(t_storage *bag, char *str);
+void	handler_int(int signum);
+void	handler_int_child(int signum);
 
 #endif

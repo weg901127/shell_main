@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
 void    loop_pipe(char ***cmd) 
 {
   int   p[2];
@@ -12,12 +13,11 @@ void    loop_pipe(char ***cmd)
     {
       pipe(p);
       if ((pid = fork()) == -1)
-        {
           exit(EXIT_FAILURE);
-        }
       else if (pid == 0)
         {
-          dup2(fd_in, 0); //change the input according to the old one 
+			p[0] = open("a", O_RDONLY);
+          dup2(p[0], 0);
           if (*(cmd + 1) != NULL)
             dup2(p[1], 1);
           close(p[0]);
@@ -37,9 +37,7 @@ void    loop_pipe(char ***cmd)
 int main()
 {
   char *ls[] = {"cat", NULL};
-  char *grep[] = {"cat", NULL};
-  char *wc[] = {"ls", NULL};
-  char **cmd[] = {ls, grep, wc, NULL};
+  char **cmd[] = {ls, NULL};
 
   loop_pipe(cmd);
   return (0);

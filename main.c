@@ -13,9 +13,9 @@ void	run_builtin(t_bag *bag)
 }
 */
 
-void	handler(int signum)
+void	handler_int(int signum)
 {
-	if (signum != SIGINT && g_child == 1)
+	if (signum != SIGINT)
 		return ;
 	write(STDOUT_FILENO, "\n", 1);
 	if (rl_on_new_line() == -1)
@@ -24,13 +24,20 @@ void	handler(int signum)
 	rl_redisplay();
 }
 
+void	handler_int_child(int signum)
+{
+	if (signum != SIGINT)
+		return ;
+	write(g_out_backup, "\n", 1);
+	exit(SIGINT);
+}
+
 int	main(void)
 {
 	char			*line;
 	t_storage			*bag;
-	int				out_backup;
 
-	out_backup = dup(1);
+	g_out_backup = dup(1);
 	bag = create_bag();
 	init_bag(bag);
 	init_builtin(bag);
@@ -38,7 +45,7 @@ int	main(void)
 	init_runtime_env(bag);
 	
 	init_rl_catch_signals();
-	signal(SIGINT, handler);
+	signal(SIGINT, handler_int);
 	while (true)
 	{
 		line = readline("micro_shell> ");
@@ -53,7 +60,7 @@ int	main(void)
 			line = NULL;
 		}
 		usleep(10000);
-		dup2(out_backup, 1);
+		dup2(g_out_backup, 1);
 		//else
 		//	return (1);
 	}
