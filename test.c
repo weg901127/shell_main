@@ -41,3 +41,57 @@ int	main(void)
 // 	printf("%d\n", ft_strncmp(str, cmp_str, ft_strlen(cmp_str)));
 // 	return(0);
 // }
+//
+/*
+int		has_redirect(t_storage *bag, char *str)
+{
+	int		res;
+	char	*buf;
+
+	res = 0;
+	buf = str;
+	while (buf != NULL)
+	{
+		buf = ft_strchr(buf, '<');
+		if (buf && buf[0] == '<' && buf[1] != '<')
+		{
+			bag->redirect_input = 1;
+			res |= 1;
+		}
+		else if (buf && buf[0] == '<' && buf[1] == '<')
+		{
+			bag->heredoc = 1;
+			res |= 1;
+		}
+	}
+	buf = str;
+	while (buf != NULL)
+	{
+		buf = ft_strchr(str, '>');
+		if (buf && buf[0] == '>' && buf[1] != '>')
+		{
+			bag->redirect_output = 1;
+			res |= 1;
+		}
+		else if (buf && buf[0] == '>' && buf[1] == '>')
+		{
+			bag->append = 1;
+			res |= 1;
+		}
+	}
+	return (res);
+}
+*/
+
+int	main(void)
+{
+	t_storage	*bag;
+	bag = create_bag();
+	init_bag(bag);
+	init_builtin(bag);
+	init_environ(bag);
+	init_runtime_env(bag);
+	char *str = "ls <";
+	has_redirect(bag, str);
+	printf("\033[32;1mDONE\n\033[m");
+}

@@ -126,14 +126,8 @@ bool parse_master(t_storage *bag)
 	args = ft_split(buf, '|');
 	free(buf);
 	pipex(bag, args);
-	// while (args[i])
-	// {
-	// 	buf = ft_strtrim(args[i++], " ");
-	// 	execve_cmd(bag, buf);
-	// 	free(buf);
-	// }
-	while (i--)
-		free(args[i]);
+	while (args[i])
+		free(args[i++]);
 	free(args);
 	return (false);
 }
