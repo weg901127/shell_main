@@ -141,7 +141,8 @@ void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)
 			dup2(pip[1], 1);
 	//close(pip[0]);
 }
-void	handle_pipe_parent(t_storage *bag, int *pip)
+
+void	handle_pipe_parent(t_storage *bag, int *pip, int cmd)
 {
 	int	stat;
 
@@ -152,6 +153,8 @@ void	handle_pipe_parent(t_storage *bag, int *pip)
 		ft_putstr_fd("Error\n",2);
 	else if (WTERMSIG(stat) == SIGINT)
 		ft_putstr_fd("\n", 2);
+	if (cmd == bag->num_of_cmds - 1)
+		bag->last_exit_status = WEXITSTATUS(stat);
 	close(pip[1]);
 	bag->pipe_old = pip[0];
 	bag->redirect_input = 0;
@@ -159,6 +162,7 @@ void	handle_pipe_parent(t_storage *bag, int *pip)
 	bag->append = 0;
 	bag->heredoc = 0;
 }
+
 void	do_fork(t_storage *bag, char *str, int cmd)
 {
 	int		p[2];
@@ -176,26 +180,36 @@ void	do_fork(t_storage *bag, char *str, int cmd)
 		my_execve(bag, str);
 	}
 	else
-		handle_pipe_parent(bag, p);
+		handle_pipe_parent(bag, p, cmd);
 }
 
 void	pipex(t_storage *bag, char **args)
 {
 	int		i;
 	pid_t	pid;
+	int		exit_status;
 	
+	i = -1;
+	exit_status = EXIT_SUCCESS;
 	bag->pipe_old = 0;
 	bag->num_of_cmds = ft_splitcnt(args);
 	if (!bag->num_of_cmds)
 		return ;
-	i = -1;
+	if (bag->num_of_cmds == 1 && is_builtin(bag, args[0]))
+	{	
+		exit_status = execve_builtin(bag, args[0]);
+		set_environ(bag, exit_status);
+		return ;
+	}
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid==0)
 	{
 		while (args[++i])
 			do_fork(bag, args[i], i);
-		exit(0);
+		// exit(0);
+		set_environ(bag, bag->last_exit_status);
+		exit(bag->last_exit_status);
 	}
 	else
 		waitpid(pid,0,0);
