@@ -101,14 +101,22 @@ char	*parse_env(t_storage *bag, char *string)
 		if (buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(string) - ft_strlen(tmp) - 1] == 1)
 		{
 			buf[ft_strlen(buf) - 1] = '\0';
-			ft_memcpy(var_buf, tmp, get_env_len(tmp));
-			tmp = tmp + get_env_len(tmp);
-			//TODO get_value NULL처리 -> 햇음! 확인부탁!
-			
-			if (get_value(bag->environ, var_buf))
-				ft_strlcat(buf, get_value(bag->environ, var_buf), MAXLEN);
-			if (get_value(bag->runtime_env, var_buf))
-				ft_strlcat(buf, get_value(bag->runtime_env, var_buf), MAXLEN);
+			if (*tmp == '?')
+			{
+				tmp++;
+				if (get_value(bag->runtime_env, "?"))
+					ft_strlcat(buf, get_value(bag->runtime_env, "?"), MAXLEN);
+			}
+			else
+			{
+				ft_memcpy(var_buf, tmp, get_env_len(tmp));
+				tmp = tmp + get_env_len(tmp);
+				//TODO get_value NULL처리 -> 햇음! 확인부탁!
+				if (get_value(bag->environ, var_buf))
+					ft_strlcat(buf, get_value(bag->environ, var_buf), MAXLEN);
+				// if (get_value(bag->runtime_env, var_buf))
+				// 	ft_strlcat(buf, get_value(bag->runtime_env, var_buf), MAXLEN);
+			}
 		}
 		if (!tmp)
 			break;
