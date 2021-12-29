@@ -17,7 +17,6 @@ char	*my_which(t_storage *bag, char *cmd)
 			fd = open(tmp2, O_RDONLY);
 			if (fd != -1)
 			{
-				free(tmp1);
 				close(fd);
 				return (tmp2);
 			}
@@ -25,5 +24,5 @@ char	*my_which(t_storage *bag, char *cmd)
 			free(tmp2);
 			i++;
 		}
-	return (NULL);
+	return (cmd);
 }

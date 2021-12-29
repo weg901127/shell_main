@@ -2,16 +2,15 @@
 //TODO trim해주기
 char	*cutnjoin(char *string, char target)
 {
-	char	*flag[2];
+	char	*flag[1];
 	char	buf[MAXLEN];
 
 	if (ft_charcnt(string, target) & 1)
 	{
-		ft_print_error("syntax error", NULL, NULL);
+		ft_print_error("SyntaxError", NULL, NULL);
 		exit(EXIT_FAILURE);
 	}
 	flag[START] = string;
-	flag[END] = string;
 	ft_memset(buf, 0, MAXLEN);
 	int	tmp = 0;
 	while (1)

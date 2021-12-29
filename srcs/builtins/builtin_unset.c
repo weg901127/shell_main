@@ -3,11 +3,9 @@
 static void     find_n_rm_element(t_storage *bag, char *key)
 {
     int     i;
-    int     key_len;
     char    *data;
 
     i = 0;
-    key_len = ft_strlen(key);
     while (i < bag->environ->current_element_count)
     {
         data = getALElement(bag->environ, i)->data;
@@ -28,7 +26,8 @@ void    builtin_unset(t_storage *bag, char *arg)
     int     i;
     char    **arg_arr;
 
-    arg_arr = split_cmd(arg);
+    //arg_arr = split_cmd(arg);
+	arg_arr = ft_split(arg, ' ');
     i = 0;
     while (arg_arr[i])
     {   

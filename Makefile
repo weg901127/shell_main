@@ -26,13 +26,9 @@ SRCS				= ./main.c					\
 					  ./srcs/init/init_environ.c 		./srcs/parse/get_environ.c \
 					  ./srcs/init/init_runtime_env.c 	./srcs/parse/prase_master.c \
 					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
-					  ./srcs/pipex/print_errors.c		./srcs/pipex/redirect_fds.c \
-					  ./srcs/pipex/wait_and_exit.c 		./srcs/pipex/allocate_before_fork.c\
-					  ./srcs/pipex/execve_with_path.c	./srcs/pipex/split_cmd.c \
-					  ./srcs/pipex/execve_builtin.c \
-					  ./srcs/pipex/exit_macros.c 		./srcs/pipex/execve_cmd.c\
-					  ./srcs/pipex/fork_grandchild.c	./srcs/pipex/heredoc_to_tmpfile.c \
-					  ./srcs/pipex/getpath.c			./srcs/pipex/my_which.c
+					  ./srcs/pipex/execve_builtin.c 	./srcs/pipex/my_execve.c \
+					  ./srcs/pipex/getpath.c			./srcs/pipex/my_which.c \
+					  ./srcs/pipex/my_heredoc.c
 OBJ					=	$(SRCS:.c=.o)
 TEST				=	$(SRCS:main.c=test.c)
 TEST_OBJ			=	$(TEST:.c=.o)

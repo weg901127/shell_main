@@ -20,7 +20,8 @@ void	builtin_cd(t_storage *bag, char *arg)
 	char	**arg_arr;
 	char	*path;
 
-	arg_arr = split_cmd(arg);
+	//arg_arr = split_cmd(arg);
+	arg_arr = ft_split(arg, ' ');
 	if (arg_arr[0] == NULL)
 		path = get_value(bag->environ, "HOME");
 	else
