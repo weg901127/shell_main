@@ -154,7 +154,7 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd)
 	else if (WTERMSIG(stat) == SIGINT)
 		ft_putstr_fd("\n", 2);
 	if (cmd == bag->num_of_cmds - 1)
-		bag->last_exit_status = WEXITSTATUS(stat);
+		bag->last_exit_status = stat;
 	close(pip[1]);
 	bag->pipe_old = pip[0];
 	bag->redirect_input = 0;
