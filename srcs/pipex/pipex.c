@@ -142,11 +142,11 @@ void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)
 	//close(pip[0]);
 }
 
-void	handle_pipe_parent(t_storage *bag, int *pip, int cmd)
+void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 {
 	int	stat;
 
-	waitpid(-1, &stat, 0);
+	waitpid(pid, &stat, 0);
 	if (WEXITSTATUS(stat) == 99)
 		ft_putstr_fd("SyntexError\n",2);
 	else if (WEXITSTATUS(stat) == 100)	
@@ -154,7 +154,7 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd)
 	else if (WTERMSIG(stat) == SIGINT)
 		ft_putstr_fd("\n", 2);
 	if (cmd == bag->num_of_cmds - 1)
-		bag->last_exit_status = stat;
+		bag->last_exit_status = WEXITSTATUS(stat);
 	close(pip[1]);
 	bag->pipe_old = pip[0];
 	bag->redirect_input = 0;
@@ -180,7 +180,7 @@ void	do_fork(t_storage *bag, char *str, int cmd)
 		my_execve(bag, str);
 	}
 	else
-		handle_pipe_parent(bag, p, cmd);
+		handle_pipe_parent(bag, p, cmd, pid);
 }
 
 void	pipex(t_storage *bag, char **args)
@@ -188,6 +188,7 @@ void	pipex(t_storage *bag, char **args)
 	int		i;
 	pid_t	pid;
 	int		exit_status;
+	int		status;
 	
 	i = -1;
 	exit_status = EXIT_SUCCESS;
@@ -208,10 +209,13 @@ void	pipex(t_storage *bag, char **args)
 		while (args[++i])
 			do_fork(bag, args[i], i);
 		// exit(0);
-		set_environ(bag, bag->last_exit_status);
 		exit(bag->last_exit_status);
 	}
 	else
-		waitpid(pid,0,0);
+	{	
+		waitpid(pid, &status, 0);
+		bag->last_exit_status = WEXITSTATUS(status);
+		set_environ(bag, bag->last_exit_status);
+	}
 	signal(SIGINT, handler_int);
 }
