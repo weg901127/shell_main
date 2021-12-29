@@ -44,7 +44,6 @@ typedef struct s_storage
 	int			redirect_output;
 	int			heredoc;
 	int			append;
-	int			last_exit_status;
 	char		*input;
 	char		**parse_buf;
 	t_ArrayList	*runtime_env;
@@ -79,7 +78,7 @@ typedef enum e_builtins
 
 /* pipex */
 void	pipex(t_storage *bag, char **args);
-int		execve_builtin(t_storage *bag, char *arg);
+void	execve_builtin(t_storage *bag, char *arg);
 //void	heredoc_to_tmpfile(t_storage *info);
 
 /* ./srcs/pipex/getpath */
@@ -104,13 +103,13 @@ void	init_runtime_env(t_storage *bag);
 char	**get_environ(t_storage *bag);
 
 /*builtin*/
-int		builtin_cd(t_storage *bag, char *arg);
-int		builtin_echo(char *str);
-int    	builtin_env(t_storage *bag);
-int		builtin_exit(t_storage *bag, char *arg);
-int   	builtin_export(t_storage *bag, char *arg);
-int		builtin_pwd(void);
-int    	builtin_unset(t_storage *bag, char *arg);
+void	builtin_cd(t_storage *bag, char *arg);
+void	builtin_echo(t_storage *bag, char *str);
+void    builtin_env(t_storage *bag);
+void	builtin_exit(t_storage *bag, char *arg);
+void    builtin_export(t_storage *bag, char *arg);
+void	builtin_pwd(t_storage *bag);
+void    builtin_unset(t_storage *bag, char *arg);
 int		count_str_array(char **arg_arr);
 void	set_environ(t_storage *bag, int exit_status);
 bool	strncmp_exact(char *str1, char *str2, char c);

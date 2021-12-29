@@ -18,12 +18,8 @@ void	my_execve(t_storage *bag, char	*str)
 {
 	char	**argv;
 	int		i;
-	int		exit_status;
 
 	i = 0;
-	exit_status = execve_builtin(bag, str);
-	if (exit_status != -1)
-		exit(exit_status);
 	argv = set_argv(bag, str);
 	while (argv[i])
 	{
