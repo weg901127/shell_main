@@ -21,12 +21,11 @@ static void     find_n_rm_element(t_storage *bag, char *key)
     }
 }
 
-void    builtin_unset(t_storage *bag, char *arg)
+int builtin_unset(t_storage *bag, char *arg)
 {
     int     i;
     char    **arg_arr;
 
-    //arg_arr = split_cmd(arg);
 	arg_arr = ft_split(arg, ' ');
     i = 0;
     while (arg_arr[i])
@@ -34,6 +33,6 @@ void    builtin_unset(t_storage *bag, char *arg)
         find_n_rm_element(bag, arg_arr[i]);
         i++;
     }
-    set_environ(bag, EXIT_SUCCESS);
     ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
+    return (EXIT_SUCCESS);
 }
