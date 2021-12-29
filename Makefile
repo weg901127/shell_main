@@ -20,7 +20,7 @@ SRCS				= ./main.c					\
 					  ./srcs/builtins/builtin_env.c		./srcs/builtins/get_value.c \
 					  ./srcs/builtins/builtin_unset.c	./srcs/builtins/set_environ.c \
 					  ./srcs/builtins/update_env.c 		./srcs/builtins/strncmp_exact.c \
-					  ./srcs/builtins/count_str_array.c ./srcs/builtins/builtin_export.c\
+					  ./srcs/builtins/count_str_array.c ./srcs/builtins/builtin_export.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
 					  ./srcs/init/init_environ.c 		./srcs/parse/get_environ.c \
