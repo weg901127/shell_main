@@ -19,7 +19,9 @@ void	builtin_cd(t_storage *bag, char *arg)
 {
 	char	**arg_arr;
 	char	*path;
+	int		exit_status;
 
+	exit_status = EXIT_SUCCESS;
 	arg_arr = split_cmd(arg);
 	if (arg_arr[0] == NULL)
 		path = get_value(bag->environ, "HOME");
@@ -28,12 +30,10 @@ void	builtin_cd(t_storage *bag, char *arg)
 	if (chdir(path) == -1)
 	{
 		ft_print_error("cd", path, strerror(errno));
-		set_environ(bag, EXIT_FAILURE);
+		exit_status = EXIT_FAILURE;
 	}
 	else
-	{
-		set_environ(bag, EXIT_SUCCESS);
 		change_pwds_environ(bag, get_value(bag->environ, "PWD"), path);
-	}
 	ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
+	exit(exit_status);
 }

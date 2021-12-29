@@ -25,18 +25,17 @@ void    builtin_exit(t_storage *bag, char *arg)
     arg_arr = split_cmd(arg);
     len_arr = count_str_array(arg_arr);
     last_exit_status = ft_atoi(get_value(bag->runtime_env, "?"));
-    //환경변수 ?를 바꾸는 함수 -> 필요없음.
     ft_putendl_fd("exit", 1);
-    if (!len_arr)
+    if (!len_arr)   //exit
         exit(last_exit_status);
-    if (!is_only_digit(arg_arr[0]))
+    if (!is_only_digit(arg_arr[0])) //exit abc 
     {
         ft_print_error("exit", arg_arr[0], "numeric argument required");
         exit(255);
     }
-    if (len_arr == 1)
+    if (len_arr == 1)   //exit 1
         exit(ft_atoi(arg_arr[0]) % 256);
-    ft_print_error("exit", NULL, "too many arguments");
-    set_environ(bag, EXIT_FAILURE);
+    ft_print_error("exit", NULL, "too many arguments");     //exit 1 2 3
     ft_malloc_fail_str(arg_arr, len_arr);
+    exit(EXIT_FAILURE);
 }

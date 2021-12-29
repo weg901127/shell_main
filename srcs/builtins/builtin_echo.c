@@ -1,7 +1,7 @@
 #include "../../micro_shell.h"
 
 //The return status is 0 unless a write error occurs. 
-void	builtin_echo(t_storage *bag, char *arg)
+void	builtin_echo(char *arg)
 {
 	int		n_option;
 	char	**arg_arr;
@@ -23,6 +23,6 @@ void	builtin_echo(t_storage *bag, char *arg)
 	}
 	if (!n_option)
 		write(1, "\n", 1);
-	set_environ(bag, EXIT_SUCCESS);
 	ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
+	exit(EXIT_SUCCESS);
 }

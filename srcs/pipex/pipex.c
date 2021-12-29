@@ -133,6 +133,7 @@ void	heredoc_rdline(char *buf, int fd)
 	else
 		wait(NULL);
 }
+
 void	rd_heredoc(char *str)
 {
 	char	*buf;
@@ -178,16 +179,19 @@ void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)
 		dup2(pip[1], 1);
 	close(pip[0]);
 }
+
 void	handle_pipe_parent(t_storage *bag, int *pip)
 {
 	int	stat;
 
+	//sehhong: 해당 child를 기다리는 거면 pid를 지정해서 기다리는 게 낫지않나요?
 	waitpid(-1, &stat, 0);
 	if (WEXITSTATUS(stat) == 99)	
 		ft_putstr_fd("SyntexError\n",2);
 	close(pip[1]);
 	bag->pipe_old = pip[0];
 }
+
 void	do_fork(t_storage *bag, char *str, int cmd)
 {
 	int		p[2];
@@ -216,14 +220,16 @@ void	pipex(t_storage *bag, char **args)
 	bag->num_of_cmds = ft_splitcnt(args);
 	if (!bag->num_of_cmds)
 		return ;
+	//sehhong: 사용?
 	i = -1;
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
-	if (pid==0)
+	if (pid == 0)
 	{
 		while (args[++i])
 			do_fork(bag, args[i], i);
 		//i = bag->num_of_cmds - 1;
+		//sehhong: ??
 		exit(0);
 	}
 	else

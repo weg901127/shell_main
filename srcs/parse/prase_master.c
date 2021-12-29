@@ -104,7 +104,7 @@ char	*parse_env(t_storage *bag, char *string)
 			buf[ft_strlen(buf) - 1] = '\0';
 			ft_memcpy(var_buf, tmp, get_env_len(tmp));
 			tmp = tmp + get_env_len(tmp);
-			//TODO get_value NULL처리
+			//TODO get_value NULL처리 ->(sehhong) 주석으로 처리했음! 확인부탁!
 			if (get_value(bag->environ, var_buf))
 				ft_strlcat(buf, get_value(bag->environ, var_buf), MAXLEN);
 		}
@@ -129,5 +129,6 @@ bool parse_master(t_storage *bag)
 	while (args[i])
 		free(args[i++]);
 	free(args);
+	//sehhong: 왜 필요하지?
 	return (false);
 }
