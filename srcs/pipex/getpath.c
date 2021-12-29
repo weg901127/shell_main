@@ -18,11 +18,6 @@ bool	getpath(t_storage *bag, char ***path_res)
 			*path_res = ft_split(after_split[1], ':');
 			res = true;
 		}
-		//TODO	free logic 작성
-		free(after_split[0]);
-		free(after_split[1]);
-		//free(after_split[2]);
-		free(after_split);
 	}
-	return (res);	
+	return (res);
 }

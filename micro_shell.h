@@ -78,32 +78,8 @@ typedef enum e_builtins
 
 /* pipex */
 void	pipex(t_storage *bag, char **args);
-void	allocate_before_fork(t_storage *bag, char **args);
-char	**split_cmd(char *str);
-void	redirect_fds(t_storage *bag, int idx);
-void	fork_grandchild(t_storage *bag, char *arg, int idx);
-void	execve_with_path(t_storage *bag, char *cmd, char *arg);
-void	execve_cmd(t_storage *bag, char *arg);
 void	execve_builtin(t_storage *bag, char *arg);
 //void	heredoc_to_tmpfile(t_storage *info);
-
-/* print_errors */
-void	print_error(char *error_str, char *error_str2);
-void	print_error_and_exit(char *error_str, char *error_str2, \
-		int return_value);
-void	print_execve_error_and_exit(char *error_str, char *error_str2, \
-		int exit_status);
-
-/* exit_macros */
-int		wstatus(int status);
-int		wifexited(int status);
-int		wexitstatus(int status);
-int		wifsignaled(int status);
-int		wtermsig(int status);
-
-/* wait_and_exit */
-void	exit_for_child(int status);
-void	wait_and_exit_for_grandchildren(t_storage *bag);
 
 /* ./srcs/pipex/getpath */
 bool	getpath(t_storage *bag, char ***path_res);
@@ -144,6 +120,9 @@ char	*cutnjoin(char *string, char target);
 bool parse_master(t_storage *bag);
 
 
+char	*get_last_redirect(char *str, int target);
+void	rd_heredoc(char *str);
+void	my_execve(t_storage *bag, char	*str);
 int		has_redirect(t_storage *bag, char *str);
 void	handler_int(int signum);
 void	handler_int_child(int signum);

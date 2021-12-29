@@ -1,17 +1,4 @@
-#include "libft/libft.h"
 #include "micro_shell.h"
-
-/*
-void	run_builtin(t_bag *bag)
-{
-	//어떤 대단한 로직
-	a = 어떤 무언가를 찾는 함수;
-	if (a == ECHO_)
-		//my echo 실행
-	else if (a == CD_)
-		//
-}
-*/
 
 void	handler_int(int signum)
 {
@@ -28,7 +15,6 @@ void	handler_int_child(int signum)
 {
 	if (signum != SIGINT)
 		return ;
-	write(g_out_backup, "\n", 1);
 	exit(SIGINT);
 }
 
@@ -43,38 +29,42 @@ void	handler_int_heredoc(int signum)
 	rl_redisplay();
 }
 
-int	main(void)
+void	init(t_storage *bag)
 {
-	char			*line;
-	t_storage			*bag;
-
-	g_out_backup = dup(1);
-	bag = create_bag();
 	init_bag(bag);
 	init_builtin(bag);
 	init_environ(bag);
 	init_runtime_env(bag);
-	
 	init_rl_catch_signals();
+}
+
+int	main(void)
+{
+	char		*line;
+	t_storage	*bag;
+
+	g_out_backup = dup(1);
+	bag = create_bag();
+	init(bag);
 	signal(SIGINT, handler_int);
+	//signal(SIGQUIT, SIG_IGN);
 	while (true)
 	{
 		line = readline("micro_shell> ");
 		if (line)
 		{
 			bag->input = ft_strdup(line);
-			//line을 parsing에 태움
 			parse_master(bag);
 			add_history(line);
 			free(line);
 			free(bag->input);
 			line = NULL;
 		}
-		usleep(10000);
-		dup2(g_out_backup, 1);
-		//else
-		//	return (1);
+		else
+		{
+			printf ("exit");
+			exit(0);
+		}
 	}
-	
 	return (0);
 }

@@ -9,7 +9,8 @@ void	builtin_echo(t_storage *bag, char *arg)
 
 	i = 0;
 	n_option = 0;
-	arg_arr = split_cmd(arg);
+	//arg_arr = split_cmd(arg);
+	arg_arr = ft_split(arg, ' ');
 	if (strncmp_exact(arg_arr[0], "-n", '\0'))
 	{
 		i = 1;

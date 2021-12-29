@@ -22,7 +22,8 @@ void    builtin_exit(t_storage *bag, char *arg)
     char    **arg_arr;
     int     len_arr;
     
-    arg_arr = split_cmd(arg);
+    //arg_arr = split_cmd(arg);
+	arg_arr = ft_split(arg, ' ');
     len_arr = count_str_array(arg_arr);
     last_exit_status = ft_atoi(get_value(bag->runtime_env, "?"));
     //환경변수 ?를 바꾸는 함수 -> 필요없음.

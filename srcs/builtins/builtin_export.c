@@ -52,7 +52,8 @@ void    builtin_export(t_storage *bag, char *arg)
     int     i;
     int     equal_here;
 
-    arg_arr = split_cmd(arg);
+    //arg_arr = split_cmd(arg);
+	arg_arr = ft_split(arg, ' ');
     equal_here = 0;
     i = 0;
     set_environ(bag, EXIT_SUCCESS);
