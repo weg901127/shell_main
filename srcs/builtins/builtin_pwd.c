@@ -1,6 +1,6 @@
 #include "../../micro_shell.h"
 
-void	builtin_pwd(t_storage *bag)
+int	builtin_pwd(void)
 {
 	char	*pwd;
 
@@ -8,10 +8,10 @@ void	builtin_pwd(t_storage *bag)
 	if (!pwd)
 	{
 		ft_print_error("pwd", NULL, strerror(errno));
-		set_environ(bag, EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	ft_putendl_fd(pwd, STDOUT_FD);
 	free(pwd);
 	pwd = NULL;
-    set_environ(bag, EXIT_SUCCESS);
+	return (EXIT_SUCCESS);	
 }

@@ -103,9 +103,12 @@ char	*parse_env(t_storage *bag, char *string)
 			buf[ft_strlen(buf) - 1] = '\0';
 			ft_memcpy(var_buf, tmp, get_env_len(tmp));
 			tmp = tmp + get_env_len(tmp);
-			//TODO get_value NULL처리
+			//TODO get_value NULL처리 -> 햇음! 확인부탁!
+			
 			if (get_value(bag->environ, var_buf))
 				ft_strlcat(buf, get_value(bag->environ, var_buf), MAXLEN);
+			if (get_value(bag->runtime_env, var_buf))
+				ft_strlcat(buf, get_value(bag->runtime_env, var_buf), MAXLEN);
 		}
 		if (!tmp)
 			break;
