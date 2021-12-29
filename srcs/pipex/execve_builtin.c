@@ -56,7 +56,7 @@ void	execve_builtin(t_storage *bag, char *arg)
 	if (!ft_strncmp(buf1, "cd", 2))
 		builtin_cd(bag, buf[1]);
 	else if (!ft_strncmp(buf1, "echo", 4))
-		builtin_echo(bag, buf[1]);
+		builtin_echo(buf[1]);
 	else if (!ft_strncmp(buf1, "pwd", 3))
 		builtin_pwd(bag);
 	else if (!ft_strncmp(buf1, "exit", 4))

@@ -27,8 +27,9 @@ static void    export_no_option(t_storage *bag)
         ft_putstr_fd("declare -x ", STDOUT_FD);
         ft_putendl_fd(getALElement(bag->environ, i)->data, STDOUT_FD);
         i++;
-    }   
+    }
 }
+
 //asdf=hihi environ에 원래 있음 -> export asdf=yum_yum
 static void    add_name_on_env(t_storage *bag, char *key_value, int equal_here)
 {
@@ -51,14 +52,14 @@ void    builtin_export(t_storage *bag, char *arg)
     char    **arg_arr;
     int     i;
     int     equal_here;
+    int     exit_status;
 
+    exit_status = EXIT_SUCCESS;
     arg_arr = split_cmd(arg);
     equal_here = 0;
     i = 0;
-    set_environ(bag, EXIT_SUCCESS);
     if (arg_arr[0] == NULL)
         export_no_option(bag);
-    // 다른 인자가 있을 때
     else
     {
         while (arg_arr[i])
@@ -66,8 +67,8 @@ void    builtin_export(t_storage *bag, char *arg)
             equal_here = where_is_equal(arg_arr[i]);
             if (!equal_here)   //export =hihi 
             {
-                set_environ(bag, EXIT_FAILURE);
                 ft_print_error("export", arg_arr[i], "not a valid identifier");
+                exit_status = EXIT_FAILURE;
             }
             else if (equal_here == -1)   //export water
             {   
@@ -80,4 +81,5 @@ void    builtin_export(t_storage *bag, char *arg)
         }
     }
     ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
+    exit(exit_status);
 }

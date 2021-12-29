@@ -35,6 +35,6 @@ void    builtin_unset(t_storage *bag, char *arg)
         find_n_rm_element(bag, arg_arr[i]);
         i++;
     }
-    set_environ(bag, EXIT_SUCCESS);
     ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
+    exit(EXIT_SUCCESS);
 }

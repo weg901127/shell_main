@@ -43,8 +43,8 @@ all : MAKE_LIB $(NAME)
 $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME)
 test : MAKE_LIB $(NAME_TEST)
-.c.o:
-	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
+#.c.o:
+#	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
 $(NAME_TEST) : $(TEST_OBJ)
 	$(CC) $(TEST_OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME_TEST)
 clean :
