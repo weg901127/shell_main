@@ -9,7 +9,7 @@ int	builtin_echo(char *arg)
 
 	i = 0;
 	n_option = 0;
-	arg_arr = ft_split(arg, ' ');
+	arg_arr = split_cmd(arg);
 	if (strncmp_exact(arg_arr[0], "-n", '\0'))
 	{
 		i = 1;

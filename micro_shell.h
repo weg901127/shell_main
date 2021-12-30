@@ -118,7 +118,10 @@ char    *get_value(t_ArrayList *env, char *str);
 void    update_env(t_ArrayList *env, char *key, char *new_val);
 /* parse_master */
 char	*cutnjoin(char *string, char target);
-bool parse_master(t_storage *bag);
+bool 	parse_master(t_storage *bag);
+char	**split_cmd(char *str);
+
+char	*parse_space(char *string);
 
 
 char	*get_last_redirect(char *str, int target);
