@@ -207,7 +207,7 @@ void	pipex(t_storage *bag, char **args)
 	//redirection은 어떻게 처리해줄까요? 적절하지 않은 로직같습니다.
 	//sehhong:
 	//execve_builtin이전에 해주면 된다고 보는데, 다른 로직을 원하시면 다시 짜놓을게요.
-	//결정되면 이 부분 함수로 만들게요. 확인차 때려박은 거라 확정되면, 그때가서 분리해 만들겟씁니다.
+	//결정되면 이 부분 함수로 만들게요. 확인차 넣은거라 확정되면, 그때가서 분리해 만들겟씁니다.
 	if (bag->num_of_cmds == 1 && is_builtin(bag, args[0]))
 	{	
 		exit_status = execve_builtin(bag, args[0]);
