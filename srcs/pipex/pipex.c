@@ -153,6 +153,8 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 		ft_putstr_fd("Error\n",2);
 	else if (WTERMSIG(stat) == SIGINT)
 		ft_putstr_fd("\n", 2);
+	else if (WTERMSIG(stat) == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", 2);
 	if (cmd == bag->num_of_cmds - 1)
 		bag->last_exit_status = WEXITSTATUS(stat);
 	close(pip[1]);
@@ -176,6 +178,7 @@ void	do_fork(t_storage *bag, char *str, int cmd)
 	else if (pid == 0)
 	{
 		signal(SIGINT, handler_int_child);
+		signal(SIGQUIT, handler_quit);
 		handle_pipe_child(bag, p, cmd, str);
 		my_execve(bag, str);
 	}

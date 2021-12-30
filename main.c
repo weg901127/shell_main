@@ -28,6 +28,12 @@ void	handler_int_heredoc(int signum)
 	rl_replace_line("", 1);
 	rl_redisplay();
 }
+void	handler_quit(int signum)
+{
+	if (signum != SIGQUIT)
+		return ;
+	exit(SIGQUIT);
+}
 
 void	init(t_storage *bag)
 {
@@ -47,7 +53,7 @@ int	main(void)
 	bag = create_bag();
 	init(bag);
 	signal(SIGINT, handler_int);
-	//signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (true)
 	{
 		line = readline("micro_shell> ");
