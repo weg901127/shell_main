@@ -11,7 +11,7 @@ char	*my_which(t_storage *bag, char *cmd)
 	
 	i = 0;
 	if (getpath(bag, &path))
-		while (*(path[i]))
+		while (path[i])
 		{
 			tmp1 = ft_strjoin(path[i], "/");
 			tmp2 = ft_strjoin(tmp1, cmd);
@@ -21,11 +21,9 @@ char	*my_which(t_storage *bag, char *cmd)
 				close(fd);
 				return (tmp2);
 			}
-			free(tmp1);
-			free(tmp2);
 			i++;
 		}
-	return (cmd);
+	return (NULL);
 }
 
 
