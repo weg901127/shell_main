@@ -23,6 +23,7 @@
 # define MAXLEN			10000
 # define MAX_ENVLEN		1000
 # define SYNTAX_ERR		99
+# define ERROR			100
 
 int	g_out_backup;
 

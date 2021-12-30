@@ -82,6 +82,6 @@ int	execve_builtin(t_storage *bag, char *arg)
 		exit_status = builtin_env(bag);
 	else if (strncmp_exact(buf1, "unset", '\0'))
 		exit_status = builtin_unset(bag, buf[1]);
-	free(buf[1]);
+	//free(buf[1]);
 	return (exit_status);
 }

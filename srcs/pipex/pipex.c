@@ -70,7 +70,7 @@ void	rd_input(char *str)
 	split = ft_split(buf, ' ');
 	fd = open(split[0], O_RDONLY);
 	if (fd == -1)
-		exit(100);
+		exit(ERROR);
 	dup2(fd, 0);
 	close(fd);
 }
@@ -111,7 +111,7 @@ void	rd_append(char *str)
 	split = ft_split(buf, ' ');
 	fd = open(split[0], O_RDWR|O_CREAT|O_APPEND, S_IRUSR | S_IWUSR);
 	if (fd == -1)
-		exit(100);
+		exit(ERROR);
 	dup2(fd, 1);
 	close(fd);
 }
@@ -147,14 +147,16 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 	int	stat;
 
 	waitpid(pid, &stat, 0);
-	if (WEXITSTATUS(stat) == 99)
+	if (WEXITSTATUS(stat) == SYNTAX_ERR)
 		ft_putstr_fd("SyntexError\n",2);
-	else if (WEXITSTATUS(stat) == 100)	
+	else if (WEXITSTATUS(stat) == ERROR)	
 		ft_putstr_fd("Error\n",2);
-	else if (WTERMSIG(stat) == SIGINT)
-		ft_putstr_fd("\n", 2);
-	else if (WTERMSIG(stat) == SIGQUIT)
-		ft_putstr_fd("Quit: 3\n", 2);
+	else if (WIFSIGNALED(stat))
+	{
+		if (WTERMSIG(stat) == 3)
+			ft_putstr_fd("Quit: 3", 1);
+		ft_putstr_fd("\n", 1);
+	}
 	if (cmd == bag->num_of_cmds - 1)
 		bag->last_exit_status = WEXITSTATUS(stat);
 	close(pip[1]);
@@ -178,12 +180,37 @@ void	do_fork(t_storage *bag, char *str, int cmd)
 	else if (pid == 0)
 	{
 		signal(SIGINT, handler_int_child);
-		signal(SIGQUIT, handler_quit);
+		signal(SIGQUIT, SIG_DFL);
 		handle_pipe_child(bag, p, cmd, str);
 		my_execve(bag, str);
 	}
 	else
 		handle_pipe_parent(bag, p, cmd, pid);
+}
+
+int		is_special(char **str)
+{
+	int	res;
+
+	res = 0;
+	res |= (ft_strlen(str[0]) == 6
+			&& !ft_strncmp(str[0], "export", 6)
+			&& !(ft_strchr(str[1], '<') || ft_strchr(str[1], '>'))
+			&& ft_strlen(str[1]));
+	res |= (ft_strlen(str[0]) == 3 && !ft_strncmp(str[0], "env", 3));
+	res |= (ft_strlen(str[0]) == 5 && !ft_strncmp(str[0], "unset", 5));
+	res |= (ft_strlen(str[0]) == 4 && !ft_strncmp(str[0], "exit", 4));
+	res |= (ft_strlen(str[0]) == 2 && !ft_strncmp(str[0], "cd", 2));
+	return (res);
+}
+int		do_not_fork(t_storage *bag, char *str)
+{
+	char	**split;
+
+	split = ft_split(str, ' ');
+	if (bag->num_of_cmds == 1 && is_special(split))
+		return (1);
+	return (0);
 }
 
 void	pipex(t_storage *bag, char **args)
@@ -197,8 +224,8 @@ void	pipex(t_storage *bag, char **args)
 	exit_status = EXIT_SUCCESS;
 	bag->pipe_old = 0;
 	bag->num_of_cmds = ft_splitcnt(args);
-	if (bag->num_of_cmds == 1 && is_builtin(bag, args[0]))
-	{	
+	if (do_not_fork(bag, args[0]))
+	{
 		exit_status = execve_builtin(bag, args[0]);
 		set_environ(bag, exit_status);
 		return ;
