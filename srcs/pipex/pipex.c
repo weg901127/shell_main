@@ -196,6 +196,7 @@ void	pipex(t_storage *bag, char **args)
 	bag->num_of_cmds = ft_splitcnt(args);
 	if (!bag->num_of_cmds)
 		return ;
+	//redirection은 어떻게 처리해줄까요? 적절하지 않은 로직같습니다
 	if (bag->num_of_cmds == 1 && is_builtin(bag, args[0]))
 	{	
 		exit_status = execve_builtin(bag, args[0]);

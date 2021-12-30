@@ -8,9 +8,14 @@ static char **set_argv(t_storage *bag, char *str)
 	tmp = ft_split(str, ' ');
 	if (ft_strchr(tmp[0], '<'))
 		exit(SYNTAX_ERR);
-	cmd_tmp = my_which(bag, tmp[0]);
-	free(tmp[0]);
-	tmp[0] = cmd_tmp;
+	if (!ft_strchr(tmp[0], '/'))
+	{
+		cmd_tmp = my_which(bag, tmp[0]);
+		if (!cmd_tmp)
+			exit(100);
+		free(tmp[0]);
+		tmp[0] = cmd_tmp;
+	}
 	return(tmp);
 }
 
@@ -34,6 +39,8 @@ void	my_execve(t_storage *bag, char	*str)
 	int		exit_status;
 
 	i = 0;
+	//이거 왜 여기에써놓으셨나요... is_builtin이런거 만들어뒀는데... 지워주세요...
+	//제발 하나에 다 때려박지마세요... 힘들어요
 	exit_status = execve_builtin(bag, str);
 	//exit_status == -1 일 경우는 builtin이 실행되지 않은 경우.
 	if (exit_status != -1)
