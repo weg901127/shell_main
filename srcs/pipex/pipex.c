@@ -163,13 +163,6 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 	bag->heredoc = 0;
 }
 
-// void	check_builtin(t_storage *bag, char *str)
-// {
-// 	if (!is_builtin(bag, str))
-// 		return ;
-// 	exit(execve_builtin(bag, str));
-// }
-
 void	do_fork(t_storage *bag, char *str, int cmd)
 {
 	int		p[2];
@@ -184,7 +177,6 @@ void	do_fork(t_storage *bag, char *str, int cmd)
 	{
 		signal(SIGINT, handler_int_child);
 		handle_pipe_child(bag, p, cmd, str);
-		//check_builtin(bag, str);
 		my_execve(bag, str);
 	}
 	else
@@ -202,12 +194,6 @@ void	pipex(t_storage *bag, char **args)
 	exit_status = EXIT_SUCCESS;
 	bag->pipe_old = 0;
 	bag->num_of_cmds = ft_splitcnt(args);
-	if (!bag->num_of_cmds)
-		return ;
-	//redirection은 어떻게 처리해줄까요? 적절하지 않은 로직같습니다.
-	//sehhong:
-	//execve_builtin이전에 해주면 된다고 보는데, 다른 로직을 원하시면 다시 짜놓을게요.
-	//결정되면 이 부분 함수로 만들게요. 확인차 넣은거라 확정되면, 그때가서 분리해 만들겟씁니다.
 	if (bag->num_of_cmds == 1 && is_builtin(bag, args[0]))
 	{	
 		exit_status = execve_builtin(bag, args[0]);
@@ -220,11 +206,10 @@ void	pipex(t_storage *bag, char **args)
 	{
 		while (args[++i])
 			do_fork(bag, args[i], i);
-		// exit(0);
 		exit(bag->last_exit_status);
 	}
 	else
-	{	
+	{
 		waitpid(pid, &status, 0);
 		bag->last_exit_status = WEXITSTATUS(status);
 		set_environ(bag, bag->last_exit_status);

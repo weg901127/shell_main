@@ -25,10 +25,6 @@ void	my_execve(t_storage *bag, char	*str)
 	int		i;
 
 	i = 0;
-	//이거 왜 여기에써놓으셨나요... is_builtin이런거 만들어뒀는데... 지워주세요...
-	//제발 하나에 다 때려박지마세요... 힘들어요
-	//sehhong: -> 그래서 이 부분 check_builtin() 주석으로 해놓을게요. (pipex.c)
-	//필요하면 쓰세요.
 	argv = set_argv(bag, str);
 	while (argv[i])
 	{

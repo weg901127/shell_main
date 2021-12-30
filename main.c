@@ -62,7 +62,7 @@ int	main(void)
 		}
 		else
 		{
-			printf ("exit");
+			printf ("micro_shell> exit");
 			exit(0);
 		}
 	}

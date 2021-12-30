@@ -22,6 +22,8 @@ static void	heredoc_rdline(char *buf, int fd)
 				write(fd, line, ft_strlen(line));
 				write(fd,"\n", 1);
 			}
+			else
+				break;
 		}
 		exit(0);
 	}
@@ -35,9 +37,11 @@ void	rd_heredoc(char *str)
 	int		fd;	
 
 	buf = ft_strdup(get_last_redirect(str, '<') + 1);
+	ft_putstr_fd(buf, 2);
 	buf = ft_strtrim(buf, " ");
+	if (buf && !(*buf))
 		exit(SYNTAX_ERR);
-	fd = open(".hd________", O_RDWR|O_CREAT, S_IRUSR | S_IWUSR);
+	fd = open(".hd________", O_RDWR|O_CREAT|O_TRUNC, S_IRUSR | S_IWUSR);
 	signal(SIGINT, SIG_IGN);
 	heredoc_rdline(buf, fd);
 	signal(SIGINT, handler_int_child);
