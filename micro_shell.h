@@ -18,28 +18,20 @@
 
 # define EXIT_SUCCESS	0
 # define EXIT_FAILURE	1
-# define PIPE_RD_FD		0
-# define PIPE_WR_FD		1
 # define STDIN_FD		0
 # define STDOUT_FD		1
-# define ECMD_NOT_FND	127
-# define EPERMS_DND		126
 # define MAXLEN			10000
 # define MAX_ENVLEN		1000
-
 # define SYNTAX_ERR		99
+
 int	g_out_backup;
 
 typedef struct s_storage
 {
-	// char		*infile_name;
-	// char		*outfile_name;
-	// char		***cmd_args;
 	int			num_of_cmds;
 	int			*pipe_fds;
 	int			pipe_old;
 	pid_t		*grandchild_pids;
-	//char		*limiter;
 	int			redirect_input;
 	int			redirect_output;
 	int			heredoc;
