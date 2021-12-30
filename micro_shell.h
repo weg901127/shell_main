@@ -18,28 +18,20 @@
 
 # define EXIT_SUCCESS	0
 # define EXIT_FAILURE	1
-# define PIPE_RD_FD		0
-# define PIPE_WR_FD		1
 # define STDIN_FD		0
 # define STDOUT_FD		1
-# define ECMD_NOT_FND	127
-# define EPERMS_DND		126
 # define MAXLEN			10000
 # define MAX_ENVLEN		1000
-
 # define SYNTAX_ERR		99
+
 int	g_out_backup;
 
 typedef struct s_storage
 {
-	// char		*infile_name;
-	// char		*outfile_name;
-	// char		***cmd_args;
 	int			num_of_cmds;
 	int			*pipe_fds;
 	int			pipe_old;
 	pid_t		*grandchild_pids;
-	//char		*limiter;
 	int			redirect_input;
 	int			redirect_output;
 	int			heredoc;
@@ -118,7 +110,10 @@ char    *get_value(t_ArrayList *env, char *str);
 void    update_env(t_ArrayList *env, char *key, char *new_val);
 /* parse_master */
 char	*cutnjoin(char *string, char target);
-bool parse_master(t_storage *bag);
+bool 	parse_master(t_storage *bag);
+char	**split_cmd(char *str);
+
+char	*parse_space(char *string);
 
 
 char	*get_last_redirect(char *str, int target);

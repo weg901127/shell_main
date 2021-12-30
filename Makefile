@@ -21,11 +21,13 @@ SRCS				= ./main.c					\
 					  ./srcs/builtins/builtin_unset.c	./srcs/builtins/set_environ.c \
 					  ./srcs/builtins/update_env.c 		./srcs/builtins/strncmp_exact.c \
 					  ./srcs/builtins/count_str_array.c ./srcs/builtins/builtin_export.c \
+					  ./srcs/builtins/split_cmd.c \
 					  ./srcs/init/create_bag.c			./srcs/init/init_bag.c \
 					  ./srcs/init/init_builtin.c		./srcs/init/init_rl_catch_signals.c \
 					  ./srcs/init/init_environ.c 		./srcs/parse/get_environ.c \
 					  ./srcs/init/init_runtime_env.c 	./srcs/parse/prase_master.c \
-					  ./srcs/parse/is_builtin.c			./srcs/pipex/pipex.c \
+					  ./srcs/parse/is_builtin.c			./srcs/parse/parse_space.c \
+					  ./srcs/pipex/pipex.c \
 					  ./srcs/pipex/execve_builtin.c 	./srcs/pipex/my_execve.c \
 					  ./srcs/pipex/getpath.c			./srcs/pipex/my_which.c \
 					  ./srcs/pipex/my_heredoc.c

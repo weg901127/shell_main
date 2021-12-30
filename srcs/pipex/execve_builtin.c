@@ -1,5 +1,5 @@
 #include "../../micro_shell.h"
-
+/*
 char	*parse_space(char *string)
 {
 	char	buf[MAXLEN];
@@ -31,6 +31,7 @@ char	*parse_space(char *string)
 	}
 	return ft_strdup(buf);
 }
+*/
 
 int	execve_builtin(t_storage *bag, char *arg)
 {
@@ -41,6 +42,7 @@ int	execve_builtin(t_storage *bag, char *arg)
 	char	*tmp;
 	int		exit_status;
 
+	// ft_putendl_fd(arg, 2);
 	exit_status = -1;
 	ft_memset(buf1, 0, MAXLEN);
 	ft_memset(buf2, 0, MAXLEN);
@@ -51,12 +53,10 @@ int	execve_builtin(t_storage *bag, char *arg)
 		exit(SYNTAX_ERR);
 	if (ft_strlen(buf1))
 	{
-		//tmp free
 		tmp = ft_strchr(arg, ' ');
 		if (tmp)
 		{
 			trim = ft_strtrim(ft_strchr(arg, ' ') + 1, " ");
-			// ft_putendl_fd(trim, 2);
 			ft_memcpy(buf2, trim, ft_strlen(trim));
 			free(trim);
 		}
@@ -64,15 +64,32 @@ int	execve_builtin(t_storage *bag, char *arg)
 		// // ft_putendl_fd(trim, 2);
 		// ft_memcpy(buf2, trim, ft_strlen(trim));
 		// free(trim);
+
+		// buf[0] = cutnjoin(buf2, '\'');
+		// ft_putendl_fd(buf[0], 2);
+		// buf[1] = cutnjoin(buf[1], '\"');
+		// ft_putendl_fd(buf[1], 2);
+		buf[1] = parse_space(buf2);
+		//ft_putendl_fd(buf[1], 2);
+
+		//free(buf[0]);
+
+
+		if (strncmp_exact(buf1, "echo", '\0'))
+		{
+			exit_status = builtin_echo(buf[1]);
+			free(buf[1]);
+			return (exit_status);
+		}
 		buf[0] = cutnjoin(buf2, '\'');
-		buf[1] = cutnjoin(buf[0], '\"');
-		free(buf[0]);
+		buf[1] = cutnjoin(buf[1], '\"');
+
 	}
 	// ft_putendl_fd(buf[1], 2);
 	if (strncmp_exact(buf1, "cd", '\0'))
 		exit_status = builtin_cd(bag, buf[1]);
-	else if (strncmp_exact(buf1, "echo", '\0'))
-		exit_status = builtin_echo(buf[1]);
+	// else if (strncmp_exact(buf1, "echo", '\0'))
+	// 	exit_status = builtin_echo(buf[1]);
 	else if (strncmp_exact(buf1, "pwd", '\0'))
 		exit_status = builtin_pwd();
 	else if (strncmp_exact(buf1, "exit", '\0'))
