@@ -1,37 +1,4 @@
 #include "../../micro_shell.h"
-/*
-char	*parse_space(char *string)
-{
-	char	buf[MAXLEN];
-	int		i;
-	int		single_q;
-	int		double_q;
-
-	i = 0;
-	single_q = 0;
-	double_q = 0;
-	while(*string)
-	{
-		if (*string == '\'')
-			single_q = !single_q;
-		else if (*string == '\"')
-			double_q = !double_q;
-		if (single_q || double_q)
-			buf[i] = *string;
-		else
-		{
-			if (*string == ' ' && *(string - 1) == ' ')
-			{
-				string++;
-				continue;
-			}
-		}
-		i++;
-		string++;
-	}
-	return ft_strdup(buf);
-}
-*/
 
 int	execve_builtin(t_storage *bag, char *arg)
 {
@@ -66,12 +33,13 @@ int	execve_builtin(t_storage *bag, char *arg)
 			free(buf[1]);
 			return (exit_status);
 		}
-		buf[0] = cutnjoin(buf2, '\'');
-		buf[1] = cutnjoin(buf[1], '\"');
-
+		buf[0] = cutnjoin(buf[1], '\'');
+		buf[1] = cutnjoin(buf[0], '\"');
 	}
 	if (strncmp_exact(buf1, "cd", '\0'))
 		exit_status = builtin_cd(bag, buf[1]);
+	//else if (strncmp_exact(buf1, "echo", '\0'))
+	//	exit_status = builtin_echo(buf[1]);
 	else if (strncmp_exact(buf1, "pwd", '\0'))
 		exit_status = builtin_pwd();
 	else if (strncmp_exact(buf1, "exit", '\0'))

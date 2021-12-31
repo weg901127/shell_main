@@ -1,6 +1,5 @@
 #include "../../micro_shell.h"
 
-//The return status is 0 unless a write error occurs. 
 int	builtin_echo(char *arg)
 {
 	int		n_option;
@@ -15,11 +14,11 @@ int	builtin_echo(char *arg)
 		i = 1;
 		n_option = 1;
 	}
-	while (arg_arr[i])
+	while (*arg_arr[i])
 	{	
 		if (i > n_option)
 			ft_putchar_fd(' ', STDOUT_FD);
-		ft_putstr_fd(arg_arr[i++], STDOUT_FD);
+		ft_putstr_fd(arg_arr[i++], 2);
 	}
 	if (!n_option)
 		write(1, "\n", 1);
