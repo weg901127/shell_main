@@ -43,6 +43,7 @@ void	init(t_storage *bag)
 int	main(void)
 {
 	char		*line;
+	char		*buf;
 	t_storage	*bag;
 
 	g_out_backup = dup(1);
@@ -53,6 +54,12 @@ int	main(void)
 		line = readline("micro_shell> ");
 		if (line)
 		{
+			buf = ft_strtrim(line, " ");
+			if (!(*buf))
+			{
+				free(buf);
+				continue;
+			}
 			bag->input = ft_strdup(line);
 			parse_master(bag);
 			add_history(line);
