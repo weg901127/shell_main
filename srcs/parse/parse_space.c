@@ -1,5 +1,15 @@
 #include "../../micro_shell.h"
 
+void	skip_space(char *buf, char **string, int i)
+{
+	if (**string == ' ' && *(*string - 1) == ' ')
+	{
+		(*string)++;
+		return ;
+	}
+	buf[i] = **string;
+}
+
 char	*parse_space(char *string)
 {
 	char	buf[MAXLEN];
@@ -11,7 +21,7 @@ char	*parse_space(char *string)
 	single_q = 0;
 	double_q = 0;
 	ft_memset(buf, 0, MAXLEN);
-	while(*string)
+	while (*string)
 	{
 		if (*string == '\'')
 			single_q = !single_q;
@@ -20,16 +30,9 @@ char	*parse_space(char *string)
 		if (single_q || double_q)
 			buf[i] = *string;
 		else
-		{
-			if (*string == ' ' && *(string - 1) == ' ')
-			{
-				string++;
-				continue;
-			}
-			buf[i] = *string;
-		}
+			skip_space(buf, &string, i);
 		i++;
 		string++;
 	}
-	return ft_strdup(buf);
+	return (ft_strdup(buf));
 }

@@ -1,133 +1,5 @@
 #include "../../micro_shell.h"
 
-int		has_redirect(t_storage *bag, char *str)
-{
-	int		res;
-	char	*buf;
-
-	res = 0;
-	buf = ft_strchr(str, '<');
-	while (buf != NULL)
-	{
-		if (buf && buf[0] == '<' && buf[1] != '<')
-		{
-			(bag->redirect_input)++;
-			res |= 1;
-		}
-		else if (buf && buf[0] == '<' && buf[1] == '<')
-		{
-			(bag->heredoc)++;
-			buf = buf + 1;
-			res |= 1;
-		}
-		buf = ft_strchr(buf + 1, '<');
-	}
-	buf = ft_strchr(str, '>');
-	while (buf != NULL)
-	{
-		if (buf && buf[0] == '>' && buf[1] != '>')
-		{
-			(bag->redirect_output)++;
-			res |= 1;
-		}
-		else if (buf && buf[0] == '>' && buf[1] == '>')
-		{
-			(bag->append)++;
-			buf = buf + 1;
-			res |= 1;
-		}
-		buf = ft_strchr(buf + 1, '>');
-	}
-	return (res);
-}
-
-char	*get_last_redirect(char *str, int target)
-{
-	char	*buf;
-	char	*res;
-
-	res = NULL;
-	buf = str;
-	while (buf)
-	{
-		buf = ft_strchr(buf, target);
-		if (buf)
-		{
-			res = buf;
-			buf = buf + 1;
-		}
-	}
-	return res;
-}
-
-void	rd_input(char *str)
-{
-	char	*buf;
-	char	**split;
-	int		fd;	
-
-	buf = ft_strdup(get_last_redirect(str, '<') + 1);
-	split = ft_split(buf, ' ');
-	fd = open(split[0], O_RDONLY);
-	if (fd == -1)
-		exit(ERROR);
-	dup2(fd, 0);
-	close(fd);
-}
-
-void	process_redirect_input(t_storage *bag, char *str)
-{
-	if ((bag->redirect_input != 0 && bag->heredoc != 0)
-			|| bag->redirect_input > 1 || bag->heredoc > 1)
-		exit(SYNTAX_ERR);
-	else if (bag->redirect_input)
-		rd_input(str);
-	else if (bag->heredoc)
-		rd_heredoc(str);
-}
-
-void	rd_output(char *str)
-{
-	char	*buf;
-	char	**split;
-	int		fd;	
-
-	buf = ft_strdup(get_last_redirect(str, '>') + 1);
-	split = ft_split(buf, ' ');
-	fd = open(split[0], O_RDWR|O_CREAT|O_TRUNC, S_IRUSR | S_IWUSR);
-	if (fd == -1)
-		exit(100);
-	dup2(fd, 1);
-	close(fd);
-}
-
-void	rd_append(char *str)
-{
-	char	*buf;
-	char	**split;
-	int		fd;	
-
-	buf = ft_strdup(get_last_redirect(str, '>') + 1);
-	split = ft_split(buf, ' ');
-	fd = open(split[0], O_RDWR|O_CREAT|O_APPEND, S_IRUSR | S_IWUSR);
-	if (fd == -1)
-		exit(ERROR);
-	dup2(fd, 1);
-	close(fd);
-}
-
-void	process_redirect_output(t_storage *bag, char *str, int *pip)
-{
-	(void) pip;
-	if ((bag->redirect_output != 0 && bag->append != 0)
-			|| bag->redirect_output > 1 || bag->append > 1)
-		exit(SYNTAX_ERR);
-	else if (bag->redirect_output)
-		rd_output(str);
-	else if (bag->append)
-		rd_append(str);
-}
-
 void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)
 {
 	if (bag->redirect_input || bag->heredoc)
@@ -139,7 +11,7 @@ void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)
 	else
 		if (cmd != bag->num_of_cmds - 1)
 			dup2(pip[1], 1);
-	//close(pip[0]);
+	close(pip[0]);
 }
 
 void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
@@ -186,31 +58,6 @@ void	do_fork(t_storage *bag, char *str, int cmd)
 	}
 	else
 		handle_pipe_parent(bag, p, cmd, pid);
-}
-
-int		is_special(char **str)
-{
-	int	res;
-
-	res = 0;
-	res |= (ft_strlen(str[0]) == 6
-			&& !ft_strncmp(str[0], "export", 6)
-			&& !(ft_strchr(str[1], '<') || ft_strchr(str[1], '>'))
-			&& ft_strlen(str[1]));
-	res |= (ft_strlen(str[0]) == 3 && !ft_strncmp(str[0], "env", 3));
-	res |= (ft_strlen(str[0]) == 5 && !ft_strncmp(str[0], "unset", 5));
-	res |= (ft_strlen(str[0]) == 4 && !ft_strncmp(str[0], "exit", 4));
-	res |= (ft_strlen(str[0]) == 2 && !ft_strncmp(str[0], "cd", 2));
-	return (res);
-}
-int		do_not_fork(t_storage *bag, char *str)
-{
-	char	**split;
-
-	split = ft_split(str, ' ');
-	if (bag->num_of_cmds == 1 && is_special(split))
-		return (1);
-	return (0);
 }
 
 void	pipex(t_storage *bag, char **args)

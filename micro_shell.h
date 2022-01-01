@@ -115,10 +115,17 @@ bool 	parse_master(t_storage *bag);
 char	**split_cmd(char *str);
 
 char	*parse_space(char *string);
+char	*parse_env(t_storage *bag, char *string, int is_heredoc);
 
 
+int		do_not_fork(t_storage *bag, char *str);
+void	process_redirect_input(t_storage *bag, char *str);
+void	process_redirect_output(t_storage *bag, char *str, int *pip);
 char	*get_last_redirect(char *str, int target);
-void	rd_heredoc(char *str);
+char	**split_pipe(char *str);
+int		*get_zone(char *string, int target);
+char	*get_last_redirect(char *str, int target);
+void	rd_heredoc(t_storage *bag, char *str);
 void	my_execve(t_storage *bag, char	*str);
 int		has_redirect(t_storage *bag, char *str);
 void	handler_int(int signum);

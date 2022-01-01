@@ -7,9 +7,10 @@ char	*my_which(t_storage *bag, char *cmd)
 	char	*tmp2;
 	int		fd;
 	int		i;
-	
+
 	i = 0;
 	if (getpath(bag, &path))
+	{
 		while (path[i])
 		{
 			tmp1 = ft_strjoin(path[i], "/");
@@ -22,5 +23,6 @@ char	*my_which(t_storage *bag, char *cmd)
 			}
 			i++;
 		}
+	}
 	return (NULL);
 }
