@@ -11,7 +11,11 @@ static void	check_output(t_storage *bag, char *str, int *res)
 	zone_d = get_zone(str, '\"');
 	while (buf != NULL)
 	{
-		if (buf && buf[0] == '>' && buf[1] != '>'
+		if (buf && buf[0] == '>' && buf[1] == '>' && buf[2] == '>'
+				&& zone_s[buf - str]
+				&& zone_d[buf - str])
+			exit(SYNTEX_ERR);
+		else if (buf && buf[0] == '>' && buf[1] != '>'
 				&& zone_s[buf - str]
 				&& zone_d[buf - str])
 		{
@@ -41,7 +45,11 @@ static void	check_input(t_storage *bag, char *str, int *res)
 	zone_d = get_zone(str, '\"');
 	while (buf != NULL)
 	{
-		if (buf && buf[0] == '<' && buf[1] != '<'
+		if (buf && buf[0] == '<' && buf[1] == '<' && buf[2] == '<'
+				&& zone_s[buf - str]
+				&& zone_d[buf - str])
+			buf = buf + 2;
+		else if (buf && buf[0] == '<' && buf[1] != '<'
 				&& zone_s[buf - str]
 				&& zone_d[buf - str])
 		{

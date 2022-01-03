@@ -1,4 +1,5 @@
 #include "../../micro_shell.h"
+#include <unistd.h>
 
 void	heredoc_core(t_storage *bag, char *buf, int fd)
 {
@@ -25,18 +26,21 @@ void	heredoc_core(t_storage *bag, char *buf, int fd)
 	exit(0);
 }
 
-static void	heredoc_rdline(t_storage *bag, char *buf, int fd)
+static void	heredoc_rdline(t_storage *bag, char *buf, int fd, int *fd_old)
 {
 	int		pid;
 
 	pid = fork();
 	if (pid == 0)
+	{
+		dup2(0, *fd_old);
 		heredoc_core(bag, buf, fd);
+	}
 	else
 		wait(NULL);
 }
 
-void	rd_heredoc(t_storage *bag, char *str)
+void	rd_heredoc(t_storage *bag, char *str, int *fd_old)
 {
 	char	*buf;
 	int		fd;	
@@ -44,17 +48,18 @@ void	rd_heredoc(t_storage *bag, char *str)
 	buf = ft_strdup(get_last_redirect(str, '<') + 1);
 	buf = ft_strtrim(buf, " ");
 	if (buf && !(*buf))
-		exit(SYNTAX_ERR);
+		exit(SYNTEX_ERR);
 	fd = open(".hd________", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	heredoc_rdline(bag, buf, fd);
+	heredoc_rdline(bag, buf, fd, fd_old);
 	signal(SIGINT, handler_int_child);
 	signal(SIGQUIT, SIG_DFL);
 	fd = open(".hd________", O_RDONLY);
 	if (fd == -1)
 		exit(1);
-	dup2(fd, 0);
+	dup2(fd, *fd_old);
+	*fd_old = fd;
 	close(fd);
 	unlink(".hd________");
 }

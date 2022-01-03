@@ -33,11 +33,13 @@ void	rd_append(char *str)
 void	process_redirect_output(t_storage *bag, char *str, int *pip)
 {
 	(void) pip;
+	/*
 	if ((bag->redirect_output != 0 && bag->append != 0)
 			|| bag->redirect_output > 1 || bag->append > 1)
 		exit(SYNTAX_ERR);
-	else if (bag->redirect_output)
+	*/
+	if (bag->redirect_output)
 		rd_output(str);
-	else if (bag->append)
+	if (bag->append)
 		rd_append(str);
 }

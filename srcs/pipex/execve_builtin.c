@@ -16,7 +16,7 @@ int	execve_builtin(t_storage *bag, char *arg)
 	if (buf1[ft_strlen(buf1) - 1] == ' ')
 		buf1[ft_strlen(buf1) - 1] = '\0';
 	if (ft_strchr(buf1, '<'))
-		exit(SYNTAX_ERR);
+		exit(SYNTEX_ERR);
 	if (ft_strlen(buf1))
 	{
 		tmp = ft_strchr(arg, ' ');

@@ -19,9 +19,9 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 	int	stat;
 
 	waitpid(pid, &stat, 0);
-	if (WEXITSTATUS(stat) == SYNTAX_ERR)
+	if (WEXITSTATUS(stat) == SYNTEX_ERR)
 		ft_putstr_fd("SyntexError\n",2);
-	else if (WEXITSTATUS(stat) == ERROR)	
+	else if (WEXITSTATUS(stat) == ERROR)
 		ft_putstr_fd("Error\n",2);
 	else if (WIFSIGNALED(stat))
 	{
@@ -90,6 +90,8 @@ void	pipex(t_storage *bag, char **args)
 		waitpid(pid, &status, 0);
 		bag->last_exit_status = WEXITSTATUS(status);
 		set_environ(bag, bag->last_exit_status);
+		if (WEXITSTATUS(status) == SYNTEX_ERR)
+			ft_putstr_fd("SyntexError\n",2);
 	}
 	signal(SIGINT, handler_int);
 }

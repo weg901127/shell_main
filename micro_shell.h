@@ -22,7 +22,7 @@
 # define STDOUT_FD		1
 # define MAXLEN			10000
 # define MAX_ENVLEN		1000
-# define SYNTAX_ERR		99
+# define SYNTEX_ERR		99
 # define ERROR			100
 
 int	g_out_backup;
@@ -125,7 +125,7 @@ char	*get_last_redirect(char *str, int target);
 char	**split_pipe(char *str);
 int		*get_zone(char *string, int target);
 char	*get_last_redirect(char *str, int target);
-void	rd_heredoc(t_storage *bag, char *str);
+void	rd_heredoc(t_storage *bag, char *str, int *fd_old);
 void	my_execve(t_storage *bag, char	*str);
 int		has_redirect(t_storage *bag, char *str);
 void	handler_int(int signum);

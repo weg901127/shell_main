@@ -4,17 +4,19 @@ static char **set_argv(t_storage *bag, char *str)
 {
 	char	**tmp;
 	char	*cmd_tmp;
+	int		target;
 
+	target = 0;
 	tmp = ft_split(str, ' ');
-	if (ft_strchr(tmp[0], '<') || ft_strchr(tmp[0], '>'))
-		exit(SYNTAX_ERR);
-	if (!ft_strchr(tmp[0], '/') && !is_builtin(bag, tmp[0]))
+	while (ft_strchr(tmp[target], '<') || ft_strchr(tmp[target], '>'))
+		target++;
+	if (!ft_strchr(tmp[target], '/') && !is_builtin(bag, tmp[target]))
 	{
-		cmd_tmp = my_which(bag, tmp[0]);
+		cmd_tmp = my_which(bag, tmp[target]);
 		if (!cmd_tmp)
 			exit(ERROR);
-		free(tmp[0]);
-		tmp[0] = cmd_tmp;
+		free(tmp[target]);
+		tmp[target] = cmd_tmp;
 	}
 	return(tmp);
 }
@@ -22,21 +24,28 @@ static char **set_argv(t_storage *bag, char *str)
 void	my_execve(t_storage *bag, char	*str)
 {
 	char	**argv;
+	char	**buf;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	argv = set_argv(bag, str);
 	if (is_builtin(bag, argv[0]))
 		exit(execve_builtin(bag, str));
+	buf = (char **)ft_calloc(ft_splitcnt(argv) + 1, sizeof(char*));
 	while (argv[i])
 	{
 		if (ft_strchr(argv[i], '<') || ft_strchr(argv[i], '>'))
 		{
 			free(argv[i]);
-			argv[i] = NULL;
+			argv[i++] = NULL;
+			continue ;
 		}
+		buf[j] = argv[i];
 		i++;
+		j++;
 	}
-	execve(argv[0], argv, get_environ(bag));
+	execve(buf[0], buf, get_environ(bag));
 	exit(EXIT_FAILURE);
 }
