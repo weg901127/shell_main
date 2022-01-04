@@ -8,10 +8,10 @@ LIBFT_NAME			= libft.a
 LIB					= $(LIBFT_DIR)$(LIBFT_NAME)
 #IREADLINE			= -I /goinfre/sehhong/homebrew/opt/readline/include
 #LREADLINE			= -L /goinfre/sehhong/homebrew/opt/readline/lib	
-IREADLINE			= -I /opt/homebrew/opt/readline/include/
-LREADLINE			= -L /opt/homebrew/opt/readline/lib/
-#IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
-#LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
+#IREADLINE			= -I /opt/homebrew/opt/readline/include/
+#LREADLINE			= -L /opt/homebrew/opt/readline/lib/
+IREADLINE			= -I /Users/gilee/brew/opt/readline/include/
+LREADLINE			= -L /Users/gilee/brew/opt/readline/lib/
 SRCS				= ./main.c					\
 					  ./gnl/get_next_line.c				./gnl/get_next_line_utils.c \
 					  ./srcs/array_list/arraylist.c 	./srcs/array_list/array_utils.c \

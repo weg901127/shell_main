@@ -30,14 +30,15 @@ int	g_out_backup;
 typedef struct s_storage
 {
 	int			num_of_cmds;
-	int			*pipe_fds;
 	int			pipe_old;
-	pid_t		*grandchild_pids;
 	int			redirect_input;
 	int			redirect_output;
 	int			heredoc;
 	int			append;
 	int			last_exit_status;
+	int			named[2];
+	int			*location_input;
+	int			*location_output;
 	char		*input;
 	char		**parse_buf;
 	t_ArrayList	*runtime_env;
@@ -125,7 +126,7 @@ char	*get_last_redirect(char *str, int target);
 char	**split_pipe(char *str);
 int		*get_zone(char *string, int target);
 char	*get_last_redirect(char *str, int target);
-void	rd_heredoc(t_storage *bag, char *str, int *fd_old);
+void	rd_heredoc(t_storage *bag, char *str, int *fd_old, int location);
 void	my_execve(t_storage *bag, char	*str);
 int		has_redirect(t_storage *bag, char *str);
 void	handler_int(int signum);

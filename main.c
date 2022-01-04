@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "micro_shell.h"
 
 void	handler_int(int signum)
@@ -36,6 +37,8 @@ void	init(t_storage *bag)
 	init_environ(bag);
 	init_runtime_env(bag);
 	init_rl_catch_signals();
+	bag->named[0] = dup(0);
+	bag->named[1] = dup(1);
 	signal(SIGINT, handler_int);
 	signal(SIGQUIT, SIG_IGN);
 }

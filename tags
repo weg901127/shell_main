@@ -1,74 +1,94 @@
-addALElement	srcs/array_list/arraylist.c	/^int	addALElement(t_ArrayList *pList, int position,/
-add_env	srcs/builtins/update_env.c	/^static	void	add_env(t_ArrayList *env, char *key, c/
-add_name_on_env	srcs/builtins/builtin_export.c	/^static void    add_name_on_env(t_storage *bag, cha/
-builtin_cd	srcs/builtins/builtin_cd.c	/^int	builtin_cd(t_storage *bag, char *arg)$/
-builtin_echo	srcs/builtins/builtin_echo.c	/^int	builtin_echo(char *arg)$/
-builtin_env	srcs/builtins/builtin_env.c	/^int builtin_env(t_storage *bag)$/
-builtin_exit	srcs/builtins/builtin_exit.c	/^int builtin_exit(t_storage *bag, char *arg)$/
-builtin_export	srcs/builtins/builtin_export.c	/^int builtin_export(t_storage *bag, char *arg)$/
-builtin_pwd	srcs/builtins/builtin_pwd.c	/^int	builtin_pwd(void)$/
-builtin_unset	srcs/builtins/builtin_unset.c	/^int builtin_unset(t_storage *bag, char *arg)$/
-change_pwds_environ	srcs/builtins/builtin_cd.c	/^static void	change_pwds_environ(t_storage *bag, ch/
-chunk_count	srcs/builtins/split_cmd.c	/^static int	chunk_count(char *str, t_chunk_info *ch/
-clearArrayList	srcs/array_list/array_utils.c	/^void	clearArrayList(t_ArrayList *pList)$/
-count_str_array	srcs/builtins/count_str_array.c	/^int	count_str_array(char **arg_arr)$/
-cpy_environ	srcs/init/init_environ.c	/^static char	*cpy_environ(char *str)$/
-createArrayList	srcs/array_list/arraylist.c	/^t_ArrayList	*createArrayList(int max_element_count/
-create_bag	srcs/init/create_bag.c	/^t_storage	*create_bag(void)$/
-cutnjoin	srcs/parse/prase_master.c	/^char	*cutnjoin(char *string, char target)$/
-define_quote_flag	srcs/builtins/split_cmd.c	/^static void	define_quote_flag(t_chunk_info *chunk_/
-deleteArrayList	srcs/array_list/arraylist.c	/^void	deleteArrayList(t_ArrayList *pList)$/
-delimiter_based_str_input	srcs/builtins/split_cmd.c	/^static void	delimiter_based_str_input(char **cmd_a/
-do_fork	srcs/pipex/pipex.c	/^void	do_fork(t_storage *bag, char *str, int cmd)$/
-do_not_fork	srcs/pipex/pipex.c	/^int		do_not_fork(t_storage *bag, char *str)$/
-execve_builtin	srcs/pipex/execve_builtin.c	/^int	execve_builtin(t_storage *bag, char *arg)$/
-export_no_option	srcs/builtins/builtin_export.c	/^static void    export_no_option(t_storage *bag)$/
-find_n_rm_element	srcs/builtins/builtin_unset.c	/^static void     find_n_rm_element(t_storage *bag, /
-getALElement	srcs/array_list/arraylist.c	/^t_ArrayListNode	*getALElement(t_ArrayList *pList, /
-getArrayListLength	srcs/array_list/array_utils.c	/^int	getArrayListLength(t_ArrayList *pList)$/
-get_env_len	srcs/parse/prase_master.c	/^int	get_env_len(char *tmp)$/
-get_environ	srcs/parse/get_environ.c	/^char **get_environ(t_storage *bag)$/
-get_last_redirect	srcs/pipex/pipex.c	/^char	*get_last_redirect(char *str, int target)$/
-get_valid_pipe	srcs/parse/prase_master.c	/^int	get_valid_pipe(char *str, int location)$/
-get_value	srcs/builtins/get_value.c	/^char    *get_value(t_ArrayList *env, char *str)$/
-get_zone	srcs/parse/prase_master.c	/^int	*get_zone(char	*string, int target)$/
-getpath	srcs/pipex/getpath.c	/^bool	getpath(t_storage *bag, char ***path_res)$/
-handle_pipe_child	srcs/pipex/pipex.c	/^void	handle_pipe_child(t_storage *bag, int *pip, i/
-handle_pipe_parent	srcs/pipex/pipex.c	/^void	handle_pipe_parent(t_storage *bag, int *pip, /
-has_redirect	srcs/pipex/pipex.c	/^int		has_redirect(t_storage *bag, char *str)$/
-heredoc_rdline	srcs/pipex/my_heredoc.c	/^static void	heredoc_rdline(char *buf, int fd)$/
-init_bag	srcs/init/init_bag.c	/^void	init_bag(t_storage *bag)$/
-init_builtin	srcs/init/init_builtin.c	/^void	init_builtin(t_storage *bag)$/
-init_environ	srcs/init/init_environ.c	/^void	init_environ(t_storage *bag)$/
-init_rl_catch_signals	srcs/init/init_rl_catch_signals.c	/^void	init_rl_catch_signals()$/
-init_runtime_env	srcs/init/init_runtime_env.c	/^void	init_runtime_env(t_storage *bag)$/
-isArrayListFull	srcs/array_list/array_utils.c	/^int	isArrayListFull(t_ArrayList *pList)$/
-is_builtin	srcs/parse/is_builtin.c	/^bool	is_builtin(t_storage *bag, const char *cmd)$/
-is_only_digit	srcs/builtins/builtin_exit.c	/^static  bool is_only_digit(char *str)$/
-is_special	srcs/pipex/pipex.c	/^int		is_special(char **str)$/
-my_execve	srcs/pipex/my_execve.c	/^void	my_execve(t_storage *bag, char	*str)$/
-my_which	srcs/pipex/my_which.c	/^char	*my_which(t_storage *bag, char *cmd)$/
-parse_env	srcs/parse/prase_master.c	/^char	*parse_env(t_storage *bag, char *string)$/
-parse_master	srcs/parse/prase_master.c	/^bool parse_master(t_storage *bag)$/
-parse_space	srcs/parse/parse_space.c	/^char	*parse_space(char *string)$/
-pipex	srcs/pipex/pipex.c	/^void	pipex(t_storage *bag, char **args)$/
-process_redirect_input	srcs/pipex/pipex.c	/^void	process_redirect_input(t_storage *bag, char */
-process_redirect_output	srcs/pipex/pipex.c	/^void	process_redirect_output(t_storage *bag, char /
-process_split	srcs/parse/prase_master.c	/^void	process_split(char **buf, char *str)$/
-rd_append	srcs/pipex/pipex.c	/^void	rd_append(char *str)$/
-rd_heredoc	srcs/pipex/my_heredoc.c	/^void	rd_heredoc(char *str)$/
-rd_input	srcs/pipex/pipex.c	/^void	rd_input(char *str)$/
-rd_output	srcs/pipex/pipex.c	/^void	rd_output(char *str)$/
-removeALElement	srcs/array_list/arraylist.c	/^int	removeALElement(t_ArrayList *pList, int positi/
-set_argv	srcs/pipex/my_execve.c	/^static char **set_argv(t_storage *bag, char *str)$/
-set_environ	srcs/builtins/set_environ.c	/^void	set_environ(t_storage *bag, int exit_status)$/
-split_cmd	srcs/builtins/split_cmd.c	/^char	**split_cmd(char *str)$/
-split_core	srcs/parse/prase_master.c	/^void	split_core(char **buf, char **str, int *var, /
-split_pipe	srcs/parse/prase_master.c	/^char	**split_pipe(char *str)$/
-str_input	srcs/builtins/split_cmd.c	/^static char	*str_input(t_chunk_info *info, char *s/
-str_malloc_and_insert	srcs/parse/get_environ.c	/^static void	str_malloc_and_insert(char **cmd, char/
-strncmp_exact	srcs/builtins/strncmp_exact.c	/^bool	strncmp_exact(char *str1, char *str2, char c)/
-t_ArrayList	srcs/array_list/arraylist.h	/^}	t_ArrayList;$/
-t_ArrayListNode	srcs/array_list/arraylist.h	/^}	t_ArrayListNode;$/
-update_env	srcs/builtins/update_env.c	/^void    update_env(t_ArrayList *env, char *key, ch/
-where_is_equal	srcs/builtins/builtin_export.c	/^static  int    where_is_equal(char *str)$/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARRAYLIST_H	srcs/array_list/arraylist.h	/^# define ARRAYLIST_H$/;"	d
+FALSE	srcs/array_list/arraylist.h	/^#  define FALSE	/;"	d
+TRUE	srcs/array_list/arraylist.h	/^#  define TRUE	/;"	d
+_COMMON_LIST_DEF_	srcs/array_list/arraylist.h	/^#  define _COMMON_LIST_DEF_$/;"	d
+addALElement	srcs/array_list/arraylist.c	/^int	addALElement(t_ArrayList *pList, int position, t_ArrayListNode element)$/;"	f
+add_env	srcs/builtins/update_env.c	/^static	void	add_env(t_ArrayList *env, char *key, char *new_val)$/;"	f	file:
+add_name_on_env	srcs/builtins/builtin_export.c	/^static void    add_name_on_env(t_storage *bag, char *key_value, int equal_here)$/;"	f	file:
+builtin_cd	srcs/builtins/builtin_cd.c	/^int	builtin_cd(t_storage *bag, char *arg)$/;"	f
+builtin_echo	srcs/builtins/builtin_echo.c	/^int	builtin_echo(char *arg)$/;"	f
+builtin_env	srcs/builtins/builtin_env.c	/^int builtin_env(t_storage *bag)$/;"	f
+builtin_exit	srcs/builtins/builtin_exit.c	/^int builtin_exit(t_storage *bag, char *arg)$/;"	f
+builtin_export	srcs/builtins/builtin_export.c	/^int builtin_export(t_storage *bag, char *arg)$/;"	f
+builtin_pwd	srcs/builtins/builtin_pwd.c	/^int	builtin_pwd(void)$/;"	f
+builtin_unset	srcs/builtins/builtin_unset.c	/^int builtin_unset(t_storage *bag, char *arg)$/;"	f
+change_pwds_environ	srcs/builtins/builtin_cd.c	/^static void	change_pwds_environ(t_storage *bag, char *curr_pwd, char *new_path)$/;"	f	file:
+check_input	srcs/pipex/has_redirect.c	/^static void	check_input(t_storage *bag, char *str, int *res)$/;"	f	file:
+check_output	srcs/pipex/has_redirect.c	/^static void	check_output(t_storage *bag, char *str, int *res)$/;"	f	file:
+chunk_count	srcs/builtins/split_cmd.c	/^static int	chunk_count(char *str, t_chunk_info *chunk_info)$/;"	f	file:
+clearArrayList	srcs/array_list/array_utils.c	/^void	clearArrayList(t_ArrayList *pList)$/;"	f
+count_str_array	srcs/builtins/count_str_array.c	/^int	count_str_array(char **arg_arr)$/;"	f
+cpy_environ	srcs/init/init_environ.c	/^static char	*cpy_environ(char *str)$/;"	f	file:
+createArrayList	srcs/array_list/arraylist.c	/^t_ArrayList	*createArrayList(int max_element_count)$/;"	f
+create_bag	srcs/init/create_bag.c	/^t_storage	*create_bag(void)$/;"	f
+current_element_count	srcs/array_list/arraylist.h	/^	int				current_element_count;$/;"	m	struct:s_ArrayListType
+cutnjoin	srcs/parse/prase_master.c	/^char	*cutnjoin(char *string, char target)$/;"	f
+data	srcs/array_list/arraylist.h	/^	char	*data;$/;"	m	struct:s_ArrayListNodeType
+define_quote_flag	srcs/builtins/split_cmd.c	/^static void	define_quote_flag(t_chunk_info *chunk_info, char c)$/;"	f	file:
+deleteArrayList	srcs/array_list/arraylist.c	/^void	deleteArrayList(t_ArrayList *pList)$/;"	f
+delimiter_based_str_input	srcs/builtins/split_cmd.c	/^static void	delimiter_based_str_input(char **cmd_arg, char *str, t_chunk_info \\$/;"	f	file:
+do_fork	srcs/pipex/pipex.c	/^void	do_fork(t_storage *bag, char *str, int cmd)$/;"	f
+do_not_fork	srcs/pipex/do_not_fork.c	/^int		do_not_fork(t_storage *bag, char *str)$/;"	f
+execve_builtin	srcs/pipex/execve_builtin.c	/^int	execve_builtin(t_storage *bag, char *arg)$/;"	f
+export_no_option	srcs/builtins/builtin_export.c	/^static void    export_no_option(t_storage *bag)$/;"	f	file:
+find_n_rm_element	srcs/builtins/builtin_unset.c	/^static void     find_n_rm_element(t_storage *bag, char *key)$/;"	f	file:
+getALElement	srcs/array_list/arraylist.c	/^t_ArrayListNode	*getALElement(t_ArrayList *pList, int position)$/;"	f
+getArrayListLength	srcs/array_list/array_utils.c	/^int	getArrayListLength(t_ArrayList *pList)$/;"	f
+get_env_len	srcs/parse/prase_master.c	/^int	get_env_len(char *tmp)$/;"	f
+get_environ	srcs/parse/get_environ.c	/^char	**get_environ(t_storage *bag)$/;"	f
+get_last_redirect	srcs/pipex/get_last_redirect.c	/^char	*get_last_redirect(char *str, int target)$/;"	f
+get_valid_pipe	srcs/parse/split_pipe.c	/^int	get_valid_pipe(char *str, int location)$/;"	f
+get_value	srcs/builtins/get_value.c	/^char    *get_value(t_ArrayList *env, char *str)$/;"	f
+get_zone	srcs/parse/prase_master.c	/^int	*get_zone(char	*string, int target)$/;"	f
+getpath	srcs/pipex/getpath.c	/^bool	getpath(t_storage *bag, char ***path_res)$/;"	f
+handle_pipe_child	srcs/pipex/pipex.c	/^void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)$/;"	f
+handle_pipe_parent	srcs/pipex/pipex.c	/^void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)$/;"	f
+has_redirect	srcs/pipex/has_redirect.c	/^int		has_redirect(t_storage *bag, char *str)$/;"	f
+heredoc_core	srcs/pipex/my_heredoc.c	/^void	heredoc_core(t_storage *bag, char *buf, int fd)$/;"	f
+heredoc_rdline	srcs/pipex/my_heredoc.c	/^static void	heredoc_rdline(t_storage *bag, char *buf, int fd, int *fd_old)$/;"	f	file:
+init_bag	srcs/init/init_bag.c	/^void	init_bag(t_storage *bag)$/;"	f
+init_builtin	srcs/init/init_builtin.c	/^void	init_builtin(t_storage *bag)$/;"	f
+init_environ	srcs/init/init_environ.c	/^void	init_environ(t_storage *bag)$/;"	f
+init_rl_catch_signals	srcs/init/init_rl_catch_signals.c	/^void	init_rl_catch_signals()$/;"	f
+init_runtime_env	srcs/init/init_runtime_env.c	/^void	init_runtime_env(t_storage *bag)$/;"	f
+isArrayListFull	srcs/array_list/array_utils.c	/^int	isArrayListFull(t_ArrayList *pList)$/;"	f
+is_builtin	srcs/parse/is_builtin.c	/^bool	is_builtin(t_storage *bag, const char *cmd)$/;"	f
+is_only_digit	srcs/builtins/builtin_exit.c	/^static  bool is_only_digit(char *str)$/;"	f	file:
+is_special	srcs/pipex/do_not_fork.c	/^static int		is_special(char **str)$/;"	f	file:
+max_element_count	srcs/array_list/arraylist.h	/^	int				max_element_count;$/;"	m	struct:s_ArrayListType
+my_execve	srcs/pipex/my_execve.c	/^void	my_execve(t_storage *bag, char	*str)$/;"	f
+my_which	srcs/pipex/my_which.c	/^char	*my_which(t_storage *bag, char *cmd)$/;"	f
+p_element	srcs/array_list/arraylist.h	/^	t_ArrayListNode	*p_element;$/;"	m	struct:s_ArrayListType
+parse_env	srcs/parse/prase_master.c	/^char	*parse_env(t_storage *bag, char *string, int is_heredoc)$/;"	f
+parse_master	srcs/parse/prase_master.c	/^bool parse_master(t_storage *bag)$/;"	f
+parse_space	srcs/parse/parse_space.c	/^char	*parse_space(char *string)$/;"	f
+pipex	srcs/pipex/pipex.c	/^void	pipex(t_storage *bag, char **args)$/;"	f
+process_redirect_input	srcs/pipex/process_redirect_input.c	/^void	process_redirect_input(t_storage *bag, char *str)$/;"	f
+process_redirect_output	srcs/pipex/process_redirect_output.c	/^void	process_redirect_output(t_storage *bag, char *str, int *pip)$/;"	f
+process_split	srcs/parse/split_pipe.c	/^void	process_split(char **buf, char *str)$/;"	f
+rd_append	srcs/pipex/process_redirect_output.c	/^void	rd_append(char *str)$/;"	f
+rd_heredoc	srcs/pipex/my_heredoc.c	/^void	rd_heredoc(t_storage *bag, char *str, int *fd_old)$/;"	f
+rd_input	srcs/pipex/process_redirect_input.c	/^static void	rd_input(char *str, int *fd_old)$/;"	f	file:
+rd_output	srcs/pipex/process_redirect_output.c	/^void	rd_output(char *str)$/;"	f
+removeALElement	srcs/array_list/arraylist.c	/^int	removeALElement(t_ArrayList *pList, int position)$/;"	f
+s_ArrayListNodeType	srcs/array_list/arraylist.h	/^typedef struct s_ArrayListNodeType$/;"	s
+s_ArrayListType	srcs/array_list/arraylist.h	/^typedef struct s_ArrayListType$/;"	s
+set_argv	srcs/pipex/my_execve.c	/^static char **set_argv(t_storage *bag, char *str)$/;"	f	file:
+set_environ	srcs/builtins/set_environ.c	/^void	set_environ(t_storage *bag, int exit_status)$/;"	f
+skip_space	srcs/parse/parse_space.c	/^void	skip_space(char *buf, char **string, int i)$/;"	f
+split_cmd	srcs/builtins/split_cmd.c	/^char	**split_cmd(char *str)$/;"	f
+split_core	srcs/parse/split_pipe.c	/^void	split_core(char **buf, char **str, int *var, char **tmp)$/;"	f
+split_pipe	srcs/parse/split_pipe.c	/^char	**split_pipe(char *str)$/;"	f
+str_input	srcs/builtins/split_cmd.c	/^static char	*str_input(t_chunk_info *info, char *str, int str_len, \\$/;"	f	file:
+str_malloc_and_insert	srcs/parse/get_environ.c	/^static void	str_malloc_and_insert(char **cmd, char *str, int len, int index)$/;"	f	file:
+strncmp_exact	srcs/builtins/strncmp_exact.c	/^bool	strncmp_exact(char *str1, char *str2, char c)$/;"	f
+t_ArrayList	srcs/array_list/arraylist.h	/^}	t_ArrayList;$/;"	t	typeref:struct:s_ArrayListType
+t_ArrayListNode	srcs/array_list/arraylist.h	/^}	t_ArrayListNode;$/;"	t	typeref:struct:s_ArrayListNodeType
+update_env	srcs/builtins/update_env.c	/^void    update_env(t_ArrayList *env, char *key, char *new_val)$/;"	f
+where_is_equal	srcs/builtins/builtin_export.c	/^static  int    where_is_equal(char *str)$/;"	f	file:

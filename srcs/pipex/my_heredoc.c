@@ -33,19 +33,22 @@ static void	heredoc_rdline(t_storage *bag, char *buf, int fd, int *fd_old)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(0, *fd_old);
+		dup2(bag->named[0], *fd_old);
 		heredoc_core(bag, buf, fd);
 	}
 	else
 		wait(NULL);
 }
 
-void	rd_heredoc(t_storage *bag, char *str, int *fd_old)
+void	rd_heredoc(t_storage *bag, char *str, int *fd_old, int location)
 {
 	char	*buf;
 	int		fd;	
 
-	buf = ft_strdup(get_last_redirect(str, '<') + 1);
+	if (*fd_old)
+		close(*fd_old);
+	//buf = ft_strdup(get_last_redirect(str, '<') + 1);
+	buf = str + location;
 	buf = ft_strtrim(buf, " ");
 	if (buf && !(*buf))
 		exit(SYNTEX_ERR);
@@ -59,7 +62,8 @@ void	rd_heredoc(t_storage *bag, char *str, int *fd_old)
 	if (fd == -1)
 		exit(1);
 	dup2(fd, *fd_old);
-	*fd_old = fd;
-	close(fd);
+	//*fd_old = fd;
+	//close(fd);
+	//close(*fd_old);
 	unlink(".hd________");
 }

@@ -39,12 +39,28 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 	bag->heredoc = 0;
 }
 
+void	init_redirect_location(t_storage *bag)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAXLEN)
+	{
+		*(bag->location_input + i) = -1;
+		*(bag->location_output + i) = -1;
+		i++;
+	}
+}
+
 void	do_fork(t_storage *bag, char *str, int cmd)
 {
 	int		p[2];
 	pid_t	pid;
 
 	pipe(p);
+	bag->location_input = (int *)ft_calloc(MAXLEN, sizeof(int));
+	bag->location_output = (int *)ft_calloc(MAXLEN, sizeof(int));
+	init_redirect_location(bag);
 	has_redirect(bag, str);
 	pid = fork();
 	if (pid == -1)

@@ -5,7 +5,9 @@ static void	check_output(t_storage *bag, char *str, int *res)
 	char	*buf;
 	int		*zone_s;
 	int		*zone_d;
+	int		i;
 	
+	i = 0;
 	buf = ft_strchr(str, '>');
 	zone_s = get_zone(str, '\'');
 	zone_d = get_zone(str, '\"');
@@ -19,15 +21,17 @@ static void	check_output(t_storage *bag, char *str, int *res)
 				&& zone_s[buf - str]
 				&& zone_d[buf - str])
 		{
-			(bag->redirect_output)++;
+			bag->redirect_output = 1;
+			*(bag->location_output + i++) = buf - str + 1 + 1000;
 			*res |= 1;
 		}
 		else if (buf && buf[0] == '>' && buf[1] == '>'
 				&& zone_s[buf - str]
 				&& zone_d[buf - str])
 		{
-			(bag->append)++;
+			bag->append = 1;
 			buf = buf + 1;
+			*(bag->location_output + i++) = buf - str + 1 + 2000;
 			*res |= 1;
 		}
 		buf = ft_strchr(buf + 1, '>');
@@ -39,7 +43,9 @@ static void	check_input(t_storage *bag, char *str, int *res)
 	char	*buf;
 	int		*zone_s;
 	int		*zone_d;
+	int		i;
 	
+	i = 0;
 	buf = ft_strchr(str, '<');
 	zone_s = get_zone(str, '\'');
 	zone_d = get_zone(str, '\"');
@@ -53,15 +59,17 @@ static void	check_input(t_storage *bag, char *str, int *res)
 				&& zone_s[buf - str]
 				&& zone_d[buf - str])
 		{
-			(bag->redirect_input)++;
+			bag->redirect_input = 1;
+			*(bag->location_input + i++) = (buf - str) + 1 + 1000;
 			*res |= 1;
 		}
 		else if (buf && buf[0] == '<' && buf[1] == '<'
 				&& zone_s[buf - str]
 				&& zone_d[buf - str])
 		{
-			(bag->heredoc)++;
+			bag->heredoc = 1;
 			buf = buf + 1;
+			*(bag->location_input + i++) = (buf - str) + 1 + 2000;
 			*res |= 1;
 		}
 		buf = ft_strchr(buf + 1, '<');
