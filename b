@@ -1,5 +1,6 @@
 Makefile
 a
+b
 compile_flags.txt
 execve_test.c
 execve_test2.c
@@ -14,6 +15,7 @@ parse_env_unit.c
 redirect_test.c
 srcs
 tags
+test
 test.c
 test_gilee.c
 test_parse_space.c
