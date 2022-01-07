@@ -1,12 +1,12 @@
 #include "../../micro_shell.h"
 
-void	rd_output(char *str)
+void	rd_output(char *str, int location)
 {
 	char	*buf;
 	char	**split;
 	int		fd;	
 
-	buf = ft_strdup(get_last_redirect(str, '>') + 1);
+	buf = str + location;
 	split = ft_split(buf, ' ');
 	fd = open(split[0], O_RDWR|O_CREAT|O_TRUNC, S_IRUSR | S_IWUSR);
 	if (fd == -1)
@@ -15,13 +15,13 @@ void	rd_output(char *str)
 	close(fd);
 }
 
-void	rd_append(char *str)
+void	rd_append(char *str, int location)
 {
 	char	*buf;
 	char	**split;
 	int		fd;	
 
-	buf = ft_strdup(get_last_redirect(str, '>') + 1);
+	buf = str + location;
 	split = ft_split(buf, ' ');
 	fd = open(split[0], O_RDWR|O_CREAT|O_APPEND, S_IRUSR | S_IWUSR);
 	if (fd == -1)
@@ -33,13 +33,15 @@ void	rd_append(char *str)
 void	process_redirect_output(t_storage *bag, char *str, int *pip)
 {
 	(void) pip;
-	/*
-	if ((bag->redirect_output != 0 && bag->append != 0)
-			|| bag->redirect_output > 1 || bag->append > 1)
-		exit(SYNTAX_ERR);
-	*/
-	if (bag->redirect_output)
-		rd_output(str);
-	if (bag->append)
-		rd_append(str);
+	int	i;
+
+	i = 0;
+	while (bag->location_output[i] != -1)
+	{
+		if ((bag->location_output[i]) - 2000 < 0)
+			rd_output(str, (bag->location_output[i]) - 1000);
+		else
+			rd_append(str, (bag->location_output[i]) - 2000);
+		i++;
+	}
 }

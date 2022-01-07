@@ -13,7 +13,6 @@ static  int    where_is_equal(char *str)
             return (i);
         i++;
     }
-    //'='가 없다.
     return(-1);
 }
 
@@ -29,7 +28,7 @@ static void    export_no_option(t_storage *bag)
         i++;
     }   
 }
-//asdf=hihi environ에 원래 있음 -> export asdf=yum_yum
+
 static void    add_name_on_env(t_storage *bag, char *key_value, int equal_here)
 {
     char            key[10000];
@@ -64,17 +63,17 @@ int builtin_export(t_storage *bag, char *arg)
         while (arg_arr[i])
         {
             equal_here = where_is_equal(arg_arr[i]);
-            if (!equal_here)   //export =hihi 
+            if (!equal_here)
             {
                 ft_print_error("export", arg_arr[i], "not a valid identifier");
                 exit_status = EXIT_FAILURE;
             }
-            else if (equal_here == -1)   //export water
+            else if (equal_here == -1)
             {   
-                if (get_value(bag->runtime_env, arg_arr[i]))
+                //if (get_value(bag->runtime_env, arg_arr[i]))
                     update_env(bag->environ, arg_arr[i], get_value(bag->runtime_env, arg_arr[i]));
             }
-            else    //export water=hihi
+            else
                 add_name_on_env(bag, arg_arr[i], equal_here);
             i++;
         }

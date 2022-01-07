@@ -1,10 +1,1 @@
-  PID TTY           TIME CMD
-68591 ttys000    0:00.02 /Applications/iTerm.app/Contents/MacOS/iTerm2 --server /usr/bin/login -fpl gilee /Applications/iTerm.app/Contents/MacOS/iTerm2 --launch_shell
-68593 ttys000    0:00.51 -zsh
-69851 ttys000    0:00.13 fish
-70208 ttys000    0:11.47 nvim
-70273 ttys001    0:00.05 /bin/zsh
-70298 ttys001    0:00.58 fish
-75186 ttys002    0:00.04 /bin/zsh
-75202 ttys002    0:00.16 fish
-75613 ttys002    0:00.01 bash
+ 

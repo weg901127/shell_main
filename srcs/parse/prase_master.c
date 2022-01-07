@@ -65,9 +65,11 @@ int	get_env_len(char *tmp)
 	int	res;
 
 	res = 0;
+	if (!tmp)
+		return (0);
 	while (*tmp)
 	{
-		if (ft_isspace(*tmp) || *tmp == '\'' || *tmp =='\"' || *tmp == '$' || *tmp == '|')
+		if (ft_isspace(*tmp) || *tmp == '\'' || *tmp =='\"' || *tmp == '$' || *tmp == '|' || *tmp == '=' || *tmp == '/')
 			break;
 		res++;
 		tmp++;
@@ -99,9 +101,10 @@ char	*parse_env(t_storage *bag, char *string, int is_heredoc)
 		tmp = ft_strchr(tmp, '$');
 		if (tmp)
 			tmp += 1;
-		if (buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(string) - ft_strlen(tmp) - 1] == !is_heredoc)
+		if (tmp && buf[ft_strlen(buf) - 1] == '$' && zone[ft_strlen(string) - ft_strlen(tmp) - 1] == !is_heredoc)
 		{
-			buf[ft_strlen(buf) - 1] = '\0';
+			if (get_env_len(tmp))
+				buf[ft_strlen(buf) - 1] = '\0';
 			if (*tmp == '?')
 			{
 				tmp++;
@@ -112,11 +115,8 @@ char	*parse_env(t_storage *bag, char *string, int is_heredoc)
 			{
 				ft_memcpy(var_buf, tmp, get_env_len(tmp));
 				tmp = tmp + get_env_len(tmp);
-				//TODO get_value NULL처리 -> 햇음! 확인부탁!
 				if (get_value(bag->environ, var_buf))
 					ft_strlcat(buf, get_value(bag->environ, var_buf), MAXLEN);
-				// if (get_value(bag->runtime_env, var_buf))
-				// 	ft_strlcat(buf, get_value(bag->runtime_env, var_buf), MAXLEN);
 			}
 		}
 		if (!tmp)
@@ -136,16 +136,6 @@ bool parse_master(t_storage *bag)
 	buf = parse_env(bag, bag->input, FALSE);
 	args = split_pipe(buf);
 	free(buf);
-	///
-	int j = 0;
-	ft_putstr_fd("\n-------------pipe-------------\n", 2);
-	while (args[j])
-	{
-		ft_putstr_fd(args[j++], 2);
-		ft_putstr_fd("\n", 2);
-	}
-	ft_putstr_fd("\n-------------pipe-------------\n", 2);
-	///
 	pipex(bag, args);
 	while (args[i])
 		free(args[i++]);
