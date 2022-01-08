@@ -14,11 +14,11 @@ static char **set_argv(t_storage *bag, char *str)
 	{
 		cmd_tmp = my_which(bag, tmp[target]);
 		if (!cmd_tmp)
-			exit(ERROR);
+			exit(127);
 		free(tmp[target]);
 		tmp[target] = cmd_tmp;
 	}
-	return(tmp);
+	return (tmp);
 }
 
 void	my_execve(t_storage *bag, char	*str)
@@ -31,8 +31,6 @@ void	my_execve(t_storage *bag, char	*str)
 	i = 0;
 	j = 0;
 	argv = set_argv(bag, str);
-	if (is_builtin(bag, argv[0]))
-		exit(execve_builtin(bag, str));
 	buf = (char **)ft_calloc(ft_splitcnt(argv) + 1, sizeof(char*));
 	while (argv[i])
 	{
@@ -46,6 +44,8 @@ void	my_execve(t_storage *bag, char	*str)
 		i++;
 		j++;
 	}
+	if (is_builtin(bag, buf[0]))
+		exit(execve_builtin(bag, str));
 	execve(buf[0], buf, get_environ(bag));
 	exit(EXIT_FAILURE);
 }

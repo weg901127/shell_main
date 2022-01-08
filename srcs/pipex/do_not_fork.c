@@ -1,4 +1,5 @@
 #include "../../micro_shell.h"
+#include <malloc/_malloc.h>
 
 static int		is_special(char **str)
 {
@@ -19,9 +20,19 @@ static int		is_special(char **str)
 int		do_not_fork(t_storage *bag, char *str)
 {
 	char	**split;
+	int		i;
 
+	i = 0;
 	split = ft_split(str, ' ');
 	if (bag->num_of_cmds == 1 && is_special(split))
+	{
+		while (split[i])
+			free(split[i++]);
+		free(split);
 		return (1);
+	}
+	while (split[i])
+		free(split[i++]);
+	free(split);
 	return (0);
 }

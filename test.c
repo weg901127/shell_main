@@ -91,7 +91,7 @@ int	main(void)
 	init_builtin(bag);
 	init_environ(bag);
 	init_runtime_env(bag);
-	char *str = "ls <";
-	has_redirect(bag, str);
+	char *str = "echo \"    asdfasfsadf\"                   \"sadfasfasf\" safasfasdf";
+	split_echo(str);
 	printf("\033[32;1mDONE\n\033[m");
 }

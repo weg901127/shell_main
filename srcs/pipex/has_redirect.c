@@ -1,4 +1,5 @@
 #include "../../micro_shell.h"
+#include <malloc/_malloc.h>
 
 static void	check_output(t_storage *bag, char *str, int *res)
 {
@@ -36,6 +37,8 @@ static void	check_output(t_storage *bag, char *str, int *res)
 		}
 		buf = ft_strchr(buf + 1, '>');
 	}
+	free(zone_d);
+	free(zone_s);
 }
 
 static void	check_input(t_storage *bag, char *str, int *res)
@@ -74,6 +77,8 @@ static void	check_input(t_storage *bag, char *str, int *res)
 		}
 		buf = ft_strchr(buf + 1, '<');
 	}
+	free(zone_d);
+	free(zone_s);
 }
 
 int		has_redirect(t_storage *bag, char *str)

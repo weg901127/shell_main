@@ -23,6 +23,8 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 		ft_putstr_fd("SyntexError\n",2);
 	else if (WEXITSTATUS(stat) == ERROR)
 		ft_putstr_fd("Error\n",2);
+	else if (WEXITSTATUS(stat) == 127)
+		ft_putstr_fd("command not found\n",2);
 	else if (WIFSIGNALED(stat))
 	{
 		if (WTERMSIG(stat) == 3)
@@ -37,6 +39,8 @@ void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
 	bag->redirect_output = 0;
 	bag->append = 0;
 	bag->heredoc = 0;
+	free(bag->location_input);
+	free(bag->location_output);
 }
 
 void	init_redirect_location(t_storage *bag)

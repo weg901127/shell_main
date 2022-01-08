@@ -124,6 +124,7 @@ void	process_redirect_input(t_storage *bag, char *str);
 void	process_redirect_output(t_storage *bag, char *str, int *pip);
 char	*get_last_redirect(char *str, int target);
 char	**split_pipe(char *str);
+char	**split_echo(char *str);
 int		*get_zone(char *string, int target);
 char	*get_last_redirect(char *str, int target);
 void	rd_heredoc(t_storage *bag, char *str, int *fd_old, int location);

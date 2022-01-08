@@ -1,6 +1,6 @@
 #include "../../micro_shell.h"
 
-int	get_valid_pipe(char *str, int location)
+static int	get_valid_pipe(char *str, int location)
 {
 	int		*zone_s;
 	int		*zone_d;
@@ -13,10 +13,12 @@ int	get_valid_pipe(char *str, int location)
 		free(zone_d);
 		return (location);
 	}
+	free(zone_s);
+	free(zone_d);
 	return (-1);
 }
 
-void	split_core(char **buf, char **str, int *var, char **tmp)
+static void	split_core(char **buf, char **str, int *var, char **tmp)
 {
 	char	buf2[MAXLEN];
 
@@ -44,7 +46,7 @@ void	split_core(char **buf, char **str, int *var, char **tmp)
 	}
 }
 
-void	process_split(char **buf, char *str)
+static void	process_split(char **buf, char *str)
 {
 	char	*tmp;
 	int		var[4];
@@ -62,7 +64,6 @@ char	**split_pipe(char *str)
 	int		i;
 
 	i = 0;
-	(void)res;
 	ft_memset(buf, 0, sizeof(char *) * MAXLEN);
 	process_split(buf, str);
 	while (buf[i++])

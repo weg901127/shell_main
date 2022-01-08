@@ -56,7 +56,7 @@ int builtin_export(t_storage *bag, char *arg)
     arg_arr = ft_split(arg, ' ');
     equal_here = 0;
     i = 0;
-    if (arg_arr[0] == NULL)
+    if (arg_arr[0] == NULL || *arg_arr[0] == '#')
         export_no_option(bag);
     else
     {
@@ -69,10 +69,7 @@ int builtin_export(t_storage *bag, char *arg)
                 exit_status = EXIT_FAILURE;
             }
             else if (equal_here == -1)
-            {   
-                //if (get_value(bag->runtime_env, arg_arr[i]))
                     update_env(bag->environ, arg_arr[i], get_value(bag->runtime_env, arg_arr[i]));
-            }
             else
                 add_name_on_env(bag, arg_arr[i], equal_here);
             i++;
