@@ -1,14 +1,64 @@
 #include "../../micro_shell.h"
 
-int	execve_builtin(t_storage *bag, char *arg)
+static void	my_free(char ***arg_arr)
+{
+	int	i;
+
+	i = 0;
+	while ((*arg_arr)[i])
+		free((*arg_arr)[i++]);
+	free(*arg_arr);
+}
+
+static void	remove_redirection(char *arg, char *dest)
+{
+	char	**split;
+	char	**buf;
+	int		var[2];
+
+	ft_bzero(var, sizeof(int) * 2);
+	split = split_echo(arg);
+	buf = (char **)ft_calloc(ft_splitcnt(split), sizeof(char *));
+	while (split[var[0]])
+	{
+		if (ft_strchr(split[var[0]], '<') || ft_strchr(split[var[0]], '>'))
+		{
+			free(split[var[0]]);
+			split[(var[0])++] = NULL;
+			continue ;
+		}
+		buf[var[1]] = split[var[0]];
+		ft_strlcat(dest, buf[var[1]], MAXLEN);
+		ft_strlcat(dest, " ", MAXLEN);
+		(var[0])++;
+		(var[1])++;
+	}
+	my_free(&split);
+}
+
+static void	do_execve(t_storage *bag, char *cmd, char *args, int *exit_status)
+{
+	if (strncmp_exact(cmd, "cd", '\0'))
+		*exit_status = builtin_cd(bag, args);
+	else if (strncmp_exact(cmd, "pwd", '\0'))
+		*exit_status = builtin_pwd();
+	else if (strncmp_exact(cmd, "exit", '\0'))
+		*exit_status = builtin_exit(bag, args);
+	else if (strncmp_exact(cmd, "export", '\0'))
+		*exit_status = builtin_export(bag, args);
+	else if (strncmp_exact(cmd, "env", '\0'))
+		*exit_status = builtin_env(bag);
+	else if (strncmp_exact(cmd, "unset", '\0'))
+		*exit_status = builtin_unset(bag, args);
+}
+
+static int	execve_core(t_storage *bag, char *buf[])
 {
 	char	buf1[MAXLEN];
-	char	*buf[5];
 	int		exit_status;
 
-	exit_status = -1;
-	ft_memset(buf1, 0, MAXLEN);
-	buf[0] = ft_strtrim(arg, " ");
+	ft_bzero(buf1, MAXLEN);
+	exit_status = 127;
 	ft_memccpy(buf1, buf[0], ' ', ft_strlen(buf[0]));
 	if (buf1[ft_strlen(buf1) - 1] == ' ')
 		buf1[ft_strlen(buf1) - 1] = '\0';
@@ -18,22 +68,21 @@ int	execve_builtin(t_storage *bag, char *arg)
 	buf[2] = parse_space(buf[1]);
 	buf[3] = cutnjoin(buf[2], '\'');
 	buf[4] = cutnjoin(buf[3], '\"');
-	if (strncmp_exact(buf1, "cd", '\0'))
-		exit_status = builtin_cd(bag, buf[4]);
-	else if (strncmp_exact(buf1, "pwd", '\0'))
-		exit_status = builtin_pwd();
-	else if (strncmp_exact(buf1, "exit", '\0'))
-		exit_status = builtin_exit(bag, buf[4]);
-	else if (strncmp_exact(buf1, "export", '\0'))
-		exit_status = builtin_export(bag, buf[4]);
-	else if (strncmp_exact(buf1, "env", '\0'))
-		exit_status = builtin_env(bag);
-	else if (strncmp_exact(buf1, "unset", '\0'))
-		exit_status = builtin_unset(bag, buf[4]);
+	do_execve(bag, buf1, buf[4], &exit_status);
 	free(buf[0]);
 	free(buf[1]);
 	free(buf[2]);
 	free(buf[3]);
 	free(buf[4]);
 	return (exit_status);
+}
+
+int	execve_builtin(t_storage *bag, char *arg)
+{
+	char	dest[MAXLEN];
+	char	*buf[5];
+
+	remove_redirection(arg, dest);
+	buf[0] = ft_strtrim(dest, " ");
+	return (execve_core(bag, buf));
 }

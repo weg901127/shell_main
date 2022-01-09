@@ -1,5 +1,15 @@
 #include "../../micro_shell.h"
 
+static void	my_free(char ***arg_arr)
+{
+	int	i;
+
+	i = 0;
+	while ((*arg_arr)[i])
+		free((*arg_arr)[i++]);
+	free(*arg_arr);
+}
+
 static void	change_pwds_environ(t_storage *bag, char *curr_pwd, char *new_path)
 {
 	t_ArrayListNode	element;
@@ -7,7 +17,8 @@ static void	change_pwds_environ(t_storage *bag, char *curr_pwd, char *new_path)
 	if (!get_value(bag->environ, "OLDPWD"))
 	{	
 		element.data = ft_strjoin("OLDPWD=", curr_pwd);
-		addALElement(bag->environ, bag->environ->current_element_count - 1, element);
+		addALElement(bag->environ,
+			bag->environ->current_element_count - 1, element);
 	}
 	else
 		update_env(bag->environ, "OLDPWD", curr_pwd);
@@ -33,6 +44,6 @@ int	builtin_cd(t_storage *bag, char *arg)
 	}
 	else
 		change_pwds_environ(bag, get_value(bag->environ, "PWD"), path);
-	ft_malloc_fail_str(arg_arr, count_str_array(arg_arr));
+	my_free(&arg_arr);
 	return (exit_status);
 }

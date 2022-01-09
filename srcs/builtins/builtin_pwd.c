@@ -13,5 +13,5 @@ int	builtin_pwd(void)
 	ft_putendl_fd(pwd, STDOUT_FD);
 	free(pwd);
 	pwd = NULL;
-	return (EXIT_SUCCESS);	
+	return (EXIT_SUCCESS);
 }

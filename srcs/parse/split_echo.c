@@ -18,7 +18,6 @@ static int	get_valid_space(char *str, int location)
 	return (-1);
 }
 
-
 static void	process_split(char **buf, char *str)
 {
 	char	tmp[MAXLEN];
@@ -30,9 +29,10 @@ static void	process_split(char **buf, char *str)
 	j = 0;
 	k = 0;
 	ft_bzero(tmp, sizeof(char) * MAXLEN);
-	while(i < (int)ft_strlen(str) + 1)
+	while (i < (int)ft_strlen(str) + 1)
 	{
-		if ((str[i] == ' ' && str[i + 1] != ' ' && get_valid_space(str, i) != -1) || !str[i])
+		if ((str[i] == ' ' && str[i + 1] != ' '
+				&& get_valid_space(str, i) != -1) || !str[i])
 		{
 			buf[j++] = ft_strdup(tmp);
 			k = 0;

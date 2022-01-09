@@ -46,35 +46,15 @@ typedef struct s_storage
 	t_ArrayList	*builtin;
 }	t_storage;
 
-typedef struct s_chunk_info
-{
-	int		chunk_count;
-	int		str_count;
-	int		quote_flag;
-	char	delimiter;
-}	t_chunk_info;
-
 typedef enum e_startend
 {
 	START,
 	END
 }	t_startend;
 
-typedef enum e_builtins
-{
-	ECHO_,
-	CD_,
-	PWD_,
-	EXPORT_,
-	UNSET_,
-	ENV_,
-	EXIT_
-}	t_builtins;
-
 /* pipex */
 void	pipex(t_storage *bag, char **args);
 int		execve_builtin(t_storage *bag, char *arg);
-//void	heredoc_to_tmpfile(t_storage *info);
 
 /* ./srcs/pipex/getpath */
 bool	getpath(t_storage *bag, char ***path_res);
@@ -113,7 +93,6 @@ void    update_env(t_ArrayList *env, char *key, char *new_val);
 /* parse_master */
 char	*cutnjoin(char *string, char target);
 bool 	parse_master(t_storage *bag);
-char	**split_cmd(char *str);
 
 char	*parse_space(char *string);
 char	*parse_env(t_storage *bag, char *string, int is_heredoc);

@@ -42,6 +42,7 @@ int	main(void)
 			add_history(line);
 			free(line);
 			free(bag->input);
+			free(buf);
 			line = NULL;
 		}
 		else

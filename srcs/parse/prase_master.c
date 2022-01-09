@@ -139,6 +139,7 @@ bool parse_master(t_storage *bag)
 	pipex(bag, args);
 	while (args[i])
 		free(args[i++]);
+	free(args[i]);
 	free(args);
 	return (false);
 }

@@ -47,7 +47,6 @@ void	rd_heredoc(t_storage *bag, char *str, int *fd_old, int location)
 
 	if (*fd_old)
 		close(*fd_old);
-	//buf = ft_strdup(get_last_redirect(str, '<') + 1);
 	buf = str + location;
 	buf = ft_strtrim(buf, " ");
 	if (buf && !(*buf))
@@ -62,8 +61,5 @@ void	rd_heredoc(t_storage *bag, char *str, int *fd_old, int location)
 	if (fd == -1)
 		exit(1);
 	dup2(fd, *fd_old);
-	//*fd_old = fd;
-	//close(fd);
-	//close(*fd_old);
 	unlink(".hd________");
 }
