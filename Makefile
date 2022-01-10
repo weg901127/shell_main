@@ -6,13 +6,13 @@
 #    By: gilee <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 20:36:37 by gilee             #+#    #+#              #
-#    Updated: 2022/01/10 20:36:52 by gilee            ###   ########.fr        #
+#    Updated: 2022/01/10 20:39:20 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME  				= minishell
 NAME_TEST			= test
-CC 					= cc -g
+CC 					= cc
 CFLAGS 				= -Wall -Wextra -Werror
 
 LIBFT_DIR 			= ./libft/
@@ -55,17 +55,11 @@ all : MAKE_LIB $(NAME)
 	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
 $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME)
-test : MAKE_LIB $(NAME_TEST)
-.c.o:
-	$(CC) $(CFLAGS) $(IREADLINE) -c -o $@ $<
-$(NAME_TEST) : $(TEST_OBJ)
-	$(CC) $(TEST_OBJ) $(CFLAGS) $(LIB) $(LREADLINE) -lreadline -o $(NAME_TEST)
 clean :
 	rm -f $(OBJ)
 fclean : clean
 	rm -f $(NAME)
 	rm -f $(NAME_TEST)
-	rm -f $(TEST_OBJ)
 	rm -f $(OBJ)
 	make -C $(LIBFT_DIR) fclean
 re : clean

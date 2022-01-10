@@ -6,11 +6,11 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 01:21:24 by gilee             #+#    #+#              #
-#    Updated: 2021/12/20 16:38:00 by gilee            ###   ########.fr        #
+#    Updated: 2022/01/10 20:38:36 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC      = cc -g
+CC      = cc
 LIB		= ar rcs
 CFLAGS  = -Wall -Wextra -Werror
 RM      = rm -f
