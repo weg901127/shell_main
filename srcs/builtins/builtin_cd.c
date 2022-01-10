@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:44:03 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:44:11 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
 static void	my_free(char ***arg_arr)
@@ -12,12 +24,12 @@ static void	my_free(char ***arg_arr)
 
 static void	change_pwds_environ(t_storage *bag, char *curr_pwd, char *new_path)
 {
-	t_ArrayListNode	element;
+	t_arraylistnode	element;
 
 	if (!get_value(bag->environ, "OLDPWD"))
 	{	
 		element.data = ft_strjoin("OLDPWD=", curr_pwd);
-		addALElement(bag->environ,
+		add_alelement(bag->environ,
 			bag->environ->current_element_count - 1, element);
 	}
 	else

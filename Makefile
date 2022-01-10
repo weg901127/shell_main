@@ -27,12 +27,15 @@ SRCS				= ./main.c					\
 					  ./srcs/init/init_runtime_env.c 	./srcs/parse/prase_master.c \
 					  ./srcs/parse/is_builtin.c			./srcs/parse/parse_space.c \
 					  ./srcs/parse/split_pipe.c			./srcs/parse/split_echo.c \
+					  ./srcs/parse/cutnjoin.c			./srcs/parse/get_zone.c \
+					  ./srcs/parse/get_env_len.c 		./srcs/parse/parse_env.c \
 					  ./srcs/pipex/pipex.c 				./srcs/pipex/handlers.c \
 					  ./srcs/pipex/execve_builtin.c 	./srcs/pipex/my_execve.c \
 					  ./srcs/pipex/getpath.c			./srcs/pipex/my_which.c \
 					  ./srcs/pipex/my_heredoc.c			./srcs/pipex/has_redirect.c \
 					  ./srcs/pipex/get_last_redirect.c	./srcs/pipex/process_redirect_input.c \
-					  ./srcs/pipex/do_not_fork.c		./srcs/pipex/process_redirect_output.c
+					  ./srcs/pipex/do_not_fork.c		./srcs/pipex/process_redirect_output.c \
+					  ./srcs/pipex/do_fork.c			./srcs/pipex/has_rd_for_rm.c
 OBJ					=	$(SRCS:.c=.o)
 TEST				=	$(SRCS:main.c=test.c)
 TEST_OBJ			=	$(TEST:.c=.o)

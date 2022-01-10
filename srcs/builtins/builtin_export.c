@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:48:12 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:48:14 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
 static int	where_is_equal(char *str)
@@ -24,7 +36,7 @@ static void	export_no_option(t_storage *bag)
 	while (i < bag->environ->current_element_count)
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FD);
-		ft_putendl_fd(getALElement(bag->environ, i)->data, STDOUT_FD);
+		ft_putendl_fd(get_alelement(bag->environ, i)->data, STDOUT_FD);
 		i++;
 	}
 }
@@ -32,7 +44,7 @@ static void	export_no_option(t_storage *bag)
 static void	add_name_on_env(t_storage *bag, char *key_value, int equal_here)
 {
 	char			key[10000];
-	t_ArrayListNode	element;
+	t_arraylistnode	element;
 
 	ft_memccpy(key, key_value, '=', equal_here);
 	key[equal_here] = '\0';
@@ -41,7 +53,7 @@ static void	add_name_on_env(t_storage *bag, char *key_value, int equal_here)
 	else
 	{
 		element.data = ft_strdup(key_value);
-		addALElement(bag->environ,
+		add_alelement(bag->environ,
 			bag->environ->current_element_count, element);
 	}
 }

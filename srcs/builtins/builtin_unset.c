@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:48:30 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:48:37 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
 static int	find_n_rm_element(t_storage *bag, char *key)
@@ -8,7 +20,7 @@ static int	find_n_rm_element(t_storage *bag, char *key)
 	i = 0;
 	while (i < bag->environ->current_element_count)
 	{
-		data = getALElement(bag->environ, i)->data;
+		data = get_alelement(bag->environ, i)->data;
 		if (strncmp_exact(data, key, '='))
 			break ;
 		i++;
@@ -17,7 +29,7 @@ static int	find_n_rm_element(t_storage *bag, char *key)
 	{
 		free(data);
 		data = NULL;
-		removeALElement(bag->environ, i);
+		remove_alelement(bag->environ, i);
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);

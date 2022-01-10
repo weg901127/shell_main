@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_redirect_output.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:57:50 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:57:51 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
 void	rd_output(char *str, int location)
@@ -8,7 +20,7 @@ void	rd_output(char *str, int location)
 
 	buf = str + location;
 	split = ft_split(buf, ' ');
-	fd = open(split[0], O_RDWR|O_CREAT|O_TRUNC, S_IRUSR | S_IWUSR);
+	fd = open(split[0], O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		exit(100);
 	dup2(fd, 1);
@@ -23,16 +35,15 @@ void	rd_append(char *str, int location)
 
 	buf = str + location;
 	split = ft_split(buf, ' ');
-	fd = open(split[0], O_RDWR|O_CREAT|O_APPEND, S_IRUSR | S_IWUSR);
+	fd = open(split[0], O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		exit(ERROR);
 	dup2(fd, 1);
 	close(fd);
 }
 
-void	process_redirect_output(t_storage *bag, char *str, int *pip)
+void	process_redirect_output(t_storage *bag, char *str)
 {
-	(void) pip;
 	int	i;
 
 	i = 0;

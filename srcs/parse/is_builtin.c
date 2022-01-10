@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:56:18 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:56:18 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
 bool	is_builtin(t_storage *bag, const char *cmd)
@@ -10,7 +22,7 @@ bool	is_builtin(t_storage *bag, const char *cmd)
 	i = bag->builtin->current_element_count;
 	while (i--)
 	{
-		tmp = getALElement(bag->builtin, i)->data;
+		tmp = get_alelement(bag->builtin, i)->data;
 		if (!ft_strncmp(cmd, tmp, ft_strlen(tmp)))
 			res = true;
 	}

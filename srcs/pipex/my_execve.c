@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_execve.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:57:27 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:57:28 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
-static char **set_argv(t_storage *bag, char *str)
+static char	**set_argv(t_storage *bag, char *str)
 {
 	char	**tmp;
 	char	*cmd_tmp;
@@ -31,7 +43,7 @@ void	my_execve(t_storage *bag, char	*str)
 	i = 0;
 	j = 0;
 	argv = set_argv(bag, str);
-	buf = (char **)ft_calloc(ft_splitcnt(argv) + 1, sizeof(char*));
+	buf = (char **)ft_calloc(ft_splitcnt(argv) + 1, sizeof(char *));
 	while (argv[i])
 	{
 		if (ft_strchr(argv[i], '<') || ft_strchr(argv[i], '>'))

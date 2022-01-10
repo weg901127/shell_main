@@ -1,83 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:57:42 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:57:42 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
-void	handle_pipe_child(t_storage *bag, int *pip, int cmd, char *str)
+static void	do_child(t_storage *bag, char **args, int *i)
 {
-	if (bag->redirect_input || bag->heredoc)
-		process_redirect_input(bag, str);
-	else
-		dup2(bag->pipe_old, 0);
-	if (bag->redirect_output || bag->append)
-		process_redirect_output(bag, str, pip);
-	else
-		if (cmd != bag->num_of_cmds - 1)
-			dup2(pip[1], 1);
-	close(pip[0]);
+	while (args[++(*i)])
+		do_fork(bag, args[*i], *i);
+	exit(bag->last_exit_status);
 }
 
-void	handle_pipe_parent(t_storage *bag, int *pip, int cmd, pid_t pid)
+static void	do_parent(t_storage *bag, int pid)
 {
-	int	stat;
+	int	status;
 
-	waitpid(pid, &stat, 0);
-	if (WEXITSTATUS(stat) == SYNTEX_ERR)
-		ft_putstr_fd("SyntexError\n",2);
-	else if (WEXITSTATUS(stat) == ERROR)
-		ft_putstr_fd("Error\n",2);
-	else if (WEXITSTATUS(stat) == 127)
-		ft_putstr_fd("command not found\n",2);
-	else if (WIFSIGNALED(stat))
-	{
-		if (WTERMSIG(stat) == 3)
-			ft_putstr_fd("Quit: 3", 1);
-		ft_putstr_fd("\n", 1);
-	}
-	if (cmd == bag->num_of_cmds - 1)
-		bag->last_exit_status = WEXITSTATUS(stat);
-	close(pip[1]);
-	bag->pipe_old = pip[0];
-	bag->redirect_input = 0;
-	bag->redirect_output = 0;
-	bag->append = 0;
-	bag->heredoc = 0;
-	free(bag->location_input);
-	free(bag->location_output);
-}
-
-void	init_redirect_location(t_storage *bag)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAXLEN)
-	{
-		*(bag->location_input + i) = -1;
-		*(bag->location_output + i) = -1;
-		i++;
-	}
-}
-
-void	do_fork(t_storage *bag, char *str, int cmd)
-{
-	int		p[2];
-	pid_t	pid;
-
-	pipe(p);
-	bag->location_input = (int *)ft_calloc(MAXLEN, sizeof(int));
-	bag->location_output = (int *)ft_calloc(MAXLEN, sizeof(int));
-	init_redirect_location(bag);
-	has_redirect(bag, str);
-	pid = fork();
-	if (pid == -1)
-		exit(EXIT_FAILURE);
-	else if (pid == 0)
-	{
-		signal(SIGINT, handler_int_child);
-		signal(SIGQUIT, SIG_DFL);
-		handle_pipe_child(bag, p, cmd, str);
-		my_execve(bag, str);
-	}
-	else
-		handle_pipe_parent(bag, p, cmd, pid);
+	waitpid(pid, &status, 0);
+	bag->last_exit_status = WEXITSTATUS(status);
+	set_environ(bag, bag->last_exit_status);
+	if (WEXITSTATUS(status) == SYNTEX_ERR)
+		ft_putstr_fd("SyntexError\n", 2);
 }
 
 void	pipex(t_storage *bag, char **args)
@@ -85,8 +35,7 @@ void	pipex(t_storage *bag, char **args)
 	int		i;
 	pid_t	pid;
 	int		exit_status;
-	int		status;
-	
+
 	i = -1;
 	exit_status = EXIT_SUCCESS;
 	bag->pipe_old = 0;
@@ -99,19 +48,9 @@ void	pipex(t_storage *bag, char **args)
 	}
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
-	if (pid==0)
-	{
-		while (args[++i])
-			do_fork(bag, args[i], i);
-		exit(bag->last_exit_status);
-	}
+	if (pid == 0)
+		do_child(bag, args, &i);
 	else
-	{
-		waitpid(pid, &status, 0);
-		bag->last_exit_status = WEXITSTATUS(status);
-		set_environ(bag, bag->last_exit_status);
-		if (WEXITSTATUS(status) == SYNTEX_ERR)
-			ft_putstr_fd("SyntexError\n",2);
-	}
+		do_parent(bag, pid);
 	signal(SIGINT, handler_int);
 }

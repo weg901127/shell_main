@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bag.c                                         :+:      :+:    :+:   */
+/*   get_env_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 10:55:34 by gilee             #+#    #+#             */
-/*   Updated: 2022/01/10 10:55:35 by gilee            ###   ########.fr       */
+/*   Created: 2022/01/10 10:56:04 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 10:56:04 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../micro_shell.h"
 
-void	init_bag(t_storage *bag)
+int	get_env_len(char *tmp)
 {
-	bag->builtin = create_array_list(7);
-	bag->environ = create_array_list(30);
-	bag->runtime_env = create_array_list(30);
-	bag->last_exit_status = EXIT_SUCCESS;
+	int	res;
+
+	res = 0;
+	if (!tmp)
+		return (0);
+	while (*tmp)
+	{
+		if (ft_isspace(*tmp) || *tmp == '\'' || *tmp == '\"' || *tmp == '$'
+			|| *tmp == '|' || *tmp == '=' || *tmp == '/' || *tmp == '\\')
+			break ;
+		res++;
+		tmp++;
+	}
+	return (res);
 }

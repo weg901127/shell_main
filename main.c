@@ -1,7 +1,16 @@
-#include <unistd.h>
-#include "libft/libft.h"
-#include "micro_shell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 13:14:02 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 13:21:05 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "micro_shell.h"
 
 static void	init(t_storage *bag)
 {
@@ -16,13 +25,26 @@ static void	init(t_storage *bag)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+static int	is_null(char *buf, char *line)
+{
+	int	res;
+
+	res = 0;
+	if (!(*buf))
+	{
+		free(buf);
+		free(line);
+		res = 1;
+	}
+	return (res);
+}
+
 int	main(void)
 {
 	char		*line;
 	char		*buf;
 	t_storage	*bag;
 
-	g_out_backup = dup(1);
 	bag = create_bag();
 	init(bag);
 	while (true)
@@ -31,12 +53,8 @@ int	main(void)
 		if (line)
 		{
 			buf = ft_strtrim(line, " ");
-			if (!(*buf))
-			{
-				free(buf);
-				free(line);
-				continue;
-			}
+			if (is_null(buf, line))
+				continue ;
 			bag->input = ft_strdup(line);
 			parse_master(bag);
 			add_history(line);

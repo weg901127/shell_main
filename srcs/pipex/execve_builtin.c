@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execve_builtin.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 10:57:01 by gilee             #+#    #+#             */
+/*   Updated: 2022/01/10 14:52:40 by gilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../micro_shell.h"
 
 static void	my_free(char ***arg_arr)
@@ -21,7 +33,7 @@ static void	remove_redirection(char *arg, char *dest)
 	buf = (char **)ft_calloc(ft_splitcnt(split), sizeof(char *));
 	while (split[var[0]])
 	{
-		if (ft_strchr(split[var[0]], '<') || ft_strchr(split[var[0]], '>'))
+		if (has_rd_for_rm(split[var[0]]))
 		{
 			free(split[var[0]]);
 			split[(var[0])++] = NULL;
