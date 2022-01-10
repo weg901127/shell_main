@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 13:14:02 by gilee             #+#    #+#             */
-/*   Updated: 2022/01/10 13:21:05 by gilee            ###   ########.fr       */
+/*   Updated: 2022/01/10 19:14:57 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ static int	is_null(char *buf, char *line)
 	return (res);
 }
 
+static void	do_if_not_null(t_storage *bag, char *line, char *buf)
+{
+	bag->input = ft_strdup(line);
+	parse_master(bag);
+	add_history(line);
+	free(line);
+	free(bag->input);
+	free(buf);
+}
+
 int	main(void)
 {
 	char		*line;
@@ -55,12 +65,7 @@ int	main(void)
 			buf = ft_strtrim(line, " ");
 			if (is_null(buf, line))
 				continue ;
-			bag->input = ft_strdup(line);
-			parse_master(bag);
-			add_history(line);
-			free(line);
-			free(bag->input);
-			free(buf);
+			do_if_not_null(bag, line, buf);
 			line = NULL;
 		}
 		else

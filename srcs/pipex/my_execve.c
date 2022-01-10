@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 10:57:27 by gilee             #+#    #+#             */
-/*   Updated: 2022/01/10 10:57:28 by gilee            ###   ########.fr       */
+/*   Updated: 2022/01/10 15:54:15 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,35 @@ static char	**set_argv(t_storage *bag, char *str)
 	return (tmp);
 }
 
-void	my_execve(t_storage *bag, char	*str)
+static void	my_execve_core(char **argv, char **buf, int *i, int *j)
 {
-	char	**argv;
-	char	**buf;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	argv = set_argv(bag, str);
-	buf = (char **)ft_calloc(ft_splitcnt(argv) + 1, sizeof(char *));
-	while (argv[i])
+	while (argv[*i])
 	{
-		if (ft_strchr(argv[i], '<') || ft_strchr(argv[i], '>'))
+		if (ft_strchr(argv[*i], '<') || ft_strchr(argv[*i], '>'))
 		{
-			free(argv[i]);
-			argv[i++] = NULL;
+			free(argv[*i]);
+			argv[(*i)++] = NULL;
 			continue ;
 		}
-		buf[j] = argv[i];
-		i++;
-		j++;
+		buf[*j] = argv[*i];
+		(*i)++;
+		(*j)++;
 	}
+}
+
+void	my_execve(t_storage *bag, char	*str)
+{
+	char			**argv;
+	char			**buf;
+	char			*tmp[2];
+	static int		i;
+	static int		j;
+
+	tmp[0] = cutnjoin(str, '\'');
+	tmp[1] = cutnjoin(tmp[0], '\"');
+	argv = set_argv(bag, tmp[1]);
+	buf = (char **)ft_calloc(ft_splitcnt(argv) + 1, sizeof(char *));
+	my_execve_core(argv, buf, &i, &j);
 	if (is_builtin(bag, buf[0]))
 		exit(execve_builtin(bag, str));
 	execve(buf[0], buf, get_environ(bag));

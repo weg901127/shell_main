@@ -1,6 +1,0 @@
--I
-/Users/gilee/brew/opt/readline/include/
--std=c99
--Wall
--Wextra
--Werror

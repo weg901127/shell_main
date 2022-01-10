@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 10:44:15 by gilee             #+#    #+#             */
-/*   Updated: 2022/01/10 10:44:18 by gilee            ###   ########.fr       */
+/*   Updated: 2022/01/10 18:16:19 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ int	builtin_echo(char *arg)
 {
 	int		var[2];
 	char	*buf[2];
+	char	*buf2[2];
 	char	**arg_arr;
 
 	ft_bzero(var, sizeof(int) * 2);
 	arg_arr = split_echo(arg);
-	if (strncmp_exact(arg_arr[0], "-n", '\0'))
+	buf2[0] = cutnjoin(arg_arr[0], '\'');
+	buf2[1] = cutnjoin(buf2[0], '\"');
+	if (strncmp_exact(buf2[1], "-n", '\0'))
 	{
 		var[0] = 1;
 		var[1] = 1;
@@ -53,5 +56,7 @@ int	builtin_echo(char *arg)
 	if (!var[1])
 		write(1, "\n", 1);
 	my_free(&arg_arr);
+	free(buf2[0]);
+	free(buf2[1]);
 	return (EXIT_SUCCESS);
 }

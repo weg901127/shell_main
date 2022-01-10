@@ -6,7 +6,7 @@
 /*   By: gilee <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 10:57:01 by gilee             #+#    #+#             */
-/*   Updated: 2022/01/10 14:52:40 by gilee            ###   ########.fr       */
+/*   Updated: 2022/01/10 19:11:55 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ static void	do_execve(t_storage *bag, char *cmd, char *args, int *exit_status)
 static int	execve_core(t_storage *bag, char *buf[])
 {
 	char	buf1[MAXLEN];
+	char	*buf2[2];
 	int		exit_status;
+	int		i;
 
 	ft_bzero(buf1, MAXLEN);
 	exit_status = 127;
@@ -75,17 +77,19 @@ static int	execve_core(t_storage *bag, char *buf[])
 	if (buf1[ft_strlen(buf1) - 1] == ' ')
 		buf1[ft_strlen(buf1) - 1] = '\0';
 	buf[1] = ft_strtrim(buf[0] + ft_strlen(buf1), " ");
-	if (strncmp_exact(buf1, "echo", '\0'))
+	buf2[0] = cutnjoin(buf1, '\'');
+	buf2[1] = cutnjoin(buf2[0], '\"');
+	if (strncmp_exact(buf2[1], "echo", '\0'))
 		exit_status = builtin_echo(buf[1]);
 	buf[2] = parse_space(buf[1]);
 	buf[3] = cutnjoin(buf[2], '\'');
 	buf[4] = cutnjoin(buf[3], '\"');
-	do_execve(bag, buf1, buf[4], &exit_status);
-	free(buf[0]);
-	free(buf[1]);
-	free(buf[2]);
-	free(buf[3]);
-	free(buf[4]);
+	do_execve(bag, buf2[1], buf[4], &exit_status);
+	free(buf2[0]);
+	free(buf2[1]);
+	i = 0;
+	while (i < 5)
+		free(buf[i++]);
 	return (exit_status);
 }
 
@@ -94,6 +98,7 @@ int	execve_builtin(t_storage *bag, char *arg)
 	char	dest[MAXLEN];
 	char	*buf[5];
 
+	ft_bzero(dest, MAXLEN);
 	remove_redirection(arg, dest);
 	buf[0] = ft_strtrim(dest, " ");
 	return (execve_core(bag, buf));
