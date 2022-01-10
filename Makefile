@@ -6,7 +6,7 @@
 #    By: gilee <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 20:36:37 by gilee             #+#    #+#              #
-#    Updated: 2022/01/10 20:39:20 by gilee            ###   ########.fr        #
+#    Updated: 2022/01/10 20:39:38 by gilee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,4 +67,4 @@ re : clean
 	make -C . all
 MAKE_LIB :
 	make -C $(LIBFT_DIR) all
-.PHONY : all test clean fclean re
+.PHONY : all clean fclean re
